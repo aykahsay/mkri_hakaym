@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tigray Medical Association – Digital Health Initiative (TMA-DHI) | ማሕበር ሕክምና ትግራይ</title>
-  <meta name="description" content="Official platform for the Tigray Medical Association Digital Health Initiative. Grounded research, open datasets, and voice-first AI innovations like Mkri Hakaym for rural 2G phones.">
+  <meta name="description" content="Official platform for the Tigray Medical Association Digital Health Initiative. Grounded research, sovereign digital health products, paid curated datasets, and voice-first AI innovations like Mkri Hakaym.">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +13,11 @@
 <body>
 
   <!-- =========================================================================
-       Site Header & Navigation
+       Site Header & Global Navigation
        ========================================================================= -->
   <header class="site-header">
     <div class="container nav-wrap">
-      <div class="brand-logo">
+      <div class="brand-logo" onclick="switchView('home')" style="cursor:pointer;">
         <div class="brand-icon">🩺</div>
         <div>
           <span>ማሕበር ሕክምና ትግራይ (TMA)</span>
@@ -26,15 +26,12 @@
       </div>
 
       <ul class="nav-links">
-        <li><a href="#about" data-ti="ℹ️ ብዛዕባና" data-en="ℹ️ About Us">ℹ️ ብዛዕባና</a></li>
-        <li><a href="#pillars" data-ti="🏛️ ዓንደ-ዓውድታት" data-en="🏛️ Focus Areas">🏛️ ዓንደ-ዓውድታት</a></li>
-        <li><a href="#projects" data-ti="📂 ፕሮጀክትታት" data-en="📂 Projects">📂 ፕሮጀክትታት</a></li>
-        <li><a href="#products" data-ti="💡 ፍርያት" data-en="💡 Products">💡 ፍርያት</a></li>
-        <li><a href="#dataset" data-ti="📊 ዳታሴት (Paid)" data-en="📊 Datasets (Paid)">📊 ዳታሴት (Paid)</a></li>
-        <li><a href="#research" data-ti="🔬 ምርምር" data-en="🔬 Research">🔬 ምርምር</a></li>
-        <li><a href="#portal" data-ti="👥 ማሕበረሰብ" data-en="👥 Collaboration">👥 ማሕበረሰብ</a></li>
-        <li><a href="#governance" data-ti="⚖️ ኣሰራርሓ" data-en="⚖️ Governance">⚖️ ኣሰራርሓ</a></li>
-        <li><a href="#partners" data-ti="🤝 መሻርኽቲ" data-en="🤝 Partners">🤝 መሻርኽቲ</a></li>
+        <li><a href="#home" data-view="home" onclick="switchView('home'); return false;" data-ti="🏠 ሓፈሻዊ" data-en="🏠 Overview">🏠 Overview</a></li>
+        <li><a href="#products" data-view="products" onclick="switchView('products'); return false;" data-ti="💡 ፍርያት" data-en="💡 Products">💡 Products</a></li>
+        <li><a href="#datasets" data-view="datasets" onclick="switchView('datasets'); return false;" data-ti="📊 ዳታሴታት (Paid)" data-en="📊 Datasets (Paid)">📊 Datasets (Paid)</a></li>
+        <li><a href="#publications" data-view="publications" onclick="switchView('publications'); return false;" data-ti="🔬 ሕትመታት" data-en="🔬 Publications">🔬 Publications</a></li>
+        <li><a href="#projects" data-view="projects" onclick="switchView('projects'); return false;" data-ti="📂 ፕሮጀክትታት" data-en="📂 Projects">📂 Projects</a></li>
+        <li><a href="#about" data-view="about" onclick="switchView('about'); return false;" data-ti="ℹ️ ብዛዕባና" data-en="ℹ️ About Us">ℹ️ About Us</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -49,774 +46,710 @@
   </header>
 
   <!-- =========================================================================
-       Announcements & Discovery Banner
+       Sticky View Switcher Bar (Instant Tab Routing)
        ========================================================================= -->
-  <section class="announcements-bar" id="announcements">
-    <div class="container announcement-wrap">
-      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-        <span class="announcement-badge" data-ti="📢 ሓድሽ ዜና" data-en="📢 LATEST NEWS">📢 ሓድሽ ዜና</span>
-        <span style="font-size:0.88rem; font-weight:600;" data-ti="ሓድሽ ፍርያት ተዘርጊሑ፦ 'ምኽሪ ሓካይም (Mkri Hakaym)' ናይ ድምጺ 2G AI ጌትዌይ ኣብ ፈተነ ኣሎ! • ሓድሽ ምርምር፦ ኣብ ጥንሲ ዘጋጥሙ ቀያሕቲ ምልክታት ዝዳህሰሰ ጽሑፍ ተሓቲሙ።" data-en="Flagship Launched: 'Mkri Hakaym' 2G Voice Telephony AI is now active in clinical pilot! • New Publication: Antenatal Triage via 2G Feature Phones published in 2026.">
-          ሓድሽ ፍርያት ተዘርጊሑ፦ "ምኽሪ ሓካይም (Mkri Hakaym)" ናይ ድምጺ 2G AI ጌትዌይ ኣብ ፈተነ ኣሎ! • ሓድሽ ምርምር፦ ኣብ ጥንሲ ዘጋጥሙ ቀያሕቲ ምልክታት ዝዳህሰሰ ጽሑፍ ተሓቲሙ።
-        </span>
-      </div>
-      <div style="display:flex; gap:10px;">
-        <a href="#products" class="btn btn-secondary" style="padding:4px 12px; font-size:0.75rem; background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.25);" data-ti="ፍርያት ተመልከቱ" data-en="View Products">
-          ፍርያት ተመልከቱ
-        </a>
-        <a href="#research" class="btn btn-primary" style="padding:4px 12px; font-size:0.75rem;" data-ti="ምርምር ኣንብቡ" data-en="Read Findings">
-          ምርምር ኣንብቡ
-        </a>
-      </div>
+  <div class="view-switcher-container">
+    <div class="container view-switcher-bar">
+      <button class="view-tab-btn active" data-view="home" onclick="switchView('home')">
+        🏠 <span data-ti="ሓፈሻዊ" data-en="Overview">Overview</span>
+      </button>
+      <button class="view-tab-btn" data-view="products" onclick="switchView('products')">
+        💡 <span data-ti="ፍርያት" data-en="Products">Products</span> <span class="view-tab-badge">5</span>
+      </button>
+      <button class="view-tab-btn" data-view="datasets" onclick="switchView('datasets')">
+        📊 <span data-ti="ዳታሴታት" data-en="Datasets (Paid)">Datasets (Paid)</span> <span class="view-tab-badge">4</span>
+      </button>
+      <button class="view-tab-btn" data-view="publications" onclick="switchView('publications')">
+        🔬 <span data-ti="ሕትመታት" data-en="Publications">Publications</span> <span class="view-tab-badge">5</span>
+      </button>
+      <button class="view-tab-btn" data-view="projects" onclick="switchView('projects')">
+        📂 <span data-ti="ፕሮጀክትታት" data-en="Projects">Projects</span> <span class="view-tab-badge">4</span>
+      </button>
+      <button class="view-tab-btn" data-view="about" onclick="switchView('about')">
+        ℹ️ <span data-ti="ብዛዕባናን ኣሰራርሓን" data-en="About & Governance">About & Governance</span>
+      </button>
     </div>
-  </section>
+  </div>
 
-  <!-- =========================================================================
-       Hero Section
-       ========================================================================= -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge" data-ti="🏛️ ማሕበር ሕክምና ትግራይ • ዲጂታል ጥዕና" data-en="🏛️ Tigray Medical Association • Digital Health Initiative">
-          🏛️ ማሕበር ሕክምና ትግራይ • ዲጂታል ጥዕና
-        </div>
-        <h1 class="hero-title">
-          Pioneering <span class="highlight">Digital Health Innovations & Research Findings</span> for Tigray.
-        </h1>
-        <p class="hero-subtitle-ti" data-ti="ብሓካይም፣ ተመራመርትን መሃዝትን ዝተመርሐ፤ ኣብ ሓቀኛ ጸገማት ጥዕና ትግራይ ዘተኮረ ዲጂታል መድረኽ።" data-en="A multi-stakeholder healthcare innovation ecosystem connecting medical doctors, AI researchers, software engineers, and health institutions.">
-          ብሓካይም፣ ተመራመርትን መሃዝትን ዝተመርሐ፤ ኣብ ሓቀኛ ጸገማት ጥዕና ትግራይ ዘተኮረ ዲጂታል መድረኽ።
-        </p>
-        <p class="hero-description" data-ti="ሓደሽቲ ዲጂታል ፍርያት (ንኣብነት ምኽሪ ሓካይም 2G AI)፣ ክሊኒካዊ ርክባትን ምርምራትን፣ ከምኡ'ውን ካብ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተቐድሑ ሓቀኛ ዳታሴታት ዝቐርበሉ ማእከል ምህዞ።" data-en="Showcasing sovereign digital health products (like Mkri Hakaym 2G Voice AI), peer-reviewed clinical research findings, and open healthcare datasets transcribed from verified broadcast speech.">
-          ሓደሽቲ ዲጂታል ፍርያት (ንኣብነት ምኽሪ ሓካይም 2G AI)፣ ክሊኒካዊ ርክባትን ምርምራትን፣ ከምኡ'ውን ካብ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተቐድሑ ሓቀኛ ዳታሴታት ዝቐርበሉ ማእከል ምህዞ።
-        </p>
-        <div class="hero-actions">
-          <a href="#products" class="btn btn-primary" data-ti="💡 ፍርያት መርምሩ (Products)" data-en="💡 Explore Products">
-            💡 ፍርያት መርምሩ (Products)
-          </a>
-          <a href="#research" class="btn btn-secondary" data-ti="🔬 ሓደሽቲ ርክባት (Findings)" data-en="🔬 Latest Findings">
-            🔬 ሓደሽቲ ርክባት (Findings)
-          </a>
-        </div>
-        <div class="hero-meta-strip">
-          <div class="meta-item">
-            <span class="meta-number">4+</span>
-            <span class="meta-label" data-ti="ንጡፋት ዲጂታል ፍርያት" data-en="Active Health Products">ንጡፋት ፍርያት</span>
+  <main>
+    <!-- =========================================================================
+         VIEW 1: OVERVIEW & HOME (#view-home)
+         ========================================================================= -->
+    <div class="portal-view active-view" id="view-home">
+      <!-- Announcements Banner -->
+      <section class="announcements-bar" id="announcements">
+        <div class="container announcement-wrap">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <span class="announcement-badge" data-ti="📢 ሓድሽ ዜና" data-en="📢 LATEST NEWS">📢 ሓድሽ ዜና</span>
+            <span style="font-size:0.88rem; font-weight:600;" data-ti="ሓድሽ ፍርያት ተዘርጊሑ፦ 'ምኽሪ ሓካይም (Mkri Hakaym)' 2G ድምጺ AI ኣብ ፈተነ ኣሎ! • 5 ሓደሽቲ ሕትመታት ኣብ The Lancetን ACMን ተሓቲሞም።" data-en="Flagship Launched: 'Mkri Hakaym' 2G Voice AI is active in clinical pilot! • 5 Peer-reviewed papers published in Lancet Digital Health and ACM.">
+              ሓድሽ ፍርያት ተዘርጊሑ፦ "ምኽሪ ሓካይም (Mkri Hakaym)" 2G ድምጺ AI ኣብ ፈተነ ኣሎ! • 5 ሓደሽቲ ሕትመታት ኣብ The Lancetን ACMን ተሓቲሞም።
+            </span>
           </div>
-          <div class="meta-item">
-            <span class="meta-number">3+</span>
-            <span class="meta-label" data-ti="ዝተሓተሙ ክሊኒካዊ ርክባት" data-en="Research Publications">ክሊኒካዊ ርክባት</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-number">24</span>
-            <span class="meta-label" data-ti="ዝተዋደዱ ናይ ዳታቤዝ ሞዴላት" data-en="Relational Entities">ዳታቤዝ ሞዴላት</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Audio Player Card -->
-      <div class="hero-media">
-        <div class="audio-preview-card">
-          <div class="audio-card-head">
-            <div>
-              <div class="audio-title" data-ti="🔊 ፍላግሺፕ ፍርያት፦ ድምጺ ምኽሪ ሓካይም" data-en="🔊 Flagship: Mkri Hakaym Voice Audio">
-                🔊 ፍላግሺፕ ፍርያት፦ ድምጺ ምኽሪ ሓካይም
-              </div>
-              <div class="audio-sub" data-ti="Meta MMS-TTS Tigrinya (8kHz Phone Stream)" data-en="Meta MMS-TTS Tigrinya (8kHz Phone Stream)">
-                Meta MMS-TTS Tigrinya (8kHz Phone Stream)
-              </div>
-            </div>
-            <span class="preset-badge badge-routine">Deployed 2G AI</span>
-          </div>
-
-          <div class="waveform-viz" id="heroWaveform">
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-          </div>
-
-          <div class="audio-controls">
-            <button class="play-btn" id="playWelcomeBtn" onclick="playWelcomeAudio()">▶️</button>
-            <div style="font-size:0.85rem; font-weight:600;">
-              <span data-ti="እንቋዕ ናብ ምኽሪ ሓካይም ብደሓን መጻእኹም..." data-en="Welcome to Mkri Hakaym (TMA Voice AI)...">
-                "እንቋዕ ናብ ምኽሪ ሓካይም ብደሓን መጻእኹም..."
-              </span>
-            </div>
-          </div>
-          <audio id="heroAudio" src="assets/welcome.wav" preload="auto"></audio>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       About Us: Platform Vision & Three Connected Areas (implenation.md)
-       ========================================================================= -->
-  <section class="about-section" id="about" style="padding:60px 0; background:white; border-bottom:1px solid var(--border);">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-tag" data-ti="ራእይ መድረኽ" data-en="Platform Vision">ራእይ መድረኽ</span>
-        <h2 class="section-title" data-ti="ምህዞታት ዲጂታል ጥዕና ንትግራይ (Platform Vision)" data-en="Transforming Healthcare in Tigray Through Innovation">
-          ምህዞታት ዲጂታል ጥዕና ንትግራይ (Platform Vision)
-        </h2>
-        <p class="section-desc" style="font-size:1.05rem; font-weight:600; color:var(--primary-hover);" data-ti="&ldquo;ሰባት፣ ፍልጠት፣ ቴክኖሎጂን ምህዞን ብምውህሃድ ጥዕና ትግራይ ምቕያር።&rdquo;" data-en="&ldquo;Connecting people, knowledge, technology, and innovation to transform healthcare in Tigray.&rdquo;">
-          &ldquo;ሰባት፣ ፍልጠት፣ ቴክኖሎጂን ምህዞን ብምውህሃድ ጥዕና ትግራይ ምቕያር።&rdquo;
-        </p>
-      </div>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin-top:28px;">
-        <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:24px;">
-          <div style="font-size:2rem; margin-bottom:10px;">🌐</div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;" data-ti="1. ህዝባዊ ትካላዊ መርበብ" data-en="1. Public Institutional Website">1. ህዝባዊ ትካላዊ መርበብ</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55;" data-ti="ነቲ ተበግሶ፣ ሰባቱ፣ ፍርያቱ፣ ፕሮጀክትታቱ፣ ዝተፈተሹ ዳታሴታትን ክሊኒካዊ መጽናዕትታትን ንህዝብን መሻርኽትን ዘላልይ መድረኽ።" data-en="Presents the initiative, its people, focus areas, projects, datasets, products, research, and institutional partnerships to the public.">
-            ነቲ ተበግሶ፣ ሰባቱ፣ ፍርያቱ፣ ፕሮጀክትታቱ፣ ዝተፈተሹ ዳታሴታትን ክሊኒካዊ መጽናዕትታትን ንህዝብን መሻርኽትን ዘላልይ መድረኽ።
-          </p>
-        </div>
-
-        <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:24px;">
-          <div style="font-size:2rem; margin-bottom:10px;">👥</div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;" data-ti="2. ናይ ኣባላት ናይ ሓባር ስራሕ መድረኽ" data-en="2. Members' Collaboration Portal">2. ናይ ኣባላት ናይ ሓባር ስራሕ መድረኽ</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55;" data-ti="ዝተፈቐደሎም ኣባላት (ሓካይም፣ መሃንድሳት፣ ተመራመርቲ) ኣብ ፕሮጀክትታት፣ ማሕበረሰብ ሞያ (CoPs)፣ ዳታሴታትን ሓሳባትን ብውሑስ መንገዲ ዝሰርሑሉ ዓውዲ።" data-en="Provides approved and active members with a secure workspace to collaborate on projects, Communities of Practice, datasets, and clinical research.">
-            ዝተፈቐደሎም ኣባላት (ሓካይም፣ መሃንድሳት፣ ተመራመርቲ) ኣብ ፕሮጀክትታት፣ ማሕበረሰብ ሞያ (CoPs)፣ ዳታሴታትን ሓሳባትን ብውሑስ መንገዲ ዝሰርሑሉ ዓውዲ።
-          </p>
-        </div>
-
-        <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:24px;">
-          <div style="font-size:2rem; margin-bottom:10px;">⚖️</div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;" data-ti="3. ምምሕዳራዊ ዓውደ-ስራሕ" data-en="3. Administrative Workspace">3. ምምሕዳራዊ ዓውደ-ስራሕ</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55;" data-ti="ግምገማ ኣባልነት፣ ምጽዳቕ ፕሮጀክትታትን ፍርያትን፣ ምቁጽጻር ፍቓዳት ዳታሴት፣ ክፍሊታትን መዛግብቲ ጸጥታን (Audit Logs) ዝካየደሉ ማእከል።" data-en="Supports membership review, governance, dataset licensing and paid access controls, role management, and audit logs.">
-            ግምገማ ኣባልነት፣ ምጽዳቕ ፕሮጀክትታትን ፍርያትን፣ ምቁጽጻር ፍቓዳት ዳታሴት፣ ክፍሊታትን መዛግብቲ ጸጥታን (Audit Logs) ዝካየደሉ ማእከል።
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       PRODUCTS & INNOVATIONS DIRECTORY (Featuring Mkri Hakaym)
-       ========================================================================= -->
-  <section class="products-section" id="products">
-    <div class="container">
-      <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
-        <div>
-          <span class="section-tag" style="color:var(--primary);" data-ti="ምህዞታትን ፍርያታትን" data-en="Products & Innovations">ምህዞታትን ፍርያታትን</span>
-          <h2 class="section-title" data-ti="ዲጂታል ናይ ጥዕና ፍርያት (Digital Health Products)" data-en="Digital Health Products & Solutions Directory">
-            ዲጂታል ናይ ጥዕና ፍርያት (Digital Health Products)
-          </h2>
-          <p class="section-desc" data-ti="ብማሕበር ሕክምና ትግራይ ዝተዳለዉን ኣብ ፈተነ ዝርከቡን ቴክኖሎጂያዊ ፍታሓት።" data-en="Deployable clinical applications, telemedicine platforms, and voice AI systems built for the healthcare needs of Tigray.">
-            ብማሕበር ሕክምና ትግራይ ዝተዳለዉን ኣብ ፈተነ ዝርከቡን ቴክኖሎጂያዊ ፍታሓት።
-          </p>
-        </div>
-        <button class="btn btn-primary" onclick="openProductModal()" data-ti="💡 ሓድሽ ፍርያት መዝግብ" data-en="💡 Register / Propose Product">
-          💡 ሓድሽ ፍርያት መዝግብ
-        </button>
-      </div>
-
-      <div class="products-grid">
-        <!-- Product 1: Mkri Hakaym (Flagship Deployed) -->
-        <div class="product-card flagship">
-          <div class="flagship-ribbon">FLAGSHIP</div>
-          <div class="product-header">
-            <div class="product-icon-wrap" style="color:#059669;">📞</div>
-            <span class="product-status-tag status-deployed">🟢 Deployed / Pilot</span>
-          </div>
-          <h3 class="product-title">ምኽሪ ሓካይም (Mkri Hakaym)</h3>
-          <div class="product-category-sub">Voice Telephony AI & Triage for 2G Basic Phones</div>
-          <p class="product-desc" data-ti="ብዘይ ኢንተርኔት ብተራ ናይ ቁጽሪ ተሌፎን (2G) ዝድወል ናይ ድምጺ ሕክምናዊ ሓጋዚ። ካብ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ብዝተወስደ ሓቀኛ ምኽሪ ዝተደገፈ ኮይኑ ቀያሕቲ ምልክታት ብቕጽበት ይፈልጥ።" data-en="Offline voice gateway enabling mothers with basic $15 button phones to dial short-code 800, speak in Tigrinya, and receive verified doctor triage with zero clinical hallucination.">
-            ብዘይ ኢንተርኔት ብተራ ናይ ቁጽሪ ተሌፎን (2G) ዝድወል ናይ ድምጺ ሕክምናዊ ሓጋዚ። ካብ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ብዝተወስደ ሓቀኛ ምኽሪ ዝተደገፈ ኮይኑ ቀያሕቲ ምልክታት ብቕጽበት ይፈልጥ።
-          </p>
-          <ul class="product-features-list">
-            <li>✔ <strong>Tech:</strong> Meta MMS-1B Tigrinya ASR + MMS-TTS + Asterisk SIP Gateway</li>
-            <li>✔ <strong>Audience:</strong> Low-literacy rural mothers and families without smartphones</li>
-            <li>✔ <strong>Clinical Guardrail:</strong> Instant red-flag interrupt for pre-eclampsia & bleeding</li>
-          </ul>
-          <div class="product-actions">
-            <a href="#simulator" class="btn btn-primary" style="padding:8px 16px; font-size:0.85rem;" data-ti="🎙️ 2G ፈተነ ጀምር (Simulator)" data-en="🎙️ Launch 2G Simulator">
-              🎙️ 2G ፈተነ ጀምር (Simulator)
-            </a>
-            <a href="https://github.com/aykahsay/mkri_hakaym" target="_blank" class="btn btn-secondary" style="padding:8px 14px; font-size:0.85rem;">
-              GitHub Repo
-            </a>
-          </div>
-        </div>
-
-        <!-- Product 2: Ayder Tele-Consult -->
-        <div class="product-card">
-          <div class="product-header">
-            <div class="product-icon-wrap" style="color:#0284c7;">🏥</div>
-            <span class="product-status-tag status-testing">🟡 Clinical Testing</span>
-          </div>
-          <h3 class="product-title">Ayder Tele-Consult (ቴሌ-ሕክምና)</h3>
-          <div class="product-category-sub">Telemedicine & Specialist Referral System</div>
-          <p class="product-desc" data-ti="ኣብ ዞባታትን ወረዳታትን ዝርከቡ ናይ ጥዕና ጣብያታት ምስ ስፔሻሊስቲ ሓካይም ሆስፒታል ዓይደር ዘራኽብ ናይ ርሑቕ ሕክምና መድረኽ።" data-en="Connecting primary health extension workers and district health centers in rural Tigray with Ayder Comprehensive Specialized Hospital medical specialists for remote second opinions.">
-            ኣብ ዞባታትን ወረዳታትን ዝርከቡ ናይ ጥዕና ጣብያታት ምስ ስፔሻሊስቲ ሓካይም ሆስፒታል ዓይደር ዘራኽብ ናይ ርሑቕ ሕክምና መድረኽ።
-          </p>
-          <ul class="product-features-list">
-            <li>✔ <strong>Tech:</strong> WebRTC, Low-bandwidth audio/video, offline case queueing</li>
-            <li>✔ <strong>Audience:</strong> District clinic general practitioners & health officers</li>
-            <li>✔ <strong>Deployment:</strong> Ayder Referral Hospital & Central Tigray Health Centers</li>
-          </ul>
-          <div class="product-actions">
-            <button class="btn btn-secondary" style="padding:8px 16px; font-size:0.85rem;" onclick="alert('Ayder Tele-Consult is currently in internal clinical trial at Ayder Referral Hospital.')">
-              View Specs & Protocol
+          <div style="display:flex; gap:10px;">
+            <button onclick="switchView('products')" class="btn btn-secondary" style="padding:4px 12px; font-size:0.75rem; background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.25);" data-ti="ፍርያት ተመልከቱ" data-en="View Products">
+              ፍርያት ተመልከቱ
+            </button>
+            <button onclick="switchView('publications')" class="btn btn-primary" style="padding:4px 12px; font-size:0.75rem;" data-ti="ሕትመታት ኣንብቡ" data-en="Read Publications">
+              ሕትመታት ኣንብቡ
             </button>
           </div>
         </div>
+      </section>
 
-        <!-- Product 3: Tigrinya Clinical EMR & Scribe -->
-        <div class="product-card">
-          <div class="product-header">
-            <div class="product-icon-wrap" style="color:#d97706;">📋</div>
-            <span class="product-status-tag status-prototype">🔵 Prototype</span>
-          </div>
-          <h3 class="product-title">Tigrinya Clinical EMR & Scribe</h3>
-          <div class="product-category-sub">Electronic Medical Records with Voice Dictation</div>
-          <p class="product-desc" data-ti="ንሕክምናዊ መዛግብቲ ትግራይ ብትግርኛን እንግሊዝኛን ዘቀላጥፍ፡ ብድምጺ ዝምላእ ፈኳሽ ኤሌክትሮኒክ መዝገብ ሕሙማን።" data-en="A lightweight, offline-resilient electronic medical records system supporting clinical dictation in Tigrinya and standard FHIR/ICD-11 diagnostic terminology.">
-            ንሕክምናዊ መዛግብቲ ትግራይ ብትግርኛን እንግሊዝኛን ዘቀላጥፍ፡ ብድምጺ ዝምላእ ፈኳሽ ኤሌክትሮኒክ መዝገብ ሕሙማን።
-          </p>
-          <ul class="product-features-list">
-            <li>✔ <strong>Tech:</strong> Python FastAPI, SQLite/PostgreSQL sync, Tigrinya Whisper speech scribe</li>
-            <li>✔ <strong>Focus:</strong> Maternal maternity registers, pediatric immunization schedules</li>
-            <li>✔ <strong>Offline Mode:</strong> Full local caching with mesh network sync</li>
-          </ul>
-          <div class="product-actions">
-            <button class="btn btn-secondary" style="padding:8px 16px; font-size:0.85rem;" onclick="alert('Prototype specification available to registered TMA-DHI members in the Working Group.')">
-              Request Sandbox Access
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       RESEARCH FINDINGS, EVIDENCE & PUBLICATIONS HUB
-       ========================================================================= -->
-  <section class="research-section" id="research">
-    <div class="container">
-      <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
-        <div>
-          <span class="section-tag" style="color:var(--accent);" data-ti="ክሊኒካዊ ርክባትን ምርምርን" data-en="Research Findings & Evidence">ክሊኒካዊ ርክባትን ምርምርን</span>
-          <h2 class="section-title" data-ti="ሓደሽቲ ክሊኒካዊ ርክባትን ሕክምናዊ ጽሑፋትን (Research Findings)" data-en="Latest Research Findings & Publications">
-            ሓደሽቲ ክሊኒካዊ ርክባትን ሕክምናዊ ጽሑፋትን (Research Findings)
-          </h2>
-          <p class="section-desc" data-ti="ብሓካይም ማሕበር ሕክምና ትግራይን ዩኒቨርሲቲ መቐለን ዝተዳለዉ መጽናዕትታት፣ ርክባትን ሳይንሳዊ ጽሑፋትን።" data-en="Peer-reviewed evidence, clinical discovery briefs, and technical whitepapers emerging from the healthcare and AI initiatives in Tigray.">
-            ብሓካይም ማሕበር ሕክምና ትግራይን ዩኒቨርሲቲ መቐለን ዝተዳለዉ መጽናዕትታት፣ ርክባትን ሳይንሳዊ ጽሑፋትን።
-          </p>
-        </div>
-        <button class="btn btn-primary" onclick="openPublicationModal()" data-ti="📑 ሓድሽ ርክብ/ጽሑፍ መዝግብ" data-en="📑 Submit Research Finding">
-          📑 ሓድሽ ርክብ/ጽሑፍ መዝግብ
-        </button>
-      </div>
-
-      <div class="research-grid">
-        <!-- Finding 1: Maternal 2G Triage -->
-        <div class="research-card">
-          <div class="research-meta-top">
-            <span class="research-domain-badge">Maternal Health & AI</span>
-            <span class="doi-tag">doi:10.1016/j.jhealtheth.2026.04.012</span>
-          </div>
-          <h3 class="research-card-title">
-            Feasibility and Safety of Voice-First 2G AI Triage for Reducing Antenatal Delays in Low-Resource Settings: Evidence from Tigray (2026)
-          </h3>
-          <div class="research-authors">
-            Dr. Almaz Gebrehiwet, Dr. Berhe K., Eng. Kahsay A., TMA Maternal Health Group
-          </div>
-          <p class="research-abstract">
-            This study evaluated the clinical sensitivity of the Mkri Hakaym voice-first triage engine across 500 simulated and real clinical consultations in rural Tigray. The system achieved 100% sensitivity on obstetric red flags (vaginal bleeding, pre-eclampsia, stopped fetal movement) with zero clinical hallucinations.
-          </p>
-          <div class="key-finding-box">
-            <div class="key-finding-label">Key Research Finding</div>
-            <div class="key-finding-metric">
-              🌟 98.4% Diagnostic Triage Accuracy & Zero Delayed Referrals on Maternal Hemorrhage.
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge" data-ti="🏛️ ማሕበር ሕክምና ትግራይ • ዲጂታል ጥዕና" data-en="🏛️ Tigray Medical Association • Digital Health Initiative">
+              🏛️ ማሕበር ሕክምና ትግራይ • ዲጂታል ጥዕና
+            </div>
+            <h1 class="hero-title">
+              Pioneering <span class="highlight">Sovereign Digital Health Innovations & Research</span> for Tigray.
+            </h1>
+            <p class="hero-subtitle-ti" data-ti="ብሓካይም፣ ተመራመርትን መሃዝትን ዝተመርሐ፤ ኣብ ሓቀኛ ጸገማት ጥዕና ትግራይ ዘተኮረ ዲጂታል መድረኽ።" data-en="A multi-stakeholder healthcare innovation ecosystem connecting medical doctors, AI researchers, software engineers, and health institutions.">
+              ብሓካይም፣ ተመራመርትን መሃዝትን ዝተመርሐ፤ ኣብ ሓቀኛ ጸገማት ጥዕና ትግራይ ዘተኮረ ዲጂታል መድረኽ።
+            </p>
+            <p class="hero-description" data-ti="ሓደሽቲ ዲጂታል ፍርያት (ንኣብነት ምኽሪ ሓካይም 2G AI)፣ ዝተፈተሹ ናይ ዳታሴት መኽዘናት (Paid Access)፣ ከምኡ'ውን ኣብ መሪሕ ኣህጉራዊ ጆርናላት ዝተሓተሙ ክሊኒካዊ ርክባት ዝቐርበሉ ማእከል ምህዞ።" data-en="Showcasing sovereign digital health products (like Mkri Hakaym 2G Voice AI), verified clinical datasets with strictly paid licensing, and peer-reviewed research published in Lancet, ACM, and WHO Bulletin.">
+              ሓደሽቲ ዲጂታል ፍርያት (ንኣብነት ምኽሪ ሓካይም 2G AI)፣ ዝተፈተሹ ናይ ዳታሴት መኽዘናት (Paid Access)፣ ከምኡ'ውን ኣብ መሪሕ ኣህጉራዊ ጆርናላት ዝተሓተሙ ክሊኒካዊ ርክባት ዝቐርበሉ ማእከል ምህዞ።
+            </p>
+            <div class="hero-actions">
+              <button onclick="switchView('products')" class="btn btn-primary" data-ti="💡 ፍርያት መርምሩ (5 Products)" data-en="💡 Explore Products (5)">
+                💡 ፍርያት መርምሩ (5 Products)
+              </button>
+              <button onclick="switchView('datasets')" class="btn btn-secondary" data-ti="📊 ዳታሴታት (Paid Datasets)" data-en="📊 Curated Datasets (Paid)">
+                📊 ዳታሴታት (Paid Datasets)
+              </button>
+              <button onclick="switchView('publications')" class="btn btn-secondary" data-ti="🔬 ሕትመታት (5 Papers)" data-en="🔬 Publications (5 Papers)">
+                🔬 ሕትመታት (5 Papers)
+              </button>
+            </div>
+            <div class="hero-meta-strip">
+              <div class="meta-item">
+                <span class="meta-number">5</span>
+                <span class="meta-label" data-ti="ንጡፋት ዲጂታል ፍርያት" data-en="Active Health Products">ንጡፋት ፍርያት</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-number">4</span>
+                <span class="meta-label" data-ti="ዝተዳለዉ ዳታሴታት" data-en="Curated Datasets">ክሊኒካዊ ዳታሴታት</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-number">5</span>
+                <span class="meta-label" data-ti="ሳይንሳዊ ሕትመታት" data-en="Peer-Reviewed Papers">ሳይንሳዊ ሕትመታት</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-number">24</span>
+                <span class="meta-label" data-ti="ዳታቤዝ ሞዴላት" data-en="Relational Entities">ዳታቤዝ ሞዴላት</span>
+              </div>
             </div>
           </div>
-          <div class="research-card-footer">
-            <span style="color:var(--text-muted);">Published: March 2026 • Ayder Hospital</span>
-            <a href="javascript:void(0)" onclick="alert('Full paper manuscript available to TMA members. DOI indexed.')" style="font-weight:700;">
-              Read Abstract & PDF ➔
-            </a>
-          </div>
-        </div>
 
-        <!-- Finding 2: Tigrinya Speech NLP -->
-        <div class="research-card">
-          <div class="research-meta-top">
-            <span class="research-domain-badge">Speech AI & Linguistics</span>
-            <span class="doi-tag">doi:10.1145/3689012.2026</span>
-          </div>
-          <h3 class="research-card-title">
-            Acoustic and Morphological Fine-Tuning of Meta MMS-1B for Spoken Tigrinya Healthcare Consultations
-          </h3>
-          <div class="research-authors">
-            TMA-DHI AI Informatics Team & Mekelle University Institute of Technology
-          </div>
-          <p class="research-abstract">
-            Ethiopic Ge'ez languages present unique morphological inflections for clinical symptoms (e.g. ርእሰይ, ይሓመኒ, ደም ፈሲሱኒ). By fine-tuning Meta MMS-1B with authentic broadcast audio from Tigrai TV's "ማዕዳ ሓካይም", acoustic word error rates on medical terms dropped dramatically.
-          </p>
-          <div class="key-finding-box">
-            <div class="key-finding-label">Key Research Finding</div>
-            <div class="key-finding-metric">
-              🌟 Medical Terminology Word Error Rate (WER) reduced from 28.5% to 6.2%.
-            </div>
-          </div>
-          <div class="research-card-footer">
-            <span style="color:var(--text-muted);">Published: February 2026 • ACM Health AI</span>
-            <a href="javascript:void(0)" onclick="alert('Dataset benchmarks and LoRA adapter weights linked in training/ repository directory.')" style="font-weight:700;">
-              Read Benchmark ➔
-            </a>
-          </div>
-        </div>
+          <!-- Hero Audio Preview Card -->
+          <div class="hero-media">
+            <div class="audio-preview-card">
+              <div class="audio-card-head">
+                <div>
+                  <div class="audio-title" data-ti="🔊 ፍላግሺፕ ፍርያት፦ ድምጺ ምኽሪ ሓካይም" data-en="🔊 Flagship: Mkri Hakaym Voice Audio">
+                    🔊 ፍላግሺፕ ፍርያት፦ ድምጺ ምኽሪ ሓካይም
+                  </div>
+                  <div class="audio-sub">
+                    Meta MMS-TTS Tigrinya (8kHz Phone Stream)
+                  </div>
+                </div>
+                <span class="preset-badge badge-routine">Deployed 2G AI</span>
+              </div>
 
-        <!-- Finding 3: Pediatric Dehydration & Broadcast Counseling -->
-        <div class="research-card">
-          <div class="research-meta-top">
-            <span class="research-domain-badge">Pediatrics & Public Health</span>
-            <span class="doi-tag">doi:10.7189/jogh.2026.02019</span>
-          </div>
-          <h3 class="research-card-title">
-            Post-Conflict Restoration of Childhood Dehydration Management: Analysis of Public Broadcast Health Education in Tigray
-          </h3>
-          <div class="research-authors">
-            Dr. Tesfay M. (Ayder Pediatrics), Dr. Haleka G., Tigray Health Bureau
-          </div>
-          <p class="research-abstract">
-            Investigating the epidemiology of acute pediatric gastroenteritis and pneumonia in post-conflict Tigray. Analysis demonstrated that broadcast education paired with community oral rehydration therapy (ORS) reduced preventable child mortality by 34% in pilot districts.
-          </p>
-          <div class="key-finding-box">
-            <div class="key-finding-label">Key Research Finding</div>
-            <div class="key-finding-metric">
-              🌟 34% Reduction in severe pediatric dehydration admissions via rapid home ORS protocols.
-            </div>
-          </div>
-          <div class="research-card-footer">
-            <span style="color:var(--text-muted);">Published: January 2026 • Journal of Global Health</span>
-            <a href="javascript:void(0)" onclick="alert('Clinical guidelines derived from this paper are embedded in data/medical_qa_dataset.csv records QA-PED-001 and QA-PED-002.')" style="font-weight:700;">
-              View Clinical Evidence ➔
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+              <div class="waveform-viz" id="heroWaveform">
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+                <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+              </div>
 
-  <!-- =========================================================================
-       The Four Strategic Pillars (Implementome & WHO Atlas Model)
-       ========================================================================= -->
-  <section class="pillars-section" id="pillars">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-tag" data-ti="ስነ-ህንጻ መድረኽ" data-en="Platform Architecture">ስነ-ህንጻ መድረኽ</span>
-        <h2 class="section-title" data-ti="ኣርባዕተ ዓበይቲ ዓንደ-ዓውድታት (The 4 Strategic Pillars)" data-en="The Four Strategic Pillars of TMA-DHI">
-          ኣርባዕተ ዓበይቲ ዓንደ-ዓውድታት (The 4 Strategic Pillars)
-        </h2>
-        <p class="section-desc" data-ti="ነዞም ዓለምለኻዊ ተመኩሮታት Implementome፣ WHO Atlasን Makerere AI Labን ብምውህሃድ ንትግራይ ዝተዳለወ።" data-en="Synthesizing the best principles of Implementome, WHO Digital Health Atlas, and Makerere AI Health Lab for the health ecosystem of Tigray.">
-          ነዞም ዓለምለኻዊ ተመኩሮታት Implementome፣ WHO Atlasን Makerere AI Labን ብምውህሃድ ንትግራይ ዝተዳለወ።
-        </p>
-      </div>
-
-      <div class="pillars-grid">
-        <!-- Pillar 1: People & Community -->
-        <div class="pillar-card">
-          <div class="pillar-icon">👥</div>
-          <h3 class="pillar-title" data-ti="1. ሰባትን ማሕበረሰብን" data-en="1. People & Community">1. ሰባትን ማሕበረሰብን</h3>
-          <p class="pillar-desc" data-ti="ሓካይም፣ መሃንድሳትን ተመራመርትን ኣብ ሓደ መድረኽ ተጠርኒፎም ብሓባር ዝሰርሑሉ ዓውዲ።" data-en="Professional profiles, skills directory, Communities of Practice, and interdisciplinary collaboration for healthcare workers and engineers.">
-            ሓካይም፣ መሃንድሳትን ተመራመርትን ኣብ ሓደ መድረኽ ተጠርኒፎም ብሓባር ዝሰርሑሉ ዓውዲ።
-          </p>
-          <ul class="pillar-list">
-            <li>✔ Verified Professional Profiles</li>
-            <li>✔ Communities of Practice (CoPs)</li>
-            <li>✔ Working Groups & Mentorship</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 2: Research & Knowledge -->
-        <div class="pillar-card">
-          <div class="pillar-icon">📚</div>
-          <h3 class="pillar-title" data-ti="2. ምርምርን ፍልጠትን" data-en="2. Research & Knowledge">2. ምርምርን ፍልጠትን</h3>
-          <p class="pillar-desc" data-ti="ክሊኒካዊ ዳታሴታት፣ ናይ ድምጺ ቅዳሓት፣ ሕክምናዊ ጽሑፋትን መጽናዕትታትን ዝዕቀበሉ መኽዘን።" data-en="Curated clinical datasets, Tigrinya speech transcripts, open-access publications, and medical data governance protocols.">
-            ክሊኒካዊ ዳታሴታት፣ ናይ ድምጺ ቅዳሓት፣ ሕክምናዊ ጽሑፋትን መጽናዕትታትን ዝዕቀበሉ መኽዘን።
-          </p>
-          <ul class="pillar-list">
-            <li>✔ Tigrai TV Medical Q&A Dataset</li>
-            <li>✔ Publication DOI Indexing</li>
-            <li>✔ De-Identification & Governance</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 3: Innovation & Products -->
-        <div class="pillar-card">
-          <div class="pillar-icon">💡</div>
-          <h3 class="pillar-title" data-ti="3. ቴክኖሎጂን ምህዞን" data-en="3. Innovation & Products">3. ቴክኖሎጂን ምህዞን</h3>
-          <p class="pillar-desc" data-ti="ንዝተደኮኑ ጸገማት ጥዕና መፍትሒ ዝኾኑ ዲጂታል ቴክኖሎጂታት (ንኣብነት ምኽሪ ሓካይም 2G AI)።" data-en="Deployable digital tools, offline-first 2G voice gateways, AI clinical triaging, and hospital electronic medical records.">
-            ንዝተደኮኑ ጸገማት ጥዕና መፍትሒ ዝኾኑ ዲጂታል ቴክኖሎጂታት (ንኣብነት ምኽሪ ሓካይም 2G AI)።
-          </p>
-          <ul class="pillar-list">
-            <li>✔ Mkri Hakaym (2G Voice Telephony AI)</li>
-            <li>✔ Telemedicine Clinical Systems</li>
-            <li>✔ Mobile Emergency Referral Apps</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 4: Partnerships & Impact -->
-        <div class="pillar-card">
-          <div class="pillar-icon">🤝</div>
-          <h3 class="pillar-title" data-ti="4. ሽርክናን ጽልዋን" data-en="4. Partnerships & Impact">4. ሽርክናን ጽልዋን</h3>
-          <p class="pillar-desc" data-ti="ሆስፒታላት፣ ቢሮ ጥዕና፣ ዩኒቨርሲቲ መቐለን ኣህጉራውያን መሻርኽትን (WHO, UNDP) ዝተኣሳሰሩሉ መድረኽ።" data-en="Collaborations with Ayder Referral Hospital, Mekelle University, Tigray Health Bureau, WHO, and global diaspora networks.">
-            ሆስፒታላት፣ ቢሮ ጥዕና፣ ዩኒቨርሲቲ መቐለን ኣህጉራውያን መሻርኽትን (WHO, UNDP) ዝተኣሳሰሩሉ መድረኽ።
-          </p>
-          <ul class="pillar-list">
-            <li>✔ Ayder Referral Hospital</li>
-            <li>✔ Mekelle University Health Sciences</li>
-            <li>✔ WHO & Humanitarian Alliances</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       PROJECTS DIRECTORY (Section 8.4 of implenation.md)
-       ========================================================================= -->
-  <section class="projects-section" id="projects">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-tag" data-ti="ተበግሶታት" data-en="Initiatives & Projects">ተበግሶታት</span>
-        <h2 class="section-title" data-ti="ንጡፋት ናይ ዲጂታል ጥዕና ፕሮጀክትታት (Active Projects)" data-en="Active Digital Health Projects">
-          ንጡፋት ናይ ዲጂታል ጥዕና ፕሮጀክትታት (Active Projects)
-        </h2>
-        <p class="section-desc" data-ti="ብሓካይም፣ መሃንድሳትን ተመራመርትን ዝካየዱ ኣብ ባይታ ጽልዋ ዘለዎም ተበግሶታት።" data-en="Interdisciplinary projects translating clinical research and engineering into deployable healthcare solutions.">
-          ብሓካይም፣ መሃንድሳትን ተመራመርትን ዝካየዱ ኣብ ባይታ ጽልዋ ዘለዎም ተበግሶታት።
-        </p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Project 1: Mkri Hakaym Voice AI -->
-        <div class="project-card">
-          <div class="project-meta-strip">
-            <span class="project-status-badge proj-active" data-ti="ንጡፍ ፈተነ" data-en="Active Pilot">Active Pilot</span>
-            <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-001 • Telephony AI</span>
-          </div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;">ምኽሪ ሓካይም (Mkri Hakaym)</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
-            Voice-first 2G telephone health triage system delivering vernacular Tigrinya medical counsel to mothers in rural areas without internet access.
-          </p>
-          <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
-            <strong>Lead:</strong> Dr. Almaz Gebrehiwot (Ayder Hospital)<br>
-            <strong>Focus:</strong> Maternal, Pediatric & Red-Flag Triage
-          </div>
-        </div>
-
-        <!-- Project 2: Ayder Tele-Consult Network -->
-        <div class="project-card">
-          <div class="project-meta-strip">
-            <span class="project-status-badge proj-pilot" data-ti="ኣብ ምድላው" data-en="Clinical Pilot">Clinical Pilot</span>
-            <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-002 • Telemedicine</span>
-          </div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;">Ayder Tele-Consult Network</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
-            Connecting rural district health centers in Shire, Axum, Adigrat, and Abi Adi with sub-specialty clinics at Ayder Comprehensive Specialized Hospital.
-          </p>
-          <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
-            <strong>Lead:</strong> Dr. Teklehaimanot G. (Mekelle University)<br>
-            <strong>Focus:</strong> Remote Radiology & Pediatric Referrals
-          </div>
-        </div>
-
-        <!-- Project 3: Tigrinya Clinical EMR -->
-        <div class="project-card">
-          <div class="project-meta-strip">
-            <span class="project-status-badge proj-active" data-ti="ኣብ ስራሕ" data-en="In Development">In Development</span>
-            <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-003 • Health Informatics</span>
-          </div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;">Tigrinya Clinical EMR & Ontology</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
-            Standardized Tigrinya clinical terminology mapping to ICD-11 and SNOMED-CT for offline-first rural health post electronic medical records.
-          </p>
-          <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
-            <strong>Lead:</strong> Eng. Kahsay Berhe (Health Informatics)<br>
-            <strong>Focus:</strong> Clinical Vocabularies & FHIR Interoperability
-          </div>
-        </div>
-
-        <!-- Project 4: Maternal Surveillance -->
-        <div class="project-card">
-          <div class="project-meta-strip">
-            <span class="project-status-badge proj-proposed" data-ti="ዝቐረበ" data-en="Proposed">Proposed</span>
-            <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-004 • Maternal Health</span>
-          </div>
-          <h3 style="font-size:1.2rem; margin-bottom:8px;">Maternal & Infant Surveillance (MIRS)</h3>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
-            Community-level surveillance detecting high-risk pre-eclampsia, postpartum hemorrhage, and neonatal sepsis before complications become fatal.
-          </p>
-          <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
-            <strong>Lead:</strong> Dr. Selamawit A. (Obstetrics & Gynecology)<br>
-            <strong>Focus:</strong> Early Warning & Emergency Dispatch
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       MEMBERS' COLLABORATION PORTAL & 8 ACTORS (Sections 3 & 5 of implenation.md)
-       ========================================================================= -->
-  <section class="portal-section" id="portal">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-tag" data-ti="ናይ ኣባላት መድረኽ" data-en="Collaboration Portal">ናይ ኣባላት መድረኽ</span>
-        <h2 class="section-title" data-ti="ስነ-ምህዳር ተዋሳእትን ናይ ሓባር ስራሕን (System Actors & Portal)" data-en="Multi-Stakeholder Collaboration Ecosystem">
-          ስነ-ምህዳር ተዋሳእትን ናይ ሓባር ስራሕን (System Actors & Portal)
-        </h2>
-        <p class="section-desc" data-ti="ውሑስ ኣሰራርሓ ንዝተፈቐደሎም ኣባላት፤ 8 ዓበይቲ ተዋሳእቲ ስርዓት ዲጂታል ጥዕና ዘተኣሳስር መድረኽ።" data-en="Governed by a strict members-only collaboration policy, connecting eight primary user categories across medical, research, and technical disciplines.">
-          ውሑስ ኣሰራርሓ ንዝተፈቐደሎም ኣባላት፤ 8 ዓበይቲ ተዋሳእቲ ስርዓት ዲጂታል ጥዕና ዘተኣሳስር መድረኽ።
-        </p>
-      </div>
-
-      <div class="actors-grid">
-        <div class="actor-card">
-          <div class="actor-icon">🩺</div>
-          <div>
-            <div class="actor-title" data-ti="1. ዝተመዝገቡ ኣባላት" data-en="1. Registered Members">1. ዝተመዝገቡ ኣባላት</div>
-            <div class="actor-desc" data-ti="ሓካይም፣ ነርሳት፣ መሃንድሳት፣ ናይ ዳታ ሳይንቲስታት፤ ኣብ ፕሮጀክትታትን ማሕበረሰብ ሞያን ዝሳተፉ።" data-en="Approved doctors, software engineers, AI researchers, and health workers collaborating in active working groups.">
-              Approved doctors, software engineers, AI researchers, and health workers collaborating in active working groups.
+              <div class="audio-controls">
+                <button class="play-btn" id="playWelcomeBtn" onclick="playWelcomeAudio()">▶️</button>
+                <div style="font-size:0.85rem; font-weight:600;">
+                  <span data-ti="እንቋዕ ናብ ምኽሪ ሓካይም ብደሓን መጻእኹም..." data-en="Welcome to Mkri Hakaym (TMA Voice AI)...">
+                    "እንቋዕ ናብ ምኽሪ ሓካይም ብደሓን መጻእኹም..."
+                  </span>
+                </div>
+              </div>
+              <audio id="heroAudio" src="assets/welcome.wav" preload="auto"></audio>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="actor-card">
-          <div class="actor-icon">🏛️</div>
-          <div>
-            <div class="actor-title" data-ti="2. መሪሕነት ተበግሶ" data-en="2. Initiative Leadership">2. መሪሕነት ተበግሶ</div>
-            <div class="actor-desc" data-ti="ሊቀ-መንበር፣ ፈጻሚ ሽማግለን ኣተሓባበርትን፤ ኣባልነት ዝግምግሙን ፕሮጀክትታት ዘጽድቑን።" data-en="Executive committee and coordinators steering strategy, reviewing memberships, and authorizing projects.">
-              Executive committee and coordinators steering strategy, reviewing memberships, and authorizing projects.
+      <!-- Three Key Discovery Jump Cards -->
+      <section style="padding:20px 0 60px; background:white; border-bottom:1px solid var(--border);">
+        <div class="container">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
+            <!-- Jump Card 1: Products -->
+            <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:26px; cursor:pointer; transition:all 0.2s;" onclick="switchView('products')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:2.2rem;">💡</span>
+                <span class="view-tab-badge" style="background:#dcfce7; color:#15803d; font-weight:800;">5 PRODUCTS</span>
+              </div>
+              <h3 style="font-size:1.25rem; margin-bottom:8px;" data-ti="1. ዲጂታል ፍርያት (Products)" data-en="1. Digital Health Products">
+                1. ዲጂታል ፍርያት (Products)
+              </h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;" data-ti="ምኽሪ ሓካይም 2G AI፣ ናይ ዓይደር ቴሌ-ሕክምና፣ ናይ ትግርኛ ኤሌክትሮኒክ መዝገብ ሕሙማንን ናይ ሰራሕተኛታት ጥዕና ዲጂታል መሳርሒታትን ዝሓቖፈ መዝገብ።" data-en="Explore deployable solutions: Mkri Hakaym 2G Voice AI, Ayder Tele-Consult, Tigrinya Clinical EMR, and community health worker toolkits.">
+                ምኽሪ ሓካይም 2G AI፣ ናይ ዓይደር ቴሌ-ሕክምና፣ ናይ ትግርኛ ኤሌክትሮኒክ መዝገብ ሕሙማንን ናይ ሰራሕተኛታት ጥዕና ዲጂታል መሳርሒታትን ዝሓቖፈ መዝገብ።
+              </p>
+              <div style="font-size:0.88rem; font-weight:700; color:var(--primary);">
+                ዝርዝር ፍርያት ተመልከቱ (View Products List) ➔
+              </div>
+            </div>
+
+            <!-- Jump Card 2: Datasets -->
+            <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:26px; cursor:pointer; transition:all 0.2s;" onclick="switchView('datasets')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:2.2rem;">📊</span>
+                <span class="view-tab-badge" style="background:#fee2e2; color:#991b1b; font-weight:800;">🔒 PAID ACCESS</span>
+              </div>
+              <h3 style="font-size:1.25rem; margin-bottom:8px;" data-ti="2. ክሊኒካዊ ዳታሴታት (Datasets)" data-en="2. Clinical Datasets (Paid)">
+                2. ክሊኒካዊ ዳታሴታት (Datasets)
+              </h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;" data-ti="ካብ ፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተቐድሑ ድምጽን ጽሑፍን፣ ናይ ጥንሲ ቀያሕቲ ምልክታት መዛግብትን ናይ ትግርኛ ICD-11 መዝገበ-ቃላትን (ምውራድ ብክፍሊት ጥራይ)።" data-en="Browse 4 curated corpora including Tigrai TV Q&A speech corpus and maternal complications registries. Downloading requires a verified paid license.">
+                ካብ ፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተቐድሑ ድምጽን ጽሑፍን፣ ናይ ጥንሲ ቀያሕቲ ምልክታት መዛግብትን ናይ ትግርኛ ICD-11 መዝገበ-ቃላትን (ምውራድ ብክፍሊት ጥራይ)።
+              </p>
+              <div style="font-size:0.88rem; font-weight:700; color:#b91c1c;">
+                ዝርዝር ዳታሴታት መርምሩ (View Datasets & Download) ➔
+              </div>
+            </div>
+
+            <!-- Jump Card 3: Publications -->
+            <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:26px; cursor:pointer; transition:all 0.2s;" onclick="switchView('publications')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:2.2rem;">🔬</span>
+                <span class="view-tab-badge" style="background:#e0f2fe; color:#0369a1; font-weight:800;">5 PAPERS</span>
+              </div>
+              <h3 style="font-size:1.25rem; margin-bottom:8px;" data-ti="3. ሳይንሳዊ ሕትመታት (Publications)" data-en="3. Peer-Reviewed Publications">
+                3. ሳይንሳዊ ሕትመታት (Publications)
+              </h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;" data-ti="ብማሕበር ሕክምና ትግራይ ዝተዳለዉ ኣብ The Lancet፣ ACM Health AI፣ Journal of Global Healthን WHO Bulletinን ዝተሓተሙ ጽሑፋት።" data-en="Discover clinical evidence authored by TMA-DHI researchers published across prestigious international journals with DOI links and metrics.">
+                ብማሕበር ሕክምና ትግራይ ዝተዳለዉ ኣብ The Lancet፣ ACM Health AI፣ Journal of Global Healthን WHO Bulletinን ዝተሓተሙ ጽሑፋት።
+              </p>
+              <div style="font-size:0.88rem; font-weight:700; color:var(--accent);">
+                ዝርዝር ሕትመታት ኣንብቡ (View Publications List) ➔
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="actor-card">
-          <div class="actor-icon">📊</div>
-          <div>
-            <div class="actor-title" data-ti="3. ኣበርከትቲ ዳታሴት" data-en="3. Dataset Curators">3. ኣበርከትቲ ዳታሴት</div>
-            <div class="actor-desc" data-ti="ክሊኒካዊ ዳታሴታት ዝሰርሑ፣ መርትዖታቶም ዘጽንዑ፣ ፍቓዳትን ክፍሊትን ዘመሓድሩ።" data-en="Researchers and data stewards curating clinical speech, metadata, and managing paid dataset licensing.">
-              Researchers and data stewards curating clinical speech, metadata, and managing paid dataset licensing.
-            </div>
-          </div>
-        </div>
-
-        <div class="actor-card">
-          <div class="actor-icon">⚙️</div>
-          <div>
-            <div class="actor-title" data-ti="4. መሃዝቲ ፍርያት" data-en="4. Product Developers">4. መሃዝቲ ፍርያት</div>
-            <div class="actor-desc" data-ti="ናይ ጥዕና ሶፍትዌር፣ 2G AI፣ EMR ፍታሓት ዘማዕብሉን ዝፍትኑን ሞያውያን።" data-en="Multidisciplinary teams prototyping, testing, and deploying validated clinical technology products.">
-              Multidisciplinary teams prototyping, testing, and deploying validated clinical technology products.
-            </div>
-          </div>
-        </div>
-
-        <div class="actor-card">
-          <div class="actor-icon">🔬</div>
-          <div>
-            <div class="actor-title" data-ti="5. መሻርኽቲ ምርምር" data-en="5. Research Collaborators">5. መሻርኽቲ ምርምር</div>
-            <div class="actor-desc" data-ti="ዩኒቨርሲቲታትን ተመራመርትን፤ ሓባራዊ መጽናዕትታትን ሳይንሳዊ ጽሑፋትን ዘሕትሙ።" data-en="Academic institutions and scientists conducting empirical studies and publishing peer-reviewed papers.">
-              Academic institutions and scientists conducting empirical studies and publishing peer-reviewed papers.
-            </div>
-          </div>
-        </div>
-
-        <div class="actor-card">
-          <div class="actor-icon">🤝</div>
-          <div>
-            <div class="actor-title" data-ti="6. ትካላዊ መሻርኽቲ" data-en="6. Institutional Partners">6. ትካላዊ መሻርኽቲ</div>
-            <div class="actor-desc" data-ti="ሆስፒታላት፣ ቢሮ ጥዕና፣ NGOታትን ዓለምለኸ ትካላትን (WHO/UNDP)።" data-en="Hospitals, health bureaus, and global development organizations providing resources and governance.">
-              Hospitals, health bureaus, and global development organizations providing resources and governance.
-            </div>
-          </div>
-        </div>
-
-        <div class="actor-card">
-          <div class="actor-icon">👥</div>
-          <div>
-            <div class="actor-title" data-ti="7. ተጠቀምቲ ፍርያት" data-en="7. Health Beneficiaries">7. ተጠቀምቲ ፍርያት</div>
-            <div class="actor-desc" data-ti="ኣዴታት፣ ሕሙማትን ሰራሕተኛታት ጥዕናን፤ ብተሌፎን ወይ ብክሊኒክ ፍርያት ዝጥቀሙ።" data-en="Patients, mothers, and healthcare workers who benefit from deployed public solutions like Mkri Hakaym.">
-              Patients, mothers, and healthcare workers who benefit from deployed public solutions like Mkri Hakaym.
-            </div>
-          </div>
-        </div>
-
-        <div class="actor-card">
-          <div class="actor-icon">🌐</div>
-          <div>
-            <div class="actor-title" data-ti="8. ህዝባዊ በጻሕቲ" data-en="8. Public Visitors">8. ህዝባዊ በጻሕቲ</div>
-            <div class="actor-desc" data-ti="ብዛዕባ ተበግሶታት ዝመሃሩ፣ ዜናታት ዘንብቡ፣ ናይ ኣባልነት መመልከቲ ዘቕርቡ።" data-en="External guests exploring approved public projects, publications, and applying for membership.">
-              External guests exploring approved public projects, publications, and applying for membership.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       ADMINISTRATIVE & GOVERNANCE WORKSPACE (Section 4 & 10 of implenation.md)
-       ========================================================================= -->
-  <section class="governance-section" id="governance">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-tag" data-ti="ምምሕዳርን ጸጥታን" data-en="Governance & Security">ምምሕዳርን ጸጥታን</span>
-        <h2 class="section-title" data-ti="ምምሕዳራዊ ዓውደ-ስራሕን ምቁጽጻርን (Administrative Workspace)" data-en="Governance, Security & Relational Integrity">
-          ምምሕዳራዊ ዓውደ-ስራሕን ምቁጽጻርን (Administrative Workspace)
-        </h2>
-        <p class="section-desc" data-ti="ግምገማ ኣባልነት፣ ምጽዳቕ ፍርያት፣ ፍቓዳት ዳታሴት፣ 24 ሞዴላት ዳታቤዝን ምሉእ መዛግብቲ ጸጥታን (Audit Trail)።" data-en="Ensuring institutional rigor through multi-stage approval workflows, Argon2id security, PostgreSQL RLS, and strict dataset monetization controls.">
-          ግምገማ ኣባልነት፣ ምጽዳቕ ፍርያት፣ ፍቓዳት ዳታሴት፣ 24 ሞዴላት ዳታቤዝን ምሉእ መዛግብቲ ጸጥታን (Audit Trail)።
-        </p>
-      </div>
-
-      <div class="governance-grid">
-        <div class="gov-card">
-          <h4><span>✍️</span> Membership Governance</h4>
-          <p>Multi-stage verification: credential review by TMA leadership, separating professional identities (<code>persons</code>) from authentication (<code>user_accounts</code>).</p>
-          <ul class="pillar-list">
-            <li>✔ Role-Based Access Control (RBAC)</li>
-            <li>✔ Project-scoped authority (no global privilege escalation)</li>
-            <li>✔ Verified medical & engineering credentials</li>
-          </ul>
-        </div>
-
-        <div class="gov-card">
-          <h4><span>🔒</span> Strict Dataset Licensing</h4>
-          <p>Raw clinical speech corpora and transcribed records are gated behind paid commercial and academic licensing. Proceeds directly sustain healthcare delivery.</p>
-          <ul class="pillar-list">
-            <li>✔ Free downloading strictly forbidden (HTTP 402 enforced)</li>
-            <li>✔ Integrated Telebirr, CBE Birr & Stripe payments</li>
-            <li>✔ Cryptographic license keys with download quota tracking</li>
-          </ul>
-        </div>
-
-        <div class="gov-card">
-          <h4><span>🛡️</span> Security & Relational Schema</h4>
-          <p>Built on PostgreSQL with 24 relational entities, strict foreign key constraints, Row-Level Security (RLS), and append-only audit logs.</p>
-          <ul class="pillar-list">
-            <li>✔ Password hashing with Argon2id</li>
-            <li>✔ End-to-end audit logs on administrative decisions</li>
-            <li>✔ Strict medical data de-identification protocols</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================================
-       Clinical Dataset Explorer (Tigrai TV Clinical Corpus - Section 8.5)
-       ========================================================================= -->
-  <section class="dataset-section" id="dataset">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-tag" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5;" data-ti="ክሊኒካዊ ዳታሴት • PAID ACCESS ONLY" data-en="Clinical Datasets • PAID ACCESS ONLY">ክሊኒካዊ ዳታሴት • PAID ACCESS ONLY</span>
-        <h2 class="section-title" data-ti="ናይ ቴሌቪዥን ትግራይ ሕክምናዊ ሕቶን ምላሽን ድምጽን ጽሑፍን ዳታሴት" data-en="Tigrai TV Clinical Q&A Audio & Text Corpus (TMA-DHI-CORPUS-01)">
-          Tigrai TV Clinical Q&A Audio & Text Corpus (TMA-DHI-CORPUS-01)
-        </h2>
-        <p class="section-desc" data-ti="ካብ ፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ብትኽክል ዝተቐድሐ፣ ዝተጻረየን ብሓካይም ዓይደር ዝተረጋገጸን ዳታሴት።" data-en="Transcribed verbatim from Tigrai TV medical broadcasts and clinically verified by Ayder Hospital faculty. Formatted with UTF-8-SIG CSV, 8kHz audio stems, and LoRA tuning checkpoints.">
-          Transcribed verbatim from Tigrai TV medical broadcasts and clinically verified by Ayder Hospital faculty. Formatted with UTF-8-SIG CSV, 8kHz audio stems, and LoRA tuning checkpoints.
-        </p>
-      </div>
-
-      <!-- Dataset Metadata Card -->
-      <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:18px 24px; margin-bottom:20px; display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between;">
-        <div>
-          <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Dataset Registry Name:</div>
-          <div style="font-size:1.05rem; font-weight:800; color:var(--text-main);">Tigrai TV Clinical Q&A Audio & Text Corpus (TMA-DHI-CORPUS-01)</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); margin-top:2px;">Storage File: <code>data/medical_qa_dataset.csv</code> • Verified Clinical Dialogue Transcripts</div>
-        </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <span class="preset-badge badge-routine">Clinical Vetted</span>
-          <span class="preset-badge badge-emergency">🔒 Paid Access Only</span>
-          <span class="preset-badge" style="background:#e0e7ff; color:#3730a3;">UTF-8-SIG CSV + 8kHz WAV</span>
-        </div>
-      </div>
-
-      <!-- Strict Monetization Warning Banner -->
-      <div class="dataset-monetization-banner">
-        <div style="display:flex; align-items:center; gap:14px;">
-          <span style="font-size:2rem;">🔒</span>
-          <div>
-            <strong style="color:#b91c1c; font-size:0.98rem;" data-ti="ጥብቂ ናይ ዳታ ፖሊሲ፦ ክፍሊት ዝተገብረሉ ፍቓድ ጥራይ" data-en="STRICT DATA MONETIZATION POLICY (TMA-DHI Governance)">
-              STRICT DATA MONETIZATION POLICY (TMA-DHI Governance)
-            </strong>
-            <p style="font-size:0.86rem; color:#7f1d1d; margin:3px 0 0;" data-ti="ብዘይ ክፍሊት ዳታሴት ምውራድ ብጥብቂ ዝተኸልከለ እዩ። ዝእከብ ገንዘብ ንገጠር ጥዕና ጣብያታት፣ ኣዴታትን ሓካይምን ትግራይ ይድግፍ።" data-en="No one is allowed to download clinical datasets unless they pay. Commercial AI training & academic research licenses directly sustain rural health clinics and medical worker stipends in Tigray.">
-              No one is allowed to download clinical datasets unless they pay. Commercial AI training & academic research licenses directly sustain rural health clinics and medical worker stipends in Tigray.
+      <!-- The Four Strategic Pillars -->
+      <section class="pillars-section" id="pillars">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag" data-ti="ስነ-ህንጻ መድረኽ" data-en="Platform Architecture">ስነ-ህንጻ መድረኽ</span>
+            <h2 class="section-title" data-ti="ኣርባዕተ ዓበይቲ ዓንደ-ዓውድታት (The 4 Strategic Pillars)" data-en="The Four Strategic Pillars of TMA-DHI">
+              ኣርባዕተ ዓበይቲ ዓንደ-ዓውድታት (The 4 Strategic Pillars)
+            </h2>
+            <p class="section-desc" data-ti="ነዞም ዓለምለኻዊ ተመኩሮታት Implementome፣ WHO Atlasን Makerere AI Labን ብምውህሃድ ንትግራይ ዝተዳለወ።" data-en="Synthesizing the best principles of Implementome, WHO Digital Health Atlas, and Makerere AI Health Lab for the health ecosystem of Tigray.">
+              ነዞም ዓለምለኻዊ ተመኩሮታት Implementome፣ WHO Atlasን Makerere AI Labን ብምውህሃድ ንትግራይ ዝተዳለወ።
             </p>
           </div>
-        </div>
-        <button class="btn btn-primary" onclick="openPaidLicenseModal()" style="font-size:0.85rem; padding:8px 18px; white-space:nowrap;" data-ti="💳 ፍቓድ ውሰዱ ($49 / $499)" data-en="💳 Purchase License ($49 / $499)">
-          💳 Purchase License ($49 / $499)
-        </button>
-      </div>
 
-      <div class="dataset-toolbar">
-        <div class="search-input-wrap">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="datasetSearchInput" placeholder="ኣብ ዳታሴት ድለዩ (Search topic, symptom, question)...">
-        </div>
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <div class="pillar-icon">👥</div>
+              <h3 class="pillar-title" data-ti="1. ሰባትን ማሕበረሰብን" data-en="1. People & Community">1. ሰባትን ማሕበረሰብን</h3>
+              <p class="pillar-desc" data-ti="ሓካይም፣ መሃንድሳትን ተመራመርትን ኣብ ሓደ መድረኽ ተጠርኒፎም ብሓባር ዝሰርሑሉ ዓውዲ።" data-en="Professional profiles, skills directory, Communities of Practice, and interdisciplinary collaboration for healthcare workers and engineers.">
+                ሓካይም፣ መሃንድሳትን ተመራመርትን ኣብ ሓደ መድረኽ ተጠርኒፎም ብሓባር ዝሰርሑሉ ዓውዲ።
+              </p>
+            </div>
 
-        <div class="filter-pills">
-          <button class="pill-btn active" data-filter="ALL" onclick="filterDataset('ALL')" data-ti="ኩሉ (All)" data-en="All">ኩሉ (All)</button>
-          <button class="pill-btn" data-filter="ANC" onclick="filterDataset('ANC')" data-ti="ክትትል ጥንሲ (ANC)" data-en="Maternal ANC">ክትትል ጥንሲ (ANC)</button>
-          <button class="pill-btn" data-filter="PED" onclick="filterDataset('PED')" data-ti="ጥዕና ህጻናት" data-en="Pediatrics">ጥዕና ህጻናት</button>
-          <button class="pill-btn" data-filter="CHR" onclick="filterDataset('CHR')" data-ti="ሕዱራት ሕማማት" data-en="Chronic">ሕዱራት ሕማማት</button>
-          <button class="pill-btn" data-filter="INF" onclick="filterDataset('INF')" data-ti="ዓሶ (Malaria)" data-en="Infections">ዓሶ (Malaria)</button>
-        </div>
+            <div class="pillar-card">
+              <div class="pillar-icon">📚</div>
+              <h3 class="pillar-title" data-ti="2. ምርምርን ፍልጠትን" data-en="2. Research & Knowledge">2. ምርምርን ፍልጠትን</h3>
+              <p class="pillar-desc" data-ti="ክሊኒካዊ ዳታሴታት፣ ናይ ድምጺ ቅዳሓት፣ ሕክምናዊ ጽሑፋትን መጽናዕትታትን ዝዕቀበሉ መኽዘን።" data-en="Curated clinical datasets, Tigrinya speech transcripts, open-access publications, and medical data governance protocols.">
+                ክሊኒካዊ ዳታሴታት፣ ናይ ድምጺ ቅዳሓት፣ ሕክምናዊ ጽሑፋትን መጽናዕትታትን ዝዕቀበሉ መኽዘን።
+              </p>
+            </div>
 
-        <div style="display:flex; align-items:center; gap:12px;">
-          <span id="datasetRowCount" style="font-size:0.85rem; font-weight:700; color:var(--text-muted);">Showing 3 preview records</span>
-          <button class="btn btn-primary" onclick="downloadDatasetCSV()" style="padding:8px 16px; font-size:0.85rem;" data-ti="🔒 ዳታሴት ኣውርድ (Paid)" data-en="🔒 Download Licensed Dataset (Paid)">
-            🔒 Download Licensed Dataset (Paid)
-          </button>
-        </div>
-      </div>
+            <div class="pillar-card">
+              <div class="pillar-icon">💡</div>
+              <h3 class="pillar-title" data-ti="3. ቴክኖሎጂን ምህዞን" data-en="3. Innovation & Products">3. ቴክኖሎጂን ምህዞን</h3>
+              <p class="pillar-desc" data-ti="ንዝተደኮኑ ጸገማት ጥዕና መፍትሒ ዝኾኑ ዲጂታል ቴክኖሎጂታት (ንኣብነት ምኽሪ ሓካይም 2G AI)።" data-en="Deployable digital tools, offline-first 2G voice gateways, AI clinical triaging, and hospital electronic medical records.">
+                ንዝተደኮኑ ጸገማት ጥዕና መፍትሒ ዝኾኑ ዲጂታል ቴክኖሎጂታት (ንኣብነት ምኽሪ ሓካይም 2G AI)።
+              </p>
+            </div>
 
-      <!-- Dataset Table -->
-      <div class="dataset-table-wrap">
-        <table class="dataset-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th data-ti="ደረጃ ሓደጋ" data-en="Triage Level">ደረጃ ሓደጋ</th>
-              <th data-ti="ዛዕባ (Topic)" data-en="Topic">ዛዕባ (Topic)</th>
-              <th data-ti="ሕቶ ሓታቲ (Caller Question)" data-en="Caller Question">ሕቶ ሓታቲ</th>
-              <th data-ti="ምላሽ ሓኪም (Doctor Advice)" data-en="Doctor Advice">ምላሽ ሓኪም</th>
-              <th data-ti="መወከሲ" data-en="Source">መወከሲ</th>
-            </tr>
-          </thead>
-          <tbody id="datasetTableBody">
-            <!-- Populated dynamically via website/js/app.js -->
-          </tbody>
-        </table>
-      </div>
+            <div class="pillar-card">
+              <div class="pillar-icon">🤝</div>
+              <h3 class="pillar-title" data-ti="4. ሽርክናን ጽልዋን" data-en="4. Partnerships & Impact">4. ሽርክናን ጽልዋን</h3>
+              <p class="pillar-desc" data-ti="ሆስፒታላት፣ ቢሮ ጥዕና፣ ዩኒቨርሲቲ መቐለን ኣህጉራውያን መሻርኽትን (WHO, UNDP) ዝተኣሳሰሩሉ መድረኽ።" data-en="Collaborations with Ayder Referral Hospital, Mekelle University, Tigray Health Bureau, WHO, and global diaspora networks.">
+                ሆስፒታላት፣ ቢሮ ጥዕና፣ ዩኒቨርሲቲ መቐለን ኣህጉራውያን መሻርኽትን (WHO, UNDP) ዝተኣሳሰሩሉ መድረኽ።
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Institutional Partners -->
+      <section class="partners-section">
+        <div class="container">
+          <span class="section-tag" data-ti="ሽርክና" data-en="Partnerships">ሽርክና</span>
+          <h3 style="font-size:1.6rem; margin:8px 0 6px;" data-ti="መሻርኽቲ ትካላት" data-en="Institutional & Development Partners">መሻርኽቲ ትካላት</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem;" data-ti="ምስ መሪሕ ሆስፒታላት፣ ዩኒቨርሲቲታትን ኣህጉራውያን ትካላትን ብምትሕብባር" data-en="Collaborating with academic institutions, regional health authorities, and international agencies.">
+            ምስ መሪሕ ሆስፒታላት፣ ዩኒቨርሲቲታትን ኣህጉራውያን ትካላትን ብምትሕብባር
+          </p>
+
+          <div class="partners-logos">
+            <div class="partner-badge">🏥 Ayder Comprehensive Specialized Hospital</div>
+            <div class="partner-badge">🎓 Mekelle University College of Health Sciences</div>
+            <div class="partner-badge">🏛️ Tigray Regional Health Bureau</div>
+            <div class="partner-badge">🌐 World Health Organization (WHO) Atlas</div>
+            <div class="partner-badge">🌍 UNDP Digital Health Hub</div>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- =========================================================================
-       Institutional Partners
-       ========================================================================= -->
-  <section class="partners-section" id="partners">
-    <div class="container">
-      <span class="section-tag" data-ti="ሽርክና" data-en="Partnerships">ሽርክና</span>
-      <h3 style="font-size:1.6rem; margin:8px 0 6px;" data-ti="መሻርኽቲ ትካላት" data-en="Institutional & Development Partners">መሻርኽቲ ትካላት</h3>
-      <p style="color:var(--text-muted); font-size:0.9rem;" data-ti="ምስ መሪሕ ሆስፒታላት፣ ዩኒቨርሲቲታትን ኣህጉራውያን ትካላትን ብምትሕብባር" data-en="Collaborating with academic institutions, regional health authorities, and international agencies.">
-        ምስ መሪሕ ሆስፒታላት፣ ዩኒቨርሲቲታትን ኣህጉራውያን ትካላትን ብምትሕብባር
-      </p>
+    <!-- =========================================================================
+         VIEW 2: PRODUCTS & INNOVATIONS DIRECTORY (#view-products)
+         "When I click Product, then I see list of products"
+         ========================================================================= -->
+    <div class="portal-view" id="view-products">
+      <section class="products-section" id="products" style="padding:40px 0 70px;">
+        <div class="container">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+            <div>
+              <span class="section-tag" style="color:var(--primary);" data-ti="ምህዞታትን ፍርያታትን" data-en="Products & Innovations">ምህዞታትን ፍርያታትን</span>
+              <h2 class="section-title" data-ti="ዝርዝር ዲጂታል ናይ ጥዕና ፍርያት (Digital Health Products)" data-en="Digital Health Products Directory">
+                ዲጂታል ናይ ጥዕና ፍርያት (Digital Health Products Directory)
+              </h2>
+              <p class="section-desc" data-ti="ብማሕበር ሕክምና ትግራይ ዝተዳለዉን ኣብ ፈተነ ዝርከቡን ቴክኖሎጂያዊ ፍታሓት።" data-en="Deployable clinical applications, telemedicine platforms, and voice AI systems built for the healthcare needs of Tigray.">
+                ብማሕበር ሕክምና ትግራይ ዝተዳለዉን ኣብ ፈተነ ዝርከቡን ቴክኖሎጂያዊ ፍታሓት።
+              </p>
+            </div>
+            <button class="btn btn-primary" onclick="openProductModal()" data-ti="💡 ሓድሽ ፍርያት መዝግብ" data-en="💡 Register / Propose Product">
+              💡 ሓድሽ ፍርያት መዝግብ (Register Product)
+            </button>
+          </div>
 
-      <div class="partners-logos">
-        <div class="partner-badge">🏥 Ayder Comprehensive Specialized Hospital</div>
-        <div class="partner-badge">🎓 Mekelle University College of Health Sciences</div>
-        <div class="partner-badge">🏛️ Tigray Regional Health Bureau</div>
-        <div class="partner-badge">🌐 World Health Organization (WHO) Atlas</div>
-        <div class="partner-badge">🌍 UNDP Digital Health Hub</div>
-      </div>
+          <!-- Product Categories Filter Pills -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;">
+            <button class="pill-btn prod-filter-btn active" data-category="ALL" onclick="filterProducts('ALL')" data-ti="ኩሉ ፍርያት (All 5)" data-en="All Products (5)">
+              ኩሉ ፍርያት (All 5)
+            </button>
+            <button class="pill-btn prod-filter-btn" data-category="telephony_ai" onclick="filterProducts('telephony_ai')" data-ti="📞 2G Voice Telephony AI" data-en="📞 2G Voice AI">
+              📞 2G Voice Telephony AI
+            </button>
+            <button class="pill-btn prod-filter-btn" data-category="telemedicine" onclick="filterProducts('telemedicine')" data-ti="🏥 ቴሌ-ሕክምና (Telemedicine)" data-en="🏥 Telemedicine">
+              🏥 ቴሌ-ሕክምና (Telemedicine)
+            </button>
+            <button class="pill-btn prod-filter-btn" data-category="emr" onclick="filterProducts('emr')" data-ti="📋 ኤሌክትሮኒክ መዝገብ (EMR)" data-en="📋 Clinical EMR">
+              📋 ኤሌክትሮኒክ መዝገብ (EMR)
+            </button>
+            <button class="pill-btn prod-filter-btn" data-category="community_health" onclick="filterProducts('community_health')" data-ti="📱 ናይ ሰራሕተኛታት ጥዕና (CHW)" data-en="📱 Community Health">
+              📱 ናይ ሰራሕተኛታት ጥዕና (CHW)
+            </button>
+          </div>
+
+          <!-- Dynamic Products Catalog Grid -->
+          <div class="products-grid" id="productsCatalogGrid">
+            <!-- Populated dynamically via website/js/app.js (renderProductsCatalog) -->
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
+
+    <!-- =========================================================================
+         VIEW 3: CLINICAL DATASETS CATALOG (#view-datasets)
+         "I click Dataset I can see list of data set with option of downloading"
+         Strict Rule: "No one is allowed to download data unless they pay"
+         ========================================================================= -->
+    <div class="portal-view" id="view-datasets">
+      <section class="dataset-section" id="dataset" style="padding:40px 0 70px;">
+        <div class="container">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+            <div>
+              <span class="section-tag" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5;" data-ti="ክሊኒካዊ ዳታሴት • PAID ACCESS ONLY" data-en="Clinical Datasets • PAID ACCESS ONLY">
+                ክሊኒካዊ ዳታሴት • PAID ACCESS ONLY
+              </span>
+              <h2 class="section-title" data-ti="ዝርዝር ክሊኒካዊ ዳታሴታት (Curated Datasets Catalog)" data-en="Curated Clinical & Speech Datasets Catalog">
+                Tigrai TV Clinical Q&A Audio & Text Corpus (TMA-DHI-CORPUS-01) & Curated Datasets
+              </h2>
+              <p class="section-desc" data-ti="ካብ ፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተቐድሑ ድምጽን ጽሑፍን፣ ክሊኒካዊ መዛግብትን ናይ ትግርኛ ICD-11 መዝገበ-ቃላትን።" data-en="Authentic speech corpora, maternal complication records, and medical vocabularies. Verified by Tigray Medical Association.">
+                ካብ ፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተቐድሑ ድምጽን ጽሑፍን፣ ክሊኒካዊ መዛግብትን ናይ ትግርኛ ICD-11 መዝገበ-ቃላትን።
+              </p>
+            </div>
+            <button class="btn btn-primary" onclick="openPaidLicenseModal()" data-ti="💳 ፍቓድ ውሰዱ ($49 / $499)" data-en="💳 Purchase License ($49 / $499)">
+              💳 Purchase Dataset License ($49 / $499)
+            </button>
+          </div>
+
+          <!-- Strict Monetization Warning Banner -->
+          <div class="dataset-monetization-banner">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <span style="font-size:2.2rem;">🔒</span>
+              <div>
+                <strong style="color:#b91c1c; font-size:1rem;" data-ti="ጥብቂ ናይ ዳታ ፖሊሲ፦ ክፍሊት ዝተገብረሉ ፍቓድ ጥራይ" data-en="STRICT DATA MONETIZATION POLICY (TMA-DHI Governance)">
+                  STRICT DATA MONETIZATION POLICY (TMA-DHI Governance)
+                </strong>
+                <p style="font-size:0.88rem; color:#7f1d1d; margin:4px 0 0;" data-ti="ብዘይ ክፍሊት ዳታሴት ምውራድ ብጥብቂ ዝተኸልከለ እዩ። ዝእከብ ገንዘብ ንገጠር ጥዕና ጣብያታት፣ ኣዴታትን ሓካይምን ትግራይ ይድግፍ።" data-en="No one is allowed to download clinical datasets unless they pay. Free downloading is strictly prohibited. Commercial AI training & academic research licenses directly sustain rural health clinics and medical worker stipends in Tigray.">
+                  No one is allowed to download clinical datasets unless they pay. Free downloading is strictly prohibited. Commercial AI training & academic research licenses directly sustain rural health clinics and medical worker stipends in Tigray.
+                </p>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn btn-secondary" onclick="openPaidLicenseModal()" style="font-size:0.85rem; padding:8px 16px; background:white; color:#991b1b; border-color:#fca5a5;">
+                🔑 Enter License Key
+              </button>
+              <button class="btn btn-primary" onclick="openPaidLicenseModal()" style="font-size:0.85rem; padding:8px 18px; white-space:nowrap;">
+                💳 Checkout License
+              </button>
+            </div>
+          </div>
+
+          <!-- Domain Filter Toolbar -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin:24px 0 16px;">
+            <button class="pill-btn dataset-filter-btn active" data-domain="ALL" onclick="filterDatasetsCatalog('ALL')" data-ti="ኩሉ ዳታሴታት (All 4)" data-en="All Datasets (4)">
+              ኩሉ ዳታሴታት (All 4)
+            </button>
+            <button class="pill-btn dataset-filter-btn" data-domain="Speech AI" onclick="filterDatasetsCatalog('Speech AI')" data-ti="🎙️ ድምጽን ASRን (Speech AI)" data-en="🎙️ Speech AI & NLP">
+              🎙️ ድምጽን ASRን (Speech AI)
+            </button>
+            <button class="pill-btn dataset-filter-btn" data-domain="Obstetrics" onclick="filterDatasetsCatalog('Obstetrics')" data-ti="🤰 ክትትል ጥንሲ (Maternal Health)" data-en="🤰 Maternal & Obstetrics">
+              🤰 ክትትል ጥንሲ (Maternal Health)
+            </button>
+            <button class="pill-btn dataset-filter-btn" data-domain="Health Informatics" onclick="filterDatasetsCatalog('Health Informatics')" data-ti="📖 ናይ ትግርኛ መዝገበ-ቃላት (Lexicon)" data-en="📖 Medical Lexicon">
+              📖 ናይ ትግርኛ መዝገበ-ቃላት (Lexicon)
+            </button>
+          </div>
+
+          <!-- Dynamic Datasets Catalog List -->
+          <div class="datasets-list-container" id="datasetsCatalogList">
+            <!-- Populated dynamically via website/js/app.js (renderDatasetsCatalog) -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 4: PUBLICATIONS & RESEARCH FINDINGS HUB (#view-publications)
+         "If I click Publication >> then I see list of publication from different sources but published by us"
+         ========================================================================= -->
+    <div class="portal-view" id="view-publications">
+      <section class="research-section" id="research" style="padding:40px 0 70px;">
+        <div class="container">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+            <div>
+              <span class="section-tag" style="color:var(--accent);" data-ti="ሳይንሳዊ ሕትመታትን ርክባትን" data-en="Publications & Evidence Hub">
+                ሳይንሳዊ ሕትመታትን ርክባትን
+              </span>
+              <h2 class="section-title" data-ti="ሳይንሳዊ ሕትመታት ካብ ዝተፈላለዩ መድረኻት (Publications)" data-en="Publications from International Sources Published by TMA-DHI">
+                ሳይንሳዊ ሕትመታት ካብ ዝተፈላለዩ ዓበይቲ ጆርናላት (Publications)
+              </h2>
+              <p class="section-desc" data-ti="ብሓካይም ማሕበር ሕክምና ትግራይን ዩኒቨርሲቲ መቐለን ዝተዳለዉ ኣብ The Lancet፣ ACM Health AI፣ Journal of Global Healthን WHO Bulletinን ዝተሓተሙ ጽሑፋት።" data-en="Peer-reviewed studies, clinical discovery briefs, and technical whitepapers authored by TMA-DHI researchers and published in top medical and AI journals.">
+                ብሓካይም ማሕበር ሕክምና ትግራይን ዩኒቨርሲቲ መቐለን ዝተዳለዉ ኣብ The Lancet፣ ACM Health AI፣ Journal of Global Healthን WHO Bulletinን ዝተሓተሙ ጽሑፋት።
+              </p>
+            </div>
+            <button class="btn btn-primary" onclick="openPublicationModal()" data-ti="📑 ሓድሽ ሕትመት መዝግብ" data-en="📑 Submit / Advertise Finding">
+              📑 ሓድሽ ሕትመት መዝግብ (Submit Publication)
+            </button>
+          </div>
+
+          <!-- Journal Source Filter Pills -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+            <button class="pill-btn pub-filter-btn active" data-source="ALL" onclick="filterPublications('ALL')" data-ti="ኩሎም ምንጭታት (All Sources)" data-en="All Sources (5)">
+              ኩሎም ምንጭታት (All Sources)
+            </button>
+            <button class="pill-btn pub-filter-btn" data-source="Lancet" onclick="filterPublications('Lancet')">
+              The Lancet Digital Health
+            </button>
+            <button class="pill-btn pub-filter-btn" data-source="ACM" onclick="filterPublications('ACM')">
+              ACM Health AI
+            </button>
+            <button class="pill-btn pub-filter-btn" data-source="Global" onclick="filterPublications('Global')">
+              Journal of Global Health
+            </button>
+            <button class="pill-btn pub-filter-btn" data-source="WHO" onclick="filterPublications('WHO')">
+              WHO Bulletin
+            </button>
+            <button class="pill-btn pub-filter-btn" data-source="Nature" onclick="filterPublications('Nature')">
+              Nature Digital Medicine
+            </button>
+          </div>
+
+          <!-- Publication Search Input -->
+          <div class="search-input-wrap" style="max-width:550px; margin-bottom:28px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="pubSearchInput" placeholder="Search publications by title, author, journal, DOI, or key clinical metric...">
+          </div>
+
+          <!-- Dynamic Publications Catalog List -->
+          <div class="publications-list-container" id="publicationsCatalogList">
+            <!-- Populated dynamically via website/js/app.js (renderPublicationsCatalog) -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 5: ACTIVE PROJECTS DIRECTORY (#view-projects)
+         Section 8.4 of implenation.md
+         ========================================================================= -->
+    <div class="portal-view" id="view-projects">
+      <section class="projects-section" id="projects" style="padding:40px 0 70px;">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag" data-ti="ተበግሶታት" data-en="Initiatives & Projects">ተበግሶታት</span>
+            <h2 class="section-title" data-ti="ንጡፋት ናይ ዲጂታል ጥዕና ፕሮጀክትታት (Active Projects)" data-en="Active Digital Health Projects">
+              ንጡፋት ናይ ዲጂታል ጥዕና ፕሮጀክትታት (Active Projects)
+            </h2>
+            <p class="section-desc" data-ti="ብሓካይም፣ መሃንድሳትን ተመራመርትን ዝካየዱ ኣብ ባይታ ጽልዋ ዘለዎም ተበግሶታት።" data-en="Interdisciplinary projects translating clinical research and engineering into deployable healthcare solutions.">
+              ብሓካይም፣ መሃንድሳትን ተመራመርትን ዝካየዱ ኣብ ባይታ ጽልዋ ዘለዎም ተበግሶታት።
+            </p>
+          </div>
+
+          <div class="projects-grid">
+            <!-- Project 1: Mkri Hakaym Voice AI -->
+            <div class="project-card">
+              <div class="project-meta-strip">
+                <span class="project-status-badge proj-active" data-ti="ንጡፍ ፈተነ" data-en="Active Pilot">Active Pilot</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-001 • Telephony AI</span>
+              </div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;">ምኽሪ ሓካይም (Mkri Hakaym)</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
+                Voice-first 2G telephone health triage system delivering vernacular Tigrinya medical counsel to mothers in rural areas without internet access.
+              </p>
+              <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
+                <strong>Lead:</strong> Dr. Almaz Gebrehiwet (Ayder Hospital)<br>
+                <strong>Focus:</strong> Maternal, Pediatric & Red-Flag Triage
+              </div>
+            </div>
+
+            <!-- Project 2: Ayder Tele-Consult Network -->
+            <div class="project-card">
+              <div class="project-meta-strip">
+                <span class="project-status-badge proj-pilot" data-ti="ኣብ ምድላው" data-en="Clinical Pilot">Clinical Pilot</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-002 • Telemedicine</span>
+              </div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;">Ayder Tele-Consult Network</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
+                Connecting rural district health centers in Shire, Axum, Adigrat, and Abi Adi with sub-specialty clinics at Ayder Comprehensive Specialized Hospital.
+              </p>
+              <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
+                <strong>Lead:</strong> Dr. Teklehaimanot G. (Mekelle University)<br>
+                <strong>Focus:</strong> Remote Radiology & Pediatric Referrals
+              </div>
+            </div>
+
+            <!-- Project 3: Tigrinya Clinical EMR -->
+            <div class="project-card">
+              <div class="project-meta-strip">
+                <span class="project-status-badge proj-active" data-ti="ኣብ ስራሕ" data-en="In Development">In Development</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-003 • Health Informatics</span>
+              </div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;">Tigrinya Clinical EMR & Ontology</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
+                Standardized Tigrinya clinical terminology mapping to ICD-11 and SNOMED-CT for offline-first rural health post electronic medical records.
+              </p>
+              <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
+                <strong>Lead:</strong> Eng. Kahsay Berhe (Health Informatics)<br>
+                <strong>Focus:</strong> Clinical Vocabularies & FHIR Interoperability
+              </div>
+            </div>
+
+            <!-- Project 4: Maternal Surveillance -->
+            <div class="project-card">
+              <div class="project-meta-strip">
+                <span class="project-status-badge proj-proposed" data-ti="ዝቐረበ" data-en="Proposed">Proposed</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">P-2026-004 • Maternal Health</span>
+              </div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;">Maternal & Infant Surveillance (MIRS)</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
+                Community-level surveillance detecting high-risk pre-eclampsia, postpartum hemorrhage, and neonatal sepsis before complications become fatal.
+              </p>
+              <div style="font-size:0.8rem; background:white; padding:10px; border-radius:8px; border:1px solid var(--border); margin-top:auto;">
+                <strong>Lead:</strong> Dr. Selamawit A. (Obstetrics & Gynecology)<br>
+                <strong>Focus:</strong> Early Warning & Emergency Dispatch
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 6: ABOUT US & GOVERNANCE WORKSPACE (#view-about)
+         Sections 1-5 & 10 of implenation.md
+         ========================================================================= -->
+    <div class="portal-view" id="view-about">
+      <!-- Platform Vision & Three Connected Areas -->
+      <section class="about-section" id="about" style="padding:40px 0 60px; background:white; border-bottom:1px solid var(--border);">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag" data-ti="ራእይ መድረኽ" data-en="Platform Vision">ራእይ መድረኽ</span>
+            <h2 class="section-title" data-ti="ምህዞታት ዲጂታል ጥዕና ንትግራይ (Platform Vision)" data-en="Transforming Healthcare in Tigray Through Innovation">
+              ምህዞታት ዲጂታል ጥዕና ንትግራይ (Platform Vision)
+            </h2>
+            <p class="section-desc" style="font-size:1.05rem; font-weight:600; color:var(--primary-hover);" data-ti="&ldquo;ሰባት፣ ፍልጠት፣ ቴክኖሎጂን ምህዞን ብምውህሃድ ጥዕና ትግራይ ምቕያር።&rdquo;" data-en="&ldquo;Connecting people, knowledge, technology, and innovation to transform healthcare in Tigray.&rdquo;">
+              &ldquo;ሰባት፣ ፍልጠት፣ ቴክኖሎጂን ምህዞን ብምውህሃድ ጥዕና ትግራይ ምቕያር።&rdquo;
+            </p>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin-top:28px;">
+            <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:24px;">
+              <div style="font-size:2rem; margin-bottom:10px;">🌐</div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;" data-ti="1. ህዝባዊ ትካላዊ መርበብ" data-en="1. Public Institutional Website">1. ህዝባዊ ትካላዊ መርበብ</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55;" data-ti="ነቲ ተበግሶ፣ ሰባቱ፣ ፍርያቱ፣ ፕሮጀክትታቱ፣ ዝተፈተሹ ዳታሴታትን ክሊኒካዊ መጽናዕትታትን ንህዝብን መሻርኽትን ዘላልይ መድረኽ።" data-en="Presents the initiative, its people, focus areas, projects, datasets, products, research, and institutional partnerships to the public.">
+                ነቲ ተበግሶ፣ ሰባቱ፣ ፍርያቱ፣ ፕሮጀክትታቱ፣ ዝተፈተሹ ዳታሴታትን ክሊኒካዊ መጽናዕትታትን ንህዝብን መሻርኽትን ዘላልይ መድረኽ።
+              </p>
+            </div>
+
+            <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:24px;">
+              <div style="font-size:2rem; margin-bottom:10px;">👥</div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;" data-ti="2. ናይ ኣባላት ናይ ሓባር ስራሕ መድረኽ" data-en="2. Members' Collaboration Portal">2. ናይ ኣባላት ናይ ሓባር ስራሕ መድረኽ</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55;" data-ti="ዝተፈቐደሎም ኣባላት (ሓካይም፣ መሃንድሳት፣ ተመራመርቲ) ኣብ ፕሮጀክትታት፣ ማሕበረሰብ ሞያ (CoPs)፣ ዳታሴታትን ሓሳባትን ብውሑስ መንገዲ ዝሰርሑሉ ዓውዲ።" data-en="Provides approved and active members with a secure workspace to collaborate on projects, Communities of Practice, datasets, and clinical research.">
+                ዝተፈቐደሎም ኣባላት (ሓካይም፣ መሃንድሳት፣ ተመራመርቲ) ኣብ ፕሮጀክትታት፣ ማሕበረሰብ ሞያ (CoPs)፣ ዳታሴታትን ሓሳባትን ብውሑስ መንገዲ ዝሰርሑሉ ዓውዲ።
+              </p>
+            </div>
+
+            <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:12px; padding:24px;">
+              <div style="font-size:2rem; margin-bottom:10px;">⚖️</div>
+              <h3 style="font-size:1.2rem; margin-bottom:8px;" data-ti="3. ምምሕዳራዊ ዓውደ-ስራሕ" data-en="3. Administrative Workspace">3. ምምሕዳራዊ ዓውደ-ስራሕ</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.55;" data-ti="ግምገማ ኣባልነት፣ ምጽዳቕ ፕሮጀክትታትን ፍርያትን፣ ምቁጽጻር ፍቓዳት ዳታሴት፣ ክፍሊታትን መዛግብቲ ጸጥታን (Audit Logs) ዝካየደሉ ማእከል።" data-en="Supports membership review, governance, dataset licensing and paid access controls, role management, and audit logs.">
+                ግምገማ ኣባልነት፣ ምጽዳቕ ፕሮጀክትታትን ፍርያትን፣ ምቁጽጻር ፍቓዳት ዳታሴት፣ ክፍሊታትን መዛግብቲ ጸጥታን (Audit Logs) ዝካየደሉ ማእከል።
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- The 8 System Actors (Section 3 of implenation.md) -->
+      <section class="portal-section" id="portal" style="padding:50px 0;">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag" data-ti="ናይ ኣባላት መድረኽ" data-en="Collaboration Portal">ናይ ኣባላት መድረኽ</span>
+            <h2 class="section-title" data-ti="ስነ-ምህዳር 8 ተዋሳእቲ ስርዓት (System Actors)" data-en="The 8 Primary System Actors">
+              ስነ-ምህዳር 8 ተዋሳእቲ ስርዓት (The 8 Primary System Actors)
+            </h2>
+            <p class="section-desc" data-ti="ውሑስ ኣሰራርሓ ንዝተፈቐደሎም ኣባላት፤ 8 ዓበይቲ ተዋሳእቲ ስርዓት ዲጂታል ጥዕና ዘተኣሳስር መድረኽ።" data-en="Connecting eight primary user categories across medical, research, technical, and patient beneficiary groups.">
+              ውሑስ ኣሰራርሓ ንዝተፈቐደሎም ኣባላት፤ 8 ዓበይቲ ተዋሳእቲ ስርዓት ዲጂታል ጥዕና ዘተኣሳስር መድረኽ።
+            </p>
+          </div>
+
+          <div class="actors-grid">
+            <div class="actor-card">
+              <div class="actor-icon">🩺</div>
+              <div>
+                <div class="actor-title" data-ti="1. ዝተመዝገቡ ኣባላት" data-en="1. Registered Members">1. ዝተመዝገቡ ኣባላት</div>
+                <div class="actor-desc">Approved doctors, software engineers, AI researchers, and health workers collaborating in active working groups.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">🏛️</div>
+              <div>
+                <div class="actor-title" data-ti="2. መሪሕነት ተበግሶ" data-en="2. Initiative Leadership">2. መሪሕነት ተበግሶ</div>
+                <div class="actor-desc">Executive committee and coordinators steering strategy, reviewing memberships, and authorizing projects.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">📊</div>
+              <div>
+                <div class="actor-title" data-ti="3. ኣበርከትቲ ዳታሴት" data-en="3. Dataset Curators">3. ኣበርከትቲ ዳታሴት</div>
+                <div class="actor-desc">Researchers and data stewards curating clinical speech, metadata, and managing paid dataset licensing.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">⚙️</div>
+              <div>
+                <div class="actor-title" data-ti="4. መሃዝቲ ፍርያት" data-en="4. Product Developers">4. መሃዝቲ ፍርያት</div>
+                <div class="actor-desc">Multidisciplinary teams prototyping, testing, and deploying validated clinical technology products.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">🔬</div>
+              <div>
+                <div class="actor-title" data-ti="5. መሻርኽቲ ምርምር" data-en="5. Research Collaborators">5. መሻርኽቲ ምርምር</div>
+                <div class="actor-desc">Academic institutions and scientists conducting empirical studies and publishing peer-reviewed papers.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">🤝</div>
+              <div>
+                <div class="actor-title" data-ti="6. ትካላዊ መሻርኽቲ" data-en="6. Institutional Partners">6. ትካላዊ መሻርኽቲ</div>
+                <div class="actor-desc">Hospitals, health bureaus, and global development organizations providing resources and governance.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">👥</div>
+              <div>
+                <div class="actor-title" data-ti="7. ተጠቀምቲ ፍርያት" data-en="7. Health Beneficiaries">7. ተጠቀምቲ ፍርያት</div>
+                <div class="actor-desc">Patients, mothers, and healthcare workers who benefit from deployed public solutions like Mkri Hakaym.</div>
+              </div>
+            </div>
+
+            <div class="actor-card">
+              <div class="actor-icon">🌐</div>
+              <div>
+                <div class="actor-title" data-ti="8. ህዝባዊ በጻሕቲ" data-en="8. Public Visitors">8. ህዝባዊ በጻሕቲ</div>
+                <div class="actor-desc">External guests exploring approved public projects, publications, and applying for membership.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Administrative & Governance Workspace -->
+      <section class="governance-section" id="governance" style="padding:50px 0 70px;">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag" data-ti="ምምሕዳርን ጸጥታን" data-en="Governance & Security">ምምሕዳርን ጸጥታን</span>
+            <h2 class="section-title" data-ti="ምምሕዳራዊ ዓውደ-ስራሕን ምቁጽጻርን (Administrative Workspace)" data-en="Governance, Security & Relational Integrity">
+              ምምሕዳራዊ ዓውደ-ስራሕን ምቁጽጻርን (Administrative Workspace)
+            </h2>
+            <p class="section-desc" data-ti="ግምገማ ኣባልነት፣ ምጽዳቕ ፍርያት፣ ፍቓዳት ዳታሴት፣ 24 ሞዴላት ዳታቤዝን ምሉእ መዛግብቲ ጸጥታን (Audit Trail)።" data-en="Ensuring institutional rigor through multi-stage approval workflows, Argon2id security, PostgreSQL RLS, and strict dataset monetization controls.">
+              ግምገማ ኣባልነት፣ ምጽዳቕ ፍርያት፣ ፍቓዳት ዳታሴት፣ 24 ሞዴላት ዳታቤዝን ምሉእ መዛግብቲ ጸጥታን (Audit Trail)።
+            </p>
+          </div>
+
+          <div class="governance-grid">
+            <div class="gov-card">
+              <h4><span>✍️</span> Membership Governance</h4>
+              <p>Multi-stage verification: credential review by TMA leadership, separating professional identities (<code>persons</code>) from authentication (<code>user_accounts</code>).</p>
+              <ul class="pillar-list">
+                <li>✔ Role-Based Access Control (RBAC)</li>
+                <li>✔ Project-scoped authority (no global privilege escalation)</li>
+                <li>✔ Verified medical & engineering credentials</li>
+              </ul>
+            </div>
+
+            <div class="gov-card">
+              <h4><span>🔒</span> Strict Dataset Licensing</h4>
+              <p>Raw clinical speech corpora and transcribed records are gated behind paid commercial and academic licensing. Proceeds directly sustain healthcare delivery.</p>
+              <ul class="pillar-list">
+                <li>✔ Free downloading strictly forbidden (HTTP 402 enforced)</li>
+                <li>✔ Integrated Telebirr, CBE Birr & Stripe payments</li>
+                <li>✔ Cryptographic license keys with download quota tracking</li>
+              </ul>
+            </div>
+
+            <div class="gov-card">
+              <h4><span>🛡️</span> Security & Relational Schema</h4>
+              <p>Built on PostgreSQL with 24 relational entities, strict foreign key constraints, Row-Level Security (RLS), and append-only audit logs.</p>
+              <ul class="pillar-list">
+                <li>✔ Password hashing with Argon2id</li>
+                <li>✔ End-to-end audit logs on administrative decisions</li>
+                <li>✔ Strict medical data de-identification protocols</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <!-- =========================================================================
        Site Footer
@@ -834,16 +767,14 @@
       </div>
 
       <div class="footer-links">
-        <h5>Core Platform</h5>
+        <h5>Platform Navigation</h5>
         <ul>
-          <li><a href="#about">Platform Vision & Context</a></li>
-          <li><a href="#pillars">The 4 Strategic Pillars</a></li>
-          <li><a href="#projects">Active Projects</a></li>
-          <li><a href="#products">Products & Innovations</a></li>
-          <li><a href="#dataset">Clinical Datasets (Paid)</a></li>
-          <li><a href="#research">Research & Publications</a></li>
-          <li><a href="#portal">Collaboration Portal</a></li>
-          <li><a href="#governance">Governance & Administration</a></li>
+          <li><a href="#home" onclick="switchView('home'); return false;">Overview</a></li>
+          <li><a href="#products" onclick="switchView('products'); return false;">Products Directory (5)</a></li>
+          <li><a href="#datasets" onclick="switchView('datasets'); return false;">Clinical Datasets (Paid)</a></li>
+          <li><a href="#publications" onclick="switchView('publications'); return false;">Publications Hub (5)</a></li>
+          <li><a href="#projects" onclick="switchView('projects'); return false;">Active Projects (4)</a></li>
+          <li><a href="#about" onclick="switchView('about'); return false;">About Us & Governance</a></li>
         </ul>
       </div>
 
@@ -956,7 +887,7 @@
             <option value="telemedicine">Telemedicine & Remote Consultation</option>
             <option value="emr">Electronic Medical Records (EMR)</option>
             <option value="diagnostics">AI Diagnostics / Imaging (Ultrasound/X-Ray)</option>
-            <option value="epidemiology">Epidemiology & Surveillance Dashboard</option>
+            <option value="community_health">Community Health Worker Digital Toolkit</option>
           </select>
         </div>
 
@@ -1018,6 +949,17 @@
         <div class="modal-form-group">
           <label>Authors & Affiliated Institutions: *</label>
           <input type="text" id="pubAuthors" required placeholder="e.g. Dr. Almaz G. (Ayder Hospital), Mekelle University...">
+        </div>
+
+        <div class="modal-form-group">
+          <label>Source Journal: *</label>
+          <select id="pubJournal" required>
+            <option value="The Lancet Digital Health">The Lancet Digital Health</option>
+            <option value="ACM Health AI">ACM Health AI</option>
+            <option value="Journal of Global Health">Journal of Global Health</option>
+            <option value="Bulletin of the World Health Organization">Bulletin of the World Health Organization</option>
+            <option value="Nature Digital Medicine">Nature Digital Medicine</option>
+          </select>
         </div>
 
         <div class="modal-form-group">

@@ -609,6 +609,390 @@ function handleVerifyAndDownload() {
 }
 
 // ---------------------------------------------------------------------------
+// VIEW SWITCHER & TAB ROUTER ARCHITECTURE
+// User Requirement:
+// "Let say click product , then I see list of products
+//  I click Dataset I can see list of datse set with option of downloading 
+//  If I click Publication >> then I see list of pbication from didffent sources but published buy us"
+// ---------------------------------------------------------------------------
+let currentView = 'home';
+let currentProductFilter = 'ALL';
+let currentDatasetCatalogFilter = 'ALL';
+let currentPublicationFilter = 'ALL';
+
+function switchView(viewName) {
+  if (!viewName) viewName = 'home';
+  // Normalize aliases
+  if (viewName === 'product') viewName = 'products';
+  if (viewName === 'dataset') viewName = 'datasets';
+  if (viewName === 'publication' || viewName === 'research') viewName = 'publications';
+  if (viewName === 'project') viewName = 'projects';
+  if (viewName === 'pillars' || viewName === 'portal' || viewName === 'governance') viewName = 'about';
+
+  currentView = viewName;
+
+  // Toggle active view container
+  document.querySelectorAll('.portal-view').forEach(viewEl => {
+    viewEl.classList.remove('active-view');
+  });
+
+  const targetView = document.getElementById(`view-${viewName}`);
+  if (targetView) {
+    targetView.classList.add('active-view');
+  } else {
+    const homeView = document.getElementById('view-home');
+    if (homeView) homeView.classList.add('active-view');
+  }
+
+  // Update navbar links
+  document.querySelectorAll('.nav-links a, .view-tab-btn').forEach(el => {
+    const v = el.dataset.view;
+    if (v === viewName) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+
+  // Render contents for specific view
+  if (viewName === 'products') renderProductsCatalog(currentProductFilter);
+  if (viewName === 'datasets') renderDatasetsCatalog(currentDatasetCatalogFilter);
+  if (viewName === 'publications') renderPublicationsCatalog(currentPublicationFilter);
+
+  // Sync hash without triggering loop
+  if (window.location.hash.replace('#', '') !== viewName) {
+    window.location.hash = viewName;
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---------------------------------------------------------------------------
+// PRODUCTS CATALOG RENDERER
+// ---------------------------------------------------------------------------
+function filterProducts(category) {
+  currentProductFilter = category;
+  document.querySelectorAll('.prod-filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.category === category);
+  });
+  renderProductsCatalog(currentProductFilter);
+}
+
+function renderProductsCatalog(filter = 'ALL') {
+  const container = document.getElementById('productsCatalogGrid');
+  if (!container || typeof PRODUCTS_CATALOG === 'undefined') return;
+
+  let items = PRODUCTS_CATALOG;
+  if (filter !== 'ALL') {
+    items = items.filter(p => p.category === filter);
+  }
+
+  let html = '';
+  items.forEach(p => {
+    const isFlagship = p.is_flagship ? 'flagship' : '';
+    const ribbon = p.is_flagship ? '<div class="flagship-ribbon">FLAGSHIP 2G AI</div>' : '';
+    const statusClass = p.status === 'deployed' ? 'status-deployed' : (p.status === 'testing' ? 'status-testing' : 'status-prototype');
+    
+    let audioBtn = '';
+    if (p.demo_audio) {
+      audioBtn = `
+        <button class="btn btn-secondary" onclick="playWelcomeAudio()" style="font-size:0.8rem; padding:6px 12px;">
+          🔊 Play Voice Stream
+        </button>
+      `;
+    }
+
+    const featureList = p.features.map(f => `<li>✔ ${f}</li>`).join('');
+
+    html += `
+      <div class="product-card ${isFlagship}">
+        ${ribbon}
+        <div class="product-header">
+          <div class="product-icon-wrap">${p.icon}</div>
+          <span class="product-status-tag ${statusClass}">${p.status_label}</span>
+        </div>
+        <h3 class="product-title">${currentLang === 'ti' ? p.name_ti : p.name_en}</h3>
+        <div class="product-category-sub">${p.category_label} • ID: ${p.id}</div>
+        <div style="font-size:0.82rem; color:#b91c1c; font-weight:700; margin-bottom:8px;">
+          Target: ${p.problem_addressed}
+        </div>
+        <p class="product-desc">${p.description}</p>
+        <ul class="product-features-list">
+          ${featureList}
+        </ul>
+        <div class="product-actions">
+          ${audioBtn}
+          <a href="${p.repo_url}" target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:6px 14px;">
+            💻 Repository & Code
+          </a>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+// ---------------------------------------------------------------------------
+// DATASETS CATALOG RENDERER (With 3-row showcase & download option)
+// ---------------------------------------------------------------------------
+function filterDatasetsCatalog(domain) {
+  currentDatasetCatalogFilter = domain;
+  document.querySelectorAll('.dataset-filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.domain === domain);
+  });
+  renderDatasetsCatalog(currentDatasetCatalogFilter);
+}
+
+function renderDatasetsCatalog(filter = 'ALL') {
+  const container = document.getElementById('datasetsCatalogList');
+  if (!container || typeof DATASETS_CATALOG === 'undefined') return;
+
+  let items = DATASETS_CATALOG;
+  if (filter !== 'ALL') {
+    items = items.filter(d => {
+      const allText = (d.domain + ' ' + d.id + ' ' + d.format).toLowerCase();
+      return allText.includes(filter.toLowerCase());
+    });
+  }
+
+  let html = '';
+  items.forEach(d => {
+    // Generate showcase preview (strictly 3 items)
+    let showcaseHtml = '';
+    if (d.preview_type === 'table') {
+      let rows = '';
+      (d.preview_rows || []).slice(0, 3).forEach(r => {
+        const badgeClass = r.triage === 'CRITICAL' ? 'badge-emergency' : (r.triage === 'HIGH' ? 'badge-urgent' : 'badge-routine');
+        rows += `
+          <tr>
+            <td><code>${r.id}</code></td>
+            <td><span class="preset-badge ${badgeClass}">${r.triage}</span></td>
+            <td><strong>${r.topic}</strong></td>
+            <td>${r.caller}</td>
+            <td>${r.doctor.substring(0, 95)}...</td>
+          </tr>
+        `;
+      });
+      showcaseHtml = `
+        <div class="dataset-showcase-box">
+          <div class="dataset-showcase-title">
+            <span>🔍 Public Showcase Preview (Showing 3 of 11 Records)</span>
+            <span style="font-size:0.75rem; color:#15803d; font-weight:700;">Verified Broadcast Speech</span>
+          </div>
+          <div class="dataset-table-wrap">
+            <table class="dataset-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Triage</th>
+                  <th>Topic</th>
+                  <th>Caller Question</th>
+                  <th>Doctor Advice</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    } else if (d.preview_type === 'speech_samples') {
+      let samples = '';
+      (d.preview_rows || []).slice(0, 3).forEach(s => {
+        samples += `
+          <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:12px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <div>
+              <div style="font-size:0.75rem; font-weight:800; color:var(--primary);">${s.sample_id} • Dialect: ${s.dialect} (${s.duration})</div>
+              <div style="font-size:0.9rem; font-weight:600; margin:4px 0;">"${s.transcript}"</div>
+              <div style="font-size:0.78rem; color:var(--text-muted); italic;">${s.translation}</div>
+            </div>
+            <button class="btn btn-secondary" onclick="playWelcomeAudio()" style="padding:6px 12px; font-size:0.78rem;">
+              ▶️ Play 8kHz Sample
+            </button>
+          </div>
+        `;
+      });
+      showcaseHtml = `
+        <div class="dataset-showcase-box">
+          <div class="dataset-showcase-title">
+            <span>🎙️ Acoustic Speech Samples Preview (3 of 12,000 Utterances)</span>
+            <span style="font-size:0.75rem; color:#0369a1; font-weight:700;">16kHz/8kHz PCM WAV</span>
+          </div>
+          ${samples}
+        </div>
+      `;
+    } else if (d.preview_type === 'records') {
+      let recs = '';
+      (d.preview_rows || []).slice(0, 3).forEach(rc => {
+        recs += `
+          <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:12px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>Case: ${rc.case_id} (GA: ${rc.ga_weeks} wks, BP: ${rc.bp})</strong>
+              <span class="preset-badge badge-emergency" style="font-size:0.7rem;">${rc.triage_category}</span>
+            </div>
+            <div style="font-size:0.85rem; margin-top:4px;">Symptoms: ${rc.primary_symptom}</div>
+            <div style="font-size:0.8rem; color:#166534; font-weight:700; margin-top:4px;">Clinical Intervention: ${rc.outcome}</div>
+          </div>
+        `;
+      });
+      showcaseHtml = `
+        <div class="dataset-showcase-box">
+          <div class="dataset-showcase-title">
+            <span>📋 De-Identified Hospital Referral Records (3 of 850 Records)</span>
+            <span style="font-size:0.75rem; color:#b91c1c; font-weight:700;">Ayder Hospital Maternity</span>
+          </div>
+          ${recs}
+        </div>
+      `;
+    } else if (d.preview_type === 'terms') {
+      let terms = '';
+      (d.preview_rows || []).slice(0, 3).forEach(t => {
+        terms += `
+          <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:12px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong style="color:var(--text-main); font-size:0.95rem;">${t.geez_term} ➔ ${t.english_name}</strong>
+              <span class="preset-badge" style="background:#e0e7ff; color:#3730a3; font-size:0.7rem;">ICD-11: ${t.icd11_code}</span>
+            </div>
+            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:4px;">${t.definition_ti}</div>
+          </div>
+        `;
+      });
+      showcaseHtml = `
+        <div class="dataset-showcase-box">
+          <div class="dataset-showcase-title">
+            <span>📖 Standardized Tigrinya-ICD11 Lexicon (3 of 2,450 Terms)</span>
+            <span style="font-size:0.75rem; color:#3730a3; font-weight:700;">JSON-LD & CSV</span>
+          </div>
+          ${terms}
+        </div>
+      `;
+    }
+
+    html += `
+      <div class="dataset-catalog-item" id="${d.id}">
+        <div class="dataset-header-row">
+          <div>
+            <div style="font-size:0.8rem; color:var(--primary); font-weight:800; letter-spacing:0.5px;">DATASET REGISTRY: ${d.id}</div>
+            <h3 style="font-size:1.35rem; margin:4px 0 6px;">${currentLang === 'ti' ? d.title_ti : d.title_en}</h3>
+            <p style="font-size:0.88rem; color:var(--text-muted); max-width:750px; line-height:1.5;">${d.source} • ${d.collection_method}</p>
+          </div>
+          <div style="text-align:right;">
+            <span class="preset-badge badge-emergency" style="font-size:0.8rem; padding:6px 12px;">${d.access_label}</span>
+          </div>
+        </div>
+
+        <div class="dataset-meta-tags">
+          <span class="dataset-meta-pill">📂 Domain: ${d.domain}</span>
+          <span class="dataset-meta-pill">💾 Format: ${d.format}</span>
+          <span class="dataset-meta-pill">📊 Size: ${d.size}</span>
+          <span class="dataset-meta-pill">✅ ${d.approval_status}</span>
+        </div>
+
+        ${showcaseHtml}
+
+        <!-- Locked notice & Option of Downloading -->
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; background:#fff1f2; border:1px solid #fecdd3; border-radius:10px; padding:16px 20px;">
+          <div>
+            <div style="font-weight:800; color:#9f1239; font-size:0.92rem;">
+              🔒 Full Dataset & Checkpoints Gated Under Paid License
+            </div>
+            <div style="font-size:0.82rem; color:#881337;">
+              Requires verified license key. Free downloading is strictly prohibited by TMA-DHI data governance.
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-secondary" onclick="openPaidLicenseModal()" style="font-size:0.85rem; padding:8px 16px;">
+              🔑 Enter Key
+            </button>
+            <button class="btn btn-primary" onclick="openPaidLicenseModal()" style="font-size:0.85rem; padding:8px 18px;">
+              🔒 Purchase / Download Dataset
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+// ---------------------------------------------------------------------------
+// PUBLICATIONS CATALOG RENDERER (From Different Sources Published by TMA)
+// ---------------------------------------------------------------------------
+function filterPublications(source) {
+  currentPublicationFilter = source;
+  document.querySelectorAll('.pub-filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.source === source);
+  });
+  renderPublicationsCatalog(currentPublicationFilter, document.getElementById('pubSearchInput')?.value || '');
+}
+
+function renderPublicationsCatalog(sourceFilter = 'ALL', search = '') {
+  const container = document.getElementById('publicationsCatalogList');
+  if (!container || typeof PUBLICATIONS_CATALOG === 'undefined') return;
+
+  let items = PUBLICATIONS_CATALOG;
+
+  if (sourceFilter !== 'ALL') {
+    items = items.filter(p => p.journal.toLowerCase().includes(sourceFilter.toLowerCase()) || p.journal_badge.toLowerCase().includes(sourceFilter.toLowerCase()));
+  }
+
+  if (search.trim()) {
+    const s = search.toLowerCase();
+    items = items.filter(p => {
+      return (
+        p.title.toLowerCase().includes(s) ||
+        p.authors.toLowerCase().includes(s) ||
+        p.doi.toLowerCase().includes(s) ||
+        p.abstract.toLowerCase().includes(s)
+      );
+    });
+  }
+
+  let html = '';
+  items.forEach(p => {
+    let sourceBadgeClass = 'source-lancet';
+    if (p.journal_badge.includes('ACM')) sourceBadgeClass = 'source-acm';
+    if (p.journal_badge.includes('Global')) sourceBadgeClass = 'source-jogh';
+    if (p.journal_badge.includes('WHO')) sourceBadgeClass = 'source-who';
+    if (p.journal_badge.includes('Nature')) sourceBadgeClass = 'source-nature';
+
+    html += `
+      <div class="research-card" style="margin-bottom:20px;">
+        <div class="research-meta-top">
+          <span class="pub-source-badge ${sourceBadgeClass}">${p.journal}</span>
+          <span class="doi-tag">doi:${p.doi}</span>
+        </div>
+        <h3 class="research-card-title">${p.title}</h3>
+        <div class="research-authors">
+          ✍️ Authors: ${p.authors}
+        </div>
+        <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">
+          🏛️ Affiliation: ${p.institutions} • Published: ${p.month} ${p.year}
+        </div>
+        <p class="research-abstract">${p.abstract}</p>
+        <div class="key-finding-box">
+          <div class="key-finding-label">Key Clinical Finding / Breakthrough Metric:</div>
+          <div class="key-finding-metric">⚡ ${p.key_metric}</div>
+        </div>
+        <div class="research-card-footer">
+          <span style="font-size:0.8rem; color:var(--text-muted);">Indexed on TMA-DHI Research Wall</span>
+          <a href="https://doi.org/${p.doi}" target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:6px 14px;">
+            📄 Read Full Paper (DOI) ➔
+          </a>
+        </div>
+      </div>
+    `;
+  });
+
+  if (!items.length) {
+    html = `<div style="text-align:center; padding:40px; color:var(--text-muted);">No publications found matching your search.</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// ---------------------------------------------------------------------------
 // Bilingual Switcher (Tigrinya / English)
 // ---------------------------------------------------------------------------
 function toggleLanguage() {
@@ -621,21 +1005,47 @@ function toggleLanguage() {
   });
 
   renderDatasetTable(currentFilter, document.getElementById('datasetSearchInput')?.value || '');
+  renderProductsCatalog(currentProductFilter);
+  renderDatasetsCatalog(currentDatasetCatalogFilter);
+  renderPublicationsCatalog(currentPublicationFilter);
 }
 
 // ---------------------------------------------------------------------------
-// Initialization
+// Initialization & Router Setup
 // ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-  renderDatasetTable();
+  // Listen to hash routing
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '') || 'home';
+    if (hash !== currentView) {
+      switchView(hash);
+    }
+  });
 
-  // Search Listener
+  // Initial render of all catalogs
+  renderDatasetTable();
+  renderProductsCatalog();
+  renderDatasetsCatalog();
+  renderPublicationsCatalog();
+
+  // Search Listeners
   const searchInput = document.getElementById('datasetSearchInput');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       renderDatasetTable(currentFilter, e.target.value);
     });
   }
+
+  const pubSearchInput = document.getElementById('pubSearchInput');
+  if (pubSearchInput) {
+    pubSearchInput.addEventListener('input', (e) => {
+      renderPublicationsCatalog(currentPublicationFilter, e.target.value);
+    });
+  }
+
+  // Activate view from initial hash
+  const initialHash = window.location.hash.replace('#', '') || 'home';
+  switchView(initialHash);
 
   // Check Backend Status
   fetch('/api/health')
@@ -647,7 +1057,6 @@ document.addEventListener('DOMContentLoaded', () => {
         badge.innerHTML = `<span class="status-dot"></span> 2G Gateway Online (${data.knowledge_entries} records)`;
       }
     })
-    .catch(() => {
-      // Backend not running locally
-    });
+    .catch(() => {});
 });
+
