@@ -9,7 +9,7 @@ from typing import Optional, Dict, Any
 from urllib.parse import parse_qs
 
 from fastapi import FastAPI, Request
-from fastapi.responses import Response, JSONResponse, FileResponse
+from fastapi.responses import Response, JSONResponse, FileResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -66,10 +66,16 @@ async def parse_telephony_params(request: Request) -> Dict[str, str]:
 
 
 @app.get("/")
+def index():
+    """Redirect to the TMA-DHI Web Portal."""
+    return RedirectResponse(url="/website/")
+
+
+@app.get("/api/health")
 def health_check():
     return {
         "status": "online",
-        "service": "Mkri Hakaym Telephony Gateway",
+        "service": "Mkri Hakaym & TMA-DHI Platform",
         "language": "Tigrinya (ትግርኛ)",
         "knowledge_entries": len(rag_engine.knowledge_entries),
     }

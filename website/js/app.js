@@ -251,19 +251,29 @@ async function simulatePresetQuestion(queryText) {
   // Try fetching live from FastAPI backend (/api/ask), with fallback to local client logic
   let triageResult = null;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/ask', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query_text: queryText }),
-    });
+    let res;
+    try {
+      res = await fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query_text: queryText }),
+      });
+    } catch {
+      res = await fetch('http://127.0.0.1:8000/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query_text: queryText }),
+      });
+    }
     if (res.ok) {
       const data = await res.json();
+      const r = data.result || {};
       triageResult = {
-        is_emergency: data.result.triage_level === 'CRITICAL',
-        level: data.result.triage_level,
-        title: data.result.topic_ti,
-        message: data.result.doctor_response_ti,
-        action: data.result.recommended_action || 'ናብ ሆስፒታል ምኻድ',
+        is_emergency: r.urgency_level === 'CRITICAL' || r.is_emergency === true,
+        level: r.urgency_level || r.triage_level || 'ROUTINE',
+        title: r.topic_ti || 'ሕክምናዊ ገምጋም (Triage Assessment)',
+        message: r.spoken_response_ti || r.doctor_response_ti || 'ምኽሪ ተቐቢልናዮ ኣለና።',
+        action: r.action || r.recommended_action || 'ናብ ጥዕና ትካል ምብጻሕ',
       };
     }
   } catch (err) {
@@ -489,11 +499,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Check Backend Status
-  fetch('http://127.0.0.1:8000/')
+  fetch('/api/health')
+    .catch(() => fetch('http://127.0.0.1:8000/api/health'))
     .then(r => r.json())
     .then(data => {
       const badge = document.getElementById('gatewayStatusBadge');
-      if (badge) {
+      if (badge && data.knowledge_entries !== undefined) {
         badge.innerHTML = `<span class="status-dot"></span> 2G Gateway Online (${data.knowledge_entries} records)`;
       }
     })
