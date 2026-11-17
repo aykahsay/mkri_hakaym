@@ -713,8 +713,9 @@ function renderProductsCatalog(filter = 'ALL') {
         </div>
         <h3 class="product-title">${currentLang === 'ti' ? p.name_ti : p.name_en}</h3>
         <div class="product-category-sub">${p.category_label} • ID: ${p.id}</div>
-        <div style="font-size:0.82rem; color:#b91c1c; font-weight:700; margin-bottom:8px;">
-          Target: ${p.problem_addressed}
+        <div class="product-target-pill">
+          <span class="target-label">CLINICAL TARGET</span>
+          <span>${p.problem_addressed}</span>
         </div>
         <p class="product-desc">${p.description}</p>
         <ul class="product-features-list">
@@ -722,7 +723,7 @@ function renderProductsCatalog(filter = 'ALL') {
         </ul>
         <div class="product-actions">
           ${audioBtn}
-          <a href="${p.repo_url}" target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:6px 14px;">
+          <a href="${p.repo_url}" target="_blank" class="btn btn-secondary" style="font-size:0.82rem; padding:7px 14px;">
             💻 Repository & Code
           </a>
         </div>
@@ -891,13 +892,13 @@ function renderDatasetsCatalog(filter = 'ALL') {
         ${showcaseHtml}
 
         <!-- Locked notice & Option of Downloading -->
-        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; background:#fff1f2; border:1px solid #fecdd3; border-radius:10px; padding:16px 20px;">
+        <div class="dataset-locked-footer">
           <div>
-            <div style="font-weight:800; color:#9f1239; font-size:0.92rem;">
-              🔒 Full Dataset & Checkpoints Gated Under Paid License
+            <div class="locked-title">
+              <span>🔒 Full Dataset & Checkpoints Gated Under Paid License</span>
             </div>
-            <div style="font-size:0.82rem; color:#881337;">
-              Requires verified license key. Free downloading is strictly prohibited by TMA-DHI data governance.
+            <div class="locked-sub">
+              Requires verified license key. Free downloading is strictly prohibited by TMA-DHI data sovereignty & governance.
             </div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
