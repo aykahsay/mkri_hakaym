@@ -1118,3 +1118,288 @@ section.partners-section {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
 }
+
+/* ==========================================================================
+   TMA-DHI Products & Innovations Directory
+   ========================================================================== */
+section.products-section {
+  padding: 60px 0;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.product-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.product-card.flagship {
+  border: 2px solid var(--primary);
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.flagship-ribbon {
+  position: absolute;
+  top: 14px;
+  right: -32px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 36px;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.product-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.product-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.product-status-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-deployed {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.status-testing {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.status-prototype {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.product-category-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.product-features-list {
+  list-style: none;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.product-features-list li {
+  padding: 3px 0;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+/* ==========================================================================
+   TMA-DHI Research Findings & Publications Hub
+   ========================================================================== */
+section.research-section {
+  padding: 60px 0;
+  background: var(--bg-main);
+  border-bottom: 1px solid var(--border);
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 26px;
+  margin-top: 24px;
+}
+
+.research-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.research-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+
+.research-meta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.research-domain-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.doi-tag {
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.research-card-title {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.research-authors {
+  font-size: 0.8rem;
+  color: var(--primary-hover);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.research-abstract {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.key-finding-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid var(--primary);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 16px;
+}
+
+.key-finding-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #166534;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.key-finding-metric {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #14532d;
+}
+
+.research-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  font-size: 0.82rem;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Announcements & Discovery Banner
+   ========================================================================== */
+section.announcements-bar {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  padding: 24px 0;
+  border-top: 1px solid #334155;
+  border-bottom: 1px solid #334155;
+}
+
+.announcement-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.announcement-badge {
+  background: #ef4444;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
