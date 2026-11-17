@@ -10,6 +10,8 @@ from urllib.parse import parse_qs
 
 from fastapi import FastAPI, Request
 from fastapi.responses import Response, JSONResponse, FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from brain.rag_engine import MedicalRAGEngine
@@ -23,6 +25,20 @@ app = FastAPI(
     description="Telephony Voice Gateway for 2G / Basic Feature Phones in Tigrinya",
     version="1.0.0",
 )
+
+# Enable CORS for browser frontend & website access
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Mount Website static files
+website_dir = Path(__file__).resolve().parent.parent / "website"
+if website_dir.exists():
+    app.mount("/website", StaticFiles(directory=str(website_dir), html=True), name="website")
 
 rag_engine = MedicalRAGEngine()
 audio_service = TigrinyaAudioService()

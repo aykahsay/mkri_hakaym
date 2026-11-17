@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ti">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tigray Medical Association – Digital Health Initiative (TMA-DHI) | ማሕበር ሕክምና ትግራይ</title>
+  <meta name="description" content="Official platform for the Tigray Medical Association Digital Health Initiative. Grounded research, open datasets, and voice-first AI innovations like Mkri Hakaym for rural 2G phones.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Site Header & Navigation
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand-logo">
+        <div class="brand-icon">🩺</div>
+        <div>
+          <span>ማሕበር ሕክምና ትግራይ (TMA)</span>
+          <span class="brand-sub">Digital Health Initiative • ዲጂታል ጥዕና</span>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#pillars" data-ti="🏛️ ዓንደ-ዓውድታት" data-en="🏛️ Pillars">🏛️ ዓንደ-ዓውድታት</a></li>
+        <li><a href="#simulator" data-ti="🎙️ ምኽሪ ሓካይም (2G)" data-en="🎙️ Mkri Hakaym">🎙️ ምኽሪ ሓካይም (2G)</a></li>
+        <li><a href="#redflags" data-ti="🚨 ቀያሕቲ ምልክታት" data-en="🚨 Red Flags">🚨 ቀያሕቲ ምልክታት</a></li>
+        <li><a href="#dataset" data-ti="📊 ዳታሴት" data-en="📊 Datasets">📊 ዳታሴት</a></li>
+        <li><a href="#communities" data-ti="👥 ማሕበረሰብ" data-en="👥 Communities">👥 ማሕበረሰብ</a></li>
+        <li><a href="#partners" data-ti="🤝 መሻርኽቲ" data-en="🤝 Partners">🤝 መሻርኽቲ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="openMembershipModal()" style="padding:6px 14px; font-size:0.85rem;" data-ti="ኣባል ኩን" data-en="Join TMA-DHI">
+          ✍️ ኣባል ኩን
+        </button>
+        <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">
+          🌐 English
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Hero Section
+       ========================================================================= -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge" data-ti="🏛️ ማሕበር ሕክምና ትግራይ • ዲጂታል ጥዕና" data-en="🏛️ Tigray Medical Association • Digital Health Initiative">
+          🏛️ ማሕበር ሕክምና ትግራይ • ዲጂታል ጥዕና
+        </div>
+        <h1 class="hero-title">
+          Pioneering <span class="highlight">Digital Health & Medical AI</span> for Tigray.
+        </h1>
+        <p class="hero-subtitle-ti" data-ti="ብሓካይም፣ ተመራመርትን መሃዝትን ዝተመርሐ፤ ኣብ ሓቀኛ ጸገማት ጥዕና ትግራይ ዘተኮረ ዲጂታል መድረኽ።" data-en="A multi-stakeholder healthcare innovation ecosystem connecting medical doctors, AI researchers, software engineers, and health institutions.">
+          ብሓካይም፣ ተመራመርትን መሃዝትን ዝተመርሐ፤ ኣብ ሓቀኛ ጸገማት ጥዕና ትግራይ ዘተኮረ ዲጂታል መድረኽ።
+        </p>
+        <p class="hero-description" data-ti="ካብ ተራ ናይ ቁጽሪ ተሌፎን (2G) ጀሚሩ ክሳብ ዘመናዊ AI ሓጋዚ ሕክምና፤ ብፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተደገፉ ክሊኒካዊ ዳታሴታትን ስርዓታትን ኣብ ሓደ ዝጥርንፍ መድረኽ።" data-en="From voice-first 2G telephone gateways for low-literacy rural mothers (Mkri Hakaym) to clinical research datasets and hospital interoperability, building the sovereign health technologies of Tigray.">
+          ካብ ተራ ናይ ቁጽሪ ተሌፎን (2G) ጀሚሩ ክሳብ ዘመናዊ AI ሓጋዚ ሕክምና፤ ብፈነወ ቴሌቪዥን ትግራይ 'ማዕዳ ሓካይም' ዝተደገፉ ክሊኒካዊ ዳታሴታትን ስርዓታትን ኣብ ሓደ ዝጥርንፍ መድረኽ።
+        </p>
+        <div class="hero-actions">
+          <a href="#simulator" class="btn btn-primary" data-ti="🚀 ናይ 2G ድምጺ AI ፈትኑ (Mkri Hakaym)" data-en="🚀 Try 2G Voice AI (Mkri Hakaym)">
+            🚀 ናይ 2G ድምጺ AI ፈትኑ (Mkri Hakaym)
+          </a>
+          <button class="btn btn-secondary" onclick="openMembershipModal()" data-ti="📝 ናይ ኣባልነት መመልከቲ" data-en="📝 Apply for Membership">
+            📝 ናይ ኣባልነት መመልከቲ
+          </button>
+        </div>
+        <div class="hero-meta-strip">
+          <div class="meta-item">
+            <span class="meta-number">4</span>
+            <span class="meta-label" data-ti="ዓበይቲ ዓንደ-ዓውድታት" data-en="Core Pillars">ዓበይቲ ዓንደ-ዓውድታት</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-number">24</span>
+            <span class="meta-label" data-ti="ዝተዋደዱ ናይ ዳታቤዝ ሞዴላት" data-en="PostgreSQL Schemas">ዝተዋደዱ ሞዴላት</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-number">ትግርኛ</span>
+            <span class="meta-label" data-ti="ናይ ድምጽን ጽሑፍን ቋንቋ" data-en="Tigrinya Voice & Data">ናይ ድምጽን ጽሑፍን</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Audio Player Card -->
+      <div class="hero-media">
+        <div class="audio-preview-card">
+          <div class="audio-card-head">
+            <div>
+              <div class="audio-title" data-ti="🔊 ድምጺ ሓኪም ብትግርኛ (Meta MMS Voice)" data-en="🔊 Tigrinya Doctor Voice Preview">
+                🔊 ድምጺ ሓኪም ብትግርኛ (Meta MMS Voice)
+              </div>
+              <div class="audio-sub" data-ti="ፍላግሺፕ ፕሮጀክት፦ ምኽሪ ሓካይም (Mkri Hakaym)" data-en="Flagship Project: Mkri Hakaym (Voice AI)">
+                ፍላግሺፕ ፕሮጀክት፦ ምኽሪ ሓካይም
+              </div>
+            </div>
+            <span class="preset-badge badge-routine">Telephony Audio</span>
+          </div>
+
+          <div class="waveform-viz" id="heroWaveform">
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+          </div>
+
+          <div class="audio-controls">
+            <button class="play-btn" id="playWelcomeBtn" onclick="playWelcomeAudio()">▶️</button>
+            <div style="font-size:0.85rem; font-weight:600;">
+              <span data-ti="እንቋዕ ናብ ምኽሪ ሓካይም ብደሓን መጻእኹም..." data-en="Welcome to Mkri Hakaym (TMA Voice AI)...">
+                "እንቋዕ ናብ ምኽሪ ሓካይም ብደሓን መጻእኹም..."
+              </span>
+            </div>
+          </div>
+          <audio id="heroAudio" src="assets/welcome.wav" preload="auto"></audio>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       The Four Strategic Pillars (Implementome & WHO Atlas Model)
+       ========================================================================= -->
+  <section class="pillars-section" id="pillars">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag" data-ti="ስነ-ህንጻ መድረኽ" data-en="Platform Architecture">ስነ-ህንጻ መድረኽ</span>
+        <h2 class="section-title" data-ti="ኣርባዕተ ዓበይቲ ዓንደ-ዓውድታት (The 4 Strategic Pillars)" data-en="The Four Strategic Pillars of TMA-DHI">
+          ኣርባዕተ ዓበይቲ ዓንደ-ዓውድታት (The 4 Strategic Pillars)
+        </h2>
+        <p class="section-desc" data-ti="ነዞም ዓለምለኻዊ ተመኩሮታት Implementome፣ WHO Atlasን Makerere AI Labን ብምውህሃድ ንትግራይ ዝተዳለወ።" data-en="Synthesizing the best principles of Implementome, WHO Digital Health Atlas, and Makerere AI Health Lab for the health ecosystem of Tigray.">
+          ነዞም ዓለምለኻዊ ተመኩሮታት Implementome፣ WHO Atlasን Makerere AI Labን ብምውህሃድ ንትግራይ ዝተዳለወ።
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Pillar 1: People & Community -->
+        <div class="pillar-card">
+          <div class="pillar-icon">👥</div>
+          <h3 class="pillar-title" data-ti="1. ሰባትን ማሕበረሰብን" data-en="1. People & Community">1. ሰባትን ማሕበረሰብን</h3>
+          <p class="pillar-desc" data-ti="ሓካይም፣ መሃንድሳትን ተመራመርትን ኣብ ሓደ መድረኽ ተጠርኒፎም ብሓባር ዝሰርሑሉ ዓውዲ።" data-en="Professional profiles, skills directory, Communities of Practice, and interdisciplinary collaboration for healthcare workers and engineers.">
+            ሓካይም፣ መሃንድሳትን ተመራመርትን ኣብ ሓደ መድረኽ ተጠርኒፎም ብሓባር ዝሰርሑሉ ዓውዲ።
+          </p>
+          <ul class="pillar-list">
+            <li>✔ Verified Professional Profiles</li>
+            <li>✔ Communities of Practice (CoPs)</li>
+            <li>✔ Working Groups & Mentorship</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2: Research & Knowledge -->
+        <div class="pillar-card">
+          <div class="pillar-icon">📚</div>
+          <h3 class="pillar-title" data-ti="2. ምርምርን ፍልጠትን" data-en="2. Research & Knowledge">2. ምርምርን ፍልጠትን</h3>
+          <p class="pillar-desc" data-ti="ክሊኒካዊ ዳታሴታት፣ ናይ ድምጺ ቅዳሓት፣ ሕክምናዊ ጽሑፋትን መጽናዕትታትን ዝዕቀበሉ መኽዘን።" data-en="Curated clinical datasets, Tigrinya speech transcripts, open-access publications, and medical data governance protocols.">
+            ክሊኒካዊ ዳታሴታት፣ ናይ ድምጺ ቅዳሓት፣ ሕክምናዊ ጽሑፋትን መጽናዕትታትን ዝዕቀበሉ መኽዘን።
+          </p>
+          <ul class="pillar-list">
+            <li>✔ Tigrai TV Medical Q&A Dataset</li>
+            <li>✔ Publication DOI Indexing</li>
+            <li>✔ De-Identification & Governance</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 3: Innovation & Products -->
+        <div class="pillar-card">
+          <div class="pillar-icon">💡</div>
+          <h3 class="pillar-title" data-ti="3. ቴክኖሎጂን ምህዞን" data-en="3. Innovation & Products">3. ቴክኖሎጂን ምህዞን</h3>
+          <p class="pillar-desc" data-ti="ንዝተደኮኑ ጸገማት ጥዕና መፍትሒ ዝኾኑ ዲጂታል ቴክኖሎጂታት (ንኣብነት ምኽሪ ሓካይም 2G AI)።" data-en="Deployable digital tools, offline-first 2G voice gateways, AI clinical triaging, and hospital electronic medical records.">
+            ንዝተደኮኑ ጸገማት ጥዕና መፍትሒ ዝኾኑ ዲጂታል ቴክኖሎጂታት (ንኣብነት ምኽሪ ሓካይም 2G AI)።
+          </p>
+          <ul class="pillar-list">
+            <li>✔ Mkri Hakaym (2G Voice Telephony AI)</li>
+            <li>✔ Telemedicine Clinical Systems</li>
+            <li>✔ Mobile Emergency Referral Apps</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 4: Partnerships & Impact -->
+        <div class="pillar-card">
+          <div class="pillar-icon">🤝</div>
+          <h3 class="pillar-title" data-ti="4. ሽርክናን ጽልዋን" data-en="4. Partnerships & Impact">4. ሽርክናን ጽልዋን</h3>
+          <p class="pillar-desc" data-ti="ሆስፒታላት፣ ቢሮ ጥዕና፣ ዩኒቨርሲቲ መቐለን ኣህጉራውያን መሻርኽትን (WHO, UNDP) ዝተኣሳሰሩሉ መድረኽ።" data-en="Collaborations with Ayder Referral Hospital, Mekelle University, Tigray Health Bureau, WHO, and global diaspora networks.">
+            ሆስፒታላት፣ ቢሮ ጥዕና፣ ዩኒቨርሲቲ መቐለን ኣህጉራውያን መሻርኽትን (WHO, UNDP) ዝተኣሳሰሩሉ መድረኽ።
+          </p>
+          <ul class="pillar-list">
+            <li>✔ Ayder Referral Hospital</li>
+            <li>✔ Mekelle University Health Sciences</li>
+            <li>✔ WHO & Humanitarian Alliances</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Flagship Product: Interactive 2G Phone Simulator (Mkri Hakaym)
+       ========================================================================= -->
+  <section class="phone-sim-section" id="simulator">
+    <div class="container">
+      <div class="sim-grid">
+        
+        <!-- 3D Realistic Vintage 2G Phone Device -->
+        <div class="phone-device">
+          <div class="phone-speaker"></div>
+          
+          <!-- Green Backlit LCD Screen -->
+          <div class="phone-screen" id="phoneScreen">
+            <div class="screen-top-bar">
+              <span id="screenTopStatus">ETHIO TEL 2G</span>
+              <span>📶 🔋</span>
+            </div>
+            <div class="screen-content" id="phoneScreenContent">
+              <div style="text-align:center; padding-top:20px;">
+                <div style="font-size:0.75rem;">MKRI HAKAYM (TMA)</div>
+                <div style="font-size:0.95rem; font-weight:800; margin:6px 0;">800</div>
+                <div style="font-size:0.7rem; color:#166534;">Press [CALL] to dial</div>
+              </div>
+            </div>
+            <div class="screen-bottom-bar">
+              <span id="screenBtmStatus">STANDBY</span>
+              <span>MENU</span>
+            </div>
+          </div>
+
+          <!-- Tactile Keypad -->
+          <div class="phone-keypad">
+            <div class="call-control-keys">
+              <button class="phone-key key-call" onclick="startCall()">
+                <span>📞 CALL</span>
+              </button>
+              <button class="phone-key key-end" onclick="endCall()">
+                <span>❌ END</span>
+              </button>
+            </div>
+
+            <button class="phone-key" onclick="handleKeypress('1')">
+              <span>1</span><span class="sub-chars">ጥንሲ</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('2')">
+              <span>2</span><span class="sub-chars">ህጻናት</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('3')">
+              <span>3</span><span class="sub-chars">ሕዱራት</span>
+            </button>
+
+            <button class="phone-key" onclick="handleKeypress('4')">
+              <span>4</span><span class="sub-chars">GHI</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('5')">
+              <span>5</span><span class="sub-chars">JKL</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('6')">
+              <span>6</span><span class="sub-chars">MNO</span>
+            </button>
+
+            <button class="phone-key" onclick="handleKeypress('7')">
+              <span>7</span><span class="sub-chars">PQRS</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('8')">
+              <span>8</span><span class="sub-chars">TUV</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('9')">
+              <span>9</span><span class="sub-chars">WXYZ</span>
+            </button>
+
+            <button class="phone-key" onclick="handleKeypress('*')">
+              <span>*</span><span class="sub-chars">REPEAT</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('0')">
+              <span>0</span><span class="sub-chars">ነርስ</span>
+            </button>
+            <button class="phone-key" onclick="handleKeypress('#')">
+              <span>#</span><span class="sub-chars">MENU</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Simulator Test Controls Panel -->
+        <div class="sim-controls">
+          <div>
+            <span class="section-tag" style="color:#38bdf8;" data-ti="ፍላግሺፕ ምህዞ • ምኽሪ ሓካይም" data-en="Flagship Innovation • Mkri Hakaym">ፍላግሺፕ ምህዞ • ምኽሪ ሓካይም</span>
+            <h3 data-ti="ተራ ናይ ቁጽሪ ተሌፎን (Dumbphone) ፈተነ ኣብ መርበብ ሓበሬታ" data-en="Test 2G Voice AI Simulator Live">
+              ተራ ናይ ቁጽሪ ተሌፎን (Dumbphone) ፈተነ ኣብ መርበብ ሓበሬታ
+            </h3>
+            <p style="color:#94a3b8; font-size:0.95rem; margin-top:6px;" data-ti="ኣብ ገጠር ዝርከቡ ኣዴታት ብተራ ተሌፎን 800 ደዊሎም እንታይ ከምዝሰምዑን ብኸመይ ምኽሪ ከምዝወሃቦምን ብቐጥታ ፈትኑ።" data-en="Experience how rural callers interact with the IVR gateway using DTMF keypad presses or native Tigrinya speech.">
+              ኣብ ገጠር ዝርከቡ ኣዴታት ብተራ ተሌፎን 800 ደዊሎም እንታይ ከምዝሰምዑን ብኸመይ ምኽሪ ከምዝወሃቦምን ብቐጥታ ፈትኑ።
+            </p>
+          </div>
+
+          <div class="sim-card">
+            <h4 style="color:#e2e8f0; font-size:1rem; margin-bottom:12px;" data-ti="⚡ ናይ ፈተነ ሕቶታት ምረጹ (Click Presets):" data-en="⚡ Quick Clinical Presets:">
+              ⚡ ናይ ፈተነ ሕቶታት ምረጹ (Click Presets):
+            </h4>
+            <div class="sim-presets">
+              <button class="preset-btn" onclick="simulatePresetQuestion('ጥንሲ ሒዘ ኣለኹ፡ ደም ፈሲሱኒ እንታይ ክገብር?')">
+                <span>🔴 "ጥንሲ ሒዘ ኣለኹ፡ ደም ፈሲሱኒ..."</span>
+                <span class="preset-badge badge-emergency">CRITICAL (ህጹጽ)</span>
+              </button>
+              <button class="preset-btn" onclick="simulatePresetQuestion('ጥንሲ ምስ ሓዝኩ መዓስ እየ ናብ ሓኪም ክኸይድ?')">
+                <span>🟢 "ጥንሲ ምስ ሓዝኩ መዓስ እየ ናብ ሓኪም ክኸይድ?"</span>
+                <span class="preset-badge badge-routine">ROUTINE (ክትትል)</span>
+              </button>
+              <button class="preset-btn" onclick="simulatePresetQuestion('ቆልዓይ ብርቱዕ ውጽኣትን ተምላስን ሒዝዎ ኣሎ')">
+                <span>🟠 "ቆልዓይ ብርቱዕ ውጽኣትን ተምላስን ሒዝዎ ኣሎ"</span>
+                <span class="preset-badge badge-urgent">HIGH (ድርቀት)</span>
+              </button>
+              <button class="preset-btn" onclick="simulatePresetQuestion('ጸቕጢ ደመይ ወሲኹ፡ ርእሰይ ብርቱዕ ይሓመኒ ኣሎ')">
+                <span>🔴 "ጸቕጢ ደመይ ወሲኹ፡ ርእሰይ ብርቱዕ ይሓመኒ"</span>
+                <span class="preset-badge badge-emergency">CRITICAL (Pre-eclampsia)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Custom Query Input -->
+          <div class="sim-card">
+            <h4 style="color:#e2e8f0; font-size:1rem; margin-bottom:10px;" data-ti="💬 ናትኩም ሕቶ ብትግርኛ ጽሒፍኩም ፈትኑ:" data-en="💬 Or Type Your Own Question in Tigrinya:">
+              💬 ናትኩም ሕቶ ብትግርኛ ጽሒፍኩም ፈትኑ:
+            </h4>
+            <div class="custom-query-box">
+              <input type="text" id="customSimInput" placeholder="ንኣብነት፡ ሕቖይ ይሓመኒ ኣሎ..." onkeydown="if(event.key==='Enter') simulatePresetQuestion(this.value)">
+              <button class="btn btn-primary" onclick="simulatePresetQuestion(document.getElementById('customSimInput').value)" data-ti="ሕተት" data-en="Ask">
+                ሕተት
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Emergency Red-Flags Diagnostic Section (ቀያሕቲ ምልክታት)
+       ========================================================================= -->
+  <section class="red-flags" id="redflags">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag" data-ti="ሕክምናዊ ቀያሕቲ ምልክታት" data-en="Clinical Red Flags">ሕክምናዊ ቀያሕቲ ምልክታት</span>
+        <h2 class="section-title" data-ti="ህይወት ዘድሕኑ ቀያሕቲ ምልክታት (Emergency Directory)" data-en="Life-Threatening Red Flags Directory">
+          ህይወት ዘድሕኑ ቀያሕቲ ምልክታት (Emergency Directory)
+        </h2>
+        <p class="section-desc" data-ti="ስርዓት ምኽሪ ሓካይም ነዞም ቀያሕቲ ምልክታት ኣብ ዝኾነ ሕቶ ምስ ረኸበ፡ ዝኾነ ምድንጓይ ከይፈጠረ ብቕጽበት ናብ ሆስፒታል ክኸዱ የጠንቅቕ።" data-en="Whenever these red flags are detected, the voice gateway immediately interrupts routine counseling and directs the caller to an emergency health facility.">
+          ስርዓት ምኽሪ ሓካይም ነዞም ቀያሕቲ ምልክታት ኣብ ዝኾነ ሕቶ ምስ ረኸበ፡ ዝኾነ ምድንጓይ ከይፈጠረ ብቕጽበት ናብ ሆስፒታል ክኸዱ የጠንቅቕ።
+        </p>
+      </div>
+
+      <!-- Live Symptom Tester -->
+      <div style="max-width:700px; margin:0 auto 36px; background:white; padding:20px; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+        <label style="font-weight:700; font-size:0.95rem; display:block; margin-bottom:8px;" data-ti="🔍 ምልክታትኩም ኣብዚ ብምጽሓፍ ቀይሕ ምልክት ምዃኑ ኣረጋግጹ:" data-en="🔍 Test Any Symptom for Emergency Red-Flags:">
+          🔍 ምልክታትኩም ኣብዚ ብምጽሓፍ ቀይሕ ምልክት ምዃኑ ኣረጋግጹ:
+        </label>
+        <div style="display:flex; gap:10px;">
+          <input type="text" id="triageCheckInput" placeholder="ምሳሌ፦ ደም ፈሲሱኒ፡ ዓይነይ ይፈዝዝ ኣሎ..." style="flex:1; padding:12px 16px; border:1px solid var(--border); border-radius:8px; font-size:0.95rem;" oninput="runLiveTriageCheck()">
+          <button class="btn btn-primary" onclick="runLiveTriageCheck()" data-ti="መርምር" data-en="Check">መርምር</button>
+        </div>
+        <div id="triageCheckResult"></div>
+      </div>
+
+      <div class="red-flags-grid">
+        <!-- Flag 1: Maternal Bleeding -->
+        <div class="flag-card">
+          <div>
+            <div class="flag-card-header">
+              <div class="flag-icon">🩸</div>
+              <span class="preset-badge badge-emergency">CRITICAL</span>
+            </div>
+            <h3 class="flag-title" data-ti="ምፍሳስ ደም ኣብ ጥንሲ (Hemorrhage)" data-en="Maternal Vaginal Bleeding">
+              ምፍሳስ ደም ኣብ ጥንሲ (Hemorrhage)
+            </h3>
+            <div class="flag-terms">
+              ቃላት ምልክት: <code>ምፍሳስ ደም</code> <code>ደም ፈሲሱኒ</code> <code>ደም ይፈሰኒ</code>
+            </div>
+          </div>
+          <div class="flag-action" data-ti="🚨 ብቕጽበት ናብ ሆስፒታል ወይ ጥዕና ጣብያ ምኻድ! ኣብ ገዛ ደው ኣይበሉ!" data-en="🚨 Immediate hospital transport. Never wait at home.">
+            🚨 ብቕጽበት ናብ ሆስፒታል ወይ ጥዕና ጣብያ ምኻድ! ኣብ ገዛ ደው ኣይበሉ!
+          </div>
+        </div>
+
+        <!-- Flag 2: Pre-eclampsia -->
+        <div class="flag-card">
+          <div>
+            <div class="flag-card-header">
+              <div class="flag-icon">🧠</div>
+              <span class="preset-badge badge-emergency">CRITICAL</span>
+            </div>
+            <h3 class="flag-title" data-ti="ጸቕጢ ደም ጥንሲ (Pre-eclampsia)" data-en="Pre-eclampsia / Severe Headache">
+              ጸቕጢ ደም ጥንሲ (Pre-eclampsia)
+            </h3>
+            <div class="flag-terms">
+              ቃላት ምልክት: <code>ብርቱዕ ርእሲ ሕማም</code> <code>ዓይኒ ምፍዛዝ</code> <code>ሕበጥ ገጽ</code>
+            </div>
+          </div>
+          <div class="flag-action" data-ti="🚨 ህጹጽ መርመራ ጸቕጢ ደም ምክያድ።" data-en="🚨 Immediate emergency blood pressure check.">
+            🚨 ህጹጽ መርመራ ጸቕጢ ደም ምክያድ።
+          </div>
+        </div>
+
+        <!-- Flag 3: Fetal Movement -->
+        <div class="flag-card">
+          <div>
+            <div class="flag-card-header">
+              <div class="flag-icon">👶</div>
+              <span class="preset-badge badge-emergency">CRITICAL</span>
+            </div>
+            <h3 class="flag-title" data-ti="ምንቅስቓስ ዕሸል ምቁራጽ" data-en="Reduced Fetal Movement">
+              ምንቅስቓስ ዕሸል ምቁራጽ
+            </h3>
+            <div class="flag-terms">
+              ቃላት ምልክት: <code>ዕሸል ምንቅስቓስ ምቁራጽ</code> <code>ኣይተንቀሳቐሰን</code>
+            </div>
+          </div>
+          <div class="flag-action" data-ti="🚨 ህጹጽ መርመራ ትርቂ ልቢ ዕሸል (Fetal Heart Rate)።" data-en="🚨 Immediate fetal heartbeat monitoring.">
+            🚨 ህጹጽ መርመራ ትርቂ ልቢ ዕሸል (Fetal Heart Rate)።
+          </div>
+        </div>
+
+        <!-- Flag 4: Pediatric Pneumonia -->
+        <div class="flag-card">
+          <div>
+            <div class="flag-card-header">
+              <div class="flag-icon">🫁</div>
+              <span class="preset-badge badge-emergency">CRITICAL</span>
+            </div>
+            <h3 class="flag-title" data-ti="ነድሪ ሳምባ ኣብ ህጻናት (Pneumonia)" data-en="Pediatric Pneumonia & Fast Breathing">
+              ነድሪ ሳምባ ኣብ ህጻናት (Pneumonia)
+            </h3>
+            <div class="flag-terms">
+              ቃላት ምልክት: <code>ፈጣን ኣተነፋፍሳ</code> <code>ደረት ናብ ውሽጢ ምስሓብ</code>
+            </div>
+          </div>
+          <div class="flag-action" data-ti="🚨 ናይ ነድሪ ሳምባ ምልክት ስለዝኾነ ብቕጽበት ናብ ጥዕና ጣብያ ውሰድዎ!" data-en="🚨 Classic pneumonia sign. Emergency clinical care needed.">
+            🚨 ናይ ነድሪ ሳምባ ምልክት ስለዝኾነ ብቕጽበት ናብ ጥዕና ጣብያ ውሰድዎ!
+          </div>
+        </div>
+
+        <!-- Flag 5: Severe Dehydration -->
+        <div class="flag-card">
+          <div>
+            <div class="flag-card-header">
+              <div class="flag-icon">💧</div>
+              <span class="preset-badge badge-urgent">HIGH URGENCY</span>
+            </div>
+            <h3 class="flag-title" data-ti="ውጽኣትን ተምላስን (Dehydration)" data-en="Acute Diarrhea & Dehydration">
+              ውጽኣትን ተምላስን (Dehydration)
+            </h3>
+            <div class="flag-terms">
+              ቃላት ምልክት: <code>ውጽኣት</code> <code>ተምላስ</code> <code>ዓይኒ ምዕማቕ</code>
+            </div>
+          </div>
+          <div class="flag-action" data-ti="⚠️ ኦ.ኣር.ኤስ (ORS) ምብጥባጥ + ጡብ ምጥባው ከየቋረጹ ናብ ክሊኒክ ውሰዱ።" data-en="⚠️ Administer ORS immediately and visit a health center.">
+            ⚠️ ኦ.ኣር.ኤስ (ORS) ምብጥባጥ + ጡብ ምጥባው ከየቋረጹ ናብ ክሊኒክ ውሰዱ።
+          </div>
+        </div>
+
+        <!-- Flag 6: High Fever & Malaria -->
+        <div class="flag-card">
+          <div>
+            <div class="flag-card-header">
+              <div class="flag-icon">🦟</div>
+              <span class="preset-badge badge-urgent">HIGH URGENCY</span>
+            </div>
+            <h3 class="flag-title" data-ti="ሕማም ዓሶን ብርቱዕ ረስንን (Malaria)" data-en="Malaria & High Spiking Fever">
+              ሕማም ዓሶን ብርቱዕ ረስንን (Malaria)
+            </h3>
+            <div class="flag-terms">
+              ቃላት ምልክት: <code>ብርቱዕ ረስኒ</code> <code>ቁሪ ቁሪ ምባል</code> <code>መንቀጥቀጥ</code>
+            </div>
+          </div>
+          <div class="flag-action" data-ti="⚠️ ብቕጽበት ናይ ደም መርመራ (RDT/Microscopy) ብምግባር መድሃኒት ምውሳድ።" data-en="⚠️ Immediate rapid blood test and antimalarial medication.">
+            ⚠️ ብቕጽበት ናይ ደም መርመራ (RDT/Microscopy) ብምግባር መድሃኒት ምውሳድ።
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Clinical Dataset Explorer (medical_qa_dataset.csv)
+       ========================================================================= -->
+  <section class="dataset-section" id="dataset">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag" data-ti="ክሊኒካዊ ዳታሴት" data-en="Clinical Datasets">ክሊኒካዊ ዳታሴት</span>
+        <h2 class="section-title" data-ti="ሕክምናዊ ሕቶን ምላሽን ዳታሴት (medical_qa_dataset.csv)" data-en="Structured Clinical Q&A Dataset">
+          ሕክምናዊ ሕቶን ምላሽን ዳታሴት (medical_qa_dataset.csv)
+        </h2>
+        <p class="section-desc" data-ti="ካብ ፈነወ ቴሌቪዥን ትግራይ ማዕዳ ሓካይም ዝተቐድሐን ብሞያዊ መልክዕ ዝተዳለወን ዳታሴት።" data-en="Transcribed verbatim from Tigrai TV medical broadcasts and formatted with UTF-8-SIG for instant compatibility with Excel, pandas, and LoRA fine-tuning.">
+          ካብ ፈነወ ቴሌቪዥን ትግራይ ማዕዳ ሓካይም ዝተቐድሐን ብሞያዊ መልክዕ ዝተዳለወን ዳታሴት።
+        </p>
+      </div>
+
+      <div class="dataset-toolbar">
+        <div class="search-input-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="datasetSearchInput" placeholder="ኣብ ዳታሴት ድለዩ (Search topic, symptom, question)...">
+        </div>
+
+        <div class="filter-pills">
+          <button class="pill-btn active" data-filter="ALL" onclick="filterDataset('ALL')" data-ti="ኩሉ (All)" data-en="All">ኩሉ (All)</button>
+          <button class="pill-btn" data-filter="ANC" onclick="filterDataset('ANC')" data-ti="ክትትል ጥንሲ (ANC)" data-en="Maternal ANC">ክትትል ጥንሲ (ANC)</button>
+          <button class="pill-btn" data-filter="PED" onclick="filterDataset('PED')" data-ti="ጥዕና ህጻናት" data-en="Pediatrics">ጥዕና ህጻናት</button>
+          <button class="pill-btn" data-filter="CHR" onclick="filterDataset('CHR')" data-ti="ሕዱራት ሕማማት" data-en="Chronic">ሕዱራት ሕማማት</button>
+          <button class="pill-btn" data-filter="INF" onclick="filterDataset('INF')" data-ti="ዓሶ (Malaria)" data-en="Infections">ዓሶ (Malaria)</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span id="datasetRowCount" style="font-size:0.85rem; font-weight:700; color:var(--text-muted);">11 records</span>
+          <button class="btn btn-primary" onclick="downloadDatasetCSV()" style="padding:8px 16px; font-size:0.85rem;" data-ti="⬇️ ዳታሴት ኣውርድ (CSV)" data-en="⬇️ Download CSV">
+            ⬇️ ዳታሴት ኣውርድ (CSV)
+          </button>
+        </div>
+      </div>
+
+      <!-- Dataset Table -->
+      <div class="dataset-table-wrap">
+        <table class="dataset-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th data-ti="ደረጃ ሓደጋ" data-en="Triage Level">ደረጃ ሓደጋ</th>
+              <th data-ti="ዛዕባ (Topic)" data-en="Topic">ዛዕባ (Topic)</th>
+              <th data-ti="ሕቶ ሓታቲ (Caller Question)" data-en="Caller Question">ሕቶ ሓታቲ</th>
+              <th data-ti="ምላሽ ሓኪም (Doctor Advice)" data-en="Doctor Advice">ምላሽ ሓኪም</th>
+              <th data-ti="መወከሲ" data-en="Source">መወከሲ</th>
+            </tr>
+          </thead>
+          <tbody id="datasetTableBody">
+            <!-- Populated dynamically via website/js/app.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Communities of Practice
+       ========================================================================= -->
+  <section class="container" id="communities" style="padding:60px 24px;">
+    <div class="section-head">
+      <span class="section-tag" data-ti="ማሕበረሰብን ምትሕብባርን" data-en="Communities of Practice">ማሕበረሰብን ምትሕብባርን</span>
+      <h2 class="section-title" data-ti="ስፔሻላይዝድ ናይ ስራሕ ጉጅለታት (Communities of Practice)" data-en="Specialist Working Groups">
+        ስፔሻላይዝድ ናይ ስራሕ ጉጅለታት (Communities of Practice)
+      </h2>
+      <p class="section-desc" data-ti="ኣብ ሞያዊ ዘፈራት ዝተመስረቱ ማሕበረሰባት ንልውውጥ ፍልጠት፣ ሓባራዊ ምርምርን ምህዞን።" data-en="Focused multidisciplinary groups where clinical experts and technologists collaborate on high-impact healthcare challenges.">
+        ኣብ ሞያዊ ዘፈራት ዝተመስረቱ ማሕበረሰባት ንልውውጥ ፍልጠት፣ ሓባራዊ ምርምርን ምህዞን።
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:#e0f2fe; color:#0284c7;">🤖</div>
+        <h3 class="pillar-title">AI & Data Science in Healthcare</h3>
+        <p class="pillar-desc">
+          Focusing on speech recognition for Ethiopic languages, clinical LLM grounding, and automated diagnostic decision support.
+        </p>
+        <span style="font-size:0.8rem; font-weight:700; color:#0284c7;">Active Project: Mkri Hakaym (ምኽሪ ሓካይም)</span>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:#fef2f2; color:#dc2626;">🤰</div>
+        <h3 class="pillar-title">Maternal & Child Health Informatics</h3>
+        <p class="pillar-desc">
+          Reducing maternal mortality through digital triage, ANC follow-up tracking, and community healthcare worker handoff tools.
+        </p>
+        <span style="font-size:0.8rem; font-weight:700; color:#dc2626;">In Partnership with Ayder OB/GYN</span>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:#ecfdf5; color:#059669;">🏥</div>
+        <h3 class="pillar-title">Hospital EMR & Telemedicine Systems</h3>
+        <p class="pillar-desc">
+          Connecting zonal referral hospitals and primary health centers with resilient electronic records and remote doctor consultations.
+        </p>
+        <span style="font-size:0.8rem; font-weight:700; color:#059669;">Focus: Rural Connectivity Solutions</span>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:#fef3c7; color:#d97706;">📊</div>
+        <h3 class="pillar-title">Public Health & Epidemiology Data</h3>
+        <p class="pillar-desc">
+          Surveillance data pipelines for malaria, infectious disease monitoring, malnutrition recovery, and regional health indicators.
+        </p>
+        <span style="font-size:0.8rem; font-weight:700; color:#d97706;">Collaborating with Health Bureau</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Institutional Partners
+       ========================================================================= -->
+  <section class="partners-section" id="partners">
+    <div class="container">
+      <span class="section-tag" data-ti="ሽርክና" data-en="Partnerships">ሽርክና</span>
+      <h3 style="font-size:1.6rem; margin:8px 0 6px;" data-ti="መሻርኽቲ ትካላት" data-en="Institutional & Development Partners">መሻርኽቲ ትካላት</h3>
+      <p style="color:var(--text-muted); font-size:0.9rem;" data-ti="ምስ መሪሕ ሆስፒታላት፣ ዩኒቨርሲቲታትን ኣህጉራውያን ትካላትን ብምትሕብባር" data-en="Collaborating with academic institutions, regional health authorities, and international agencies.">
+        ምስ መሪሕ ሆስፒታላት፣ ዩኒቨርሲቲታትን ኣህጉራውያን ትካላትን ብምትሕብባር
+      </p>
+
+      <div class="partners-logos">
+        <div class="partner-badge">🏥 Ayder Comprehensive Specialized Hospital</div>
+        <div class="partner-badge">🎓 Mekelle University College of Health Sciences</div>
+        <div class="partner-badge">🏛️ Tigray Regional Health Bureau</div>
+        <div class="partner-badge">🌐 World Health Organization (WHO) Atlas</div>
+        <div class="partner-badge">🌍 UNDP Digital Health Hub</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Site Footer
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h4>ማሕበር ሕክምና ትግራይ (TMA)</h4>
+        <p style="max-width:380px; font-size:0.85rem; margin-top:8px;">
+          Tigray Medical Association – Digital Health Initiative (TMA-DHI). Advancing healthcare delivery, clinical research, and sovereign medical AI solutions.
+        </p>
+        <div style="margin-top:14px; font-size:0.8rem; color:#64748b;">
+          Open-Source Healthcare Innovation
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h5>Core Platform</h5>
+        <ul>
+          <li><a href="#pillars">The 4 Pillars</a></li>
+          <li><a href="#simulator">Mkri Hakaym (2G AI)</a></li>
+          <li><a href="#redflags">Clinical Red Flags</a></li>
+          <li><a href="#dataset">Clinical Datasets</a></li>
+          <li><a href="#communities">Communities of Practice</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Governance & Docs</h5>
+        <ul>
+          <li><a href="https://github.com/aykahsay/mkri_hakaym" target="_blank">GitHub Repository</a></li>
+          <li><a href="docs/TMA_DHI_ARCHITECTURE_AND_ERD.md" target="_blank">Architecture & ERD Document</a></li>
+          <li><a href="docs/API_ARCHITECTURE.md" target="_blank">FastAPI Specifications</a></li>
+          <li><a href="javascript:void(0)" onclick="openMembershipModal()">Apply for Membership</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      &copy; 2026 Tigray Medical Association (TMA) – Digital Health Initiative. Grounded on Tigrai TV's "ማዕዳ ሓካይም". All rights reserved.
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       Membership Application Modal
+       ========================================================================= -->
+  <div class="modal-overlay" id="membershipModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeMembershipModal()">&times;</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <span style="font-size:1.5rem;">✍️</span>
+        <div>
+          <h3 style="font-size:1.3rem;">Apply for TMA-DHI Membership</h3>
+          <span style="font-size:0.8rem; color:var(--text-muted);">Tigray Medical Association • Digital Health Initiative</span>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;">
+        Join medical doctors, researchers, and software engineers collaborating on digital health in Tigray. All applications are reviewed by TMA Initiative Leadership.
+      </p>
+
+      <form onsubmit="handleMembershipSubmit(event)">
+        <div class="modal-form-group">
+          <label>Full Name (ምሉእ ስም): *</label>
+          <input type="text" id="appFullName" required placeholder="Dr. / Eng. / Prof. ...">
+        </div>
+
+        <div class="modal-form-group">
+          <label>Email Address: *</label>
+          <input type="email" id="appEmail" required placeholder="doctor@ayder.edu.et">
+        </div>
+
+        <div class="modal-form-group">
+          <label>Professional Category / Role: *</label>
+          <select id="appRole" required>
+            <option value="doctor">Medical Doctor / Specialist (ሓኪም)</option>
+            <option value="nurse">Nurse / Midwife / Clinical Officer</option>
+            <option value="engineer">Software Engineer / IT Specialist</option>
+            <option value="ai_researcher">AI / Data Scientist</option>
+            <option value="researcher">Academic Researcher / Professor</option>
+            <option value="public_health">Public Health Specialist</option>
+            <option value="student">Medical / Engineering Student</option>
+          </select>
+        </div>
+
+        <div class="modal-form-group">
+          <label>Primary Institution / Hospital: *</label>
+          <input type="text" id="appOrg" required placeholder="e.g. Ayder Comprehensive Specialized Hospital / Mekelle University">
+        </div>
+
+        <div class="modal-form-group">
+          <label>Brief Bio & Focus Areas of Interest:</label>
+          <textarea id="appBio" rows="3" placeholder="Describe your clinical expertise, AI interests, or how you wish to contribute..."></textarea>
+        </div>
+
+        <div id="appSuccessMsg" style="display:none; padding:12px; border-radius:8px; background:#ecfdf5; color:#065f46; font-size:0.85rem; margin-bottom:14px; font-weight:700;">
+          🎉 Application submitted successfully! Initiative Leadership will review your credentials and send an activation confirmation.
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeMembershipModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function openMembershipModal() {
+      document.getElementById('membershipModal').classList.add('active');
+    }
+    function closeMembershipModal() {
+      document.getElementById('membershipModal').classList.remove('active');
+    }
+    function handleMembershipSubmit(e) {
+      e.preventDefault();
+      document.getElementById('appSuccessMsg').style.display = 'block';
+      setTimeout(() => {
+        closeMembershipModal();
+        document.getElementById('appSuccessMsg').style.display = 'none';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
