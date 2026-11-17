@@ -1,0 +1,58 @@
+{
+  "TMA-PAID-DEMO-ACADEMIC": {
+    "licensee_name": "Ayder Health Researcher",
+    "licensee_email": "research@ayder.edu.et",
+    "organization": "Mekelle University College of Health Sciences",
+    "license_tier": "academic",
+    "amount_paid": 49.0,
+    "currency": "USD",
+    "payment_gateway": "telebirr",
+    "transaction_reference": "TEL-2026-DEMO-001",
+    "download_count": 0,
+    "max_downloads": 15,
+    "created_at": "2026-02-15T10:00:00Z",
+    "status": "completed"
+  },
+  "TMA-PAID-ACA-47D383AEF4": {
+    "licensee_name": "Dr. Almaz Gebrehiwot",
+    "licensee_email": "almaz@ayder.edu.et",
+    "organization": "Ayder Specialized Hospital",
+    "license_tier": "academic",
+    "amount_paid": 49.0,
+    "currency": "USD",
+    "payment_gateway": "telebirr",
+    "transaction_reference": "TEL-2026-ALMAZ-992",
+    "download_count": 1,
+    "max_downloads": 15,
+    "created_at": "2026-11-17T13:05:27.473031Z",
+    "status": "completed"
+  },
+  "TMA-PAID-ACA-20A5A5B4E2": {
+    "licensee_name": "Dr. Almaz Gebrehiwot",
+    "licensee_email": "almaz@ayder.edu.et",
+    "organization": "Ayder Comprehensive Specialized Hospital",
+    "license_tier": "academic",
+    "amount_paid": 49.0,
+    "currency": "USD",
+    "payment_gateway": "telebirr",
+    "transaction_reference": "TEL-2026-VERIFY-001",
+    "download_count": 1,
+    "max_downloads": 15,
+    "created_at": "2026-11-17T13:11:21.800452Z",
+    "status": "completed"
+  },
+  "TMA-PAID-ACA-50AAA99B25": {
+    "licensee_name": "Dr. Almaz Gebrehiwot",
+    "licensee_email": "almaz@ayder.edu.et",
+    "organization": "Ayder Comprehensive Specialized Hospital",
+    "license_tier": "academic",
+    "amount_paid": 49.0,
+    "currency": "USD",
+    "payment_gateway": "telebirr",
+    "transaction_reference": "TEL-2026-VERIFY-001",
+    "download_count": 1,
+    "max_downloads": 15,
+    "created_at": "2026-11-17T13:11:38.321882Z",
+    "status": "completed"
+  }
+}

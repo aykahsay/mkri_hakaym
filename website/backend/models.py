@@ -17,6 +17,7 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     Integer,
+    Numeric,
     UniqueConstraint,
     CheckConstraint,
 )
@@ -258,6 +259,33 @@ class DatasetVersion(Base):
 
     dataset = relationship("Dataset", back_populates="versions")
     __table_args__ = (UniqueConstraint("dataset_id", "version_number", name="uq_dataset_version"),)
+
+
+class DatasetLicense(Base):
+    """
+    Paid licensing records for datasets.
+    In accordance with TMA-DHI data monetization: raw datasets cannot be downloaded unless paid.
+    """
+    __tablename__ = "dataset_licenses"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    dataset_id = Column(UUID(as_uuid=True), ForeignKey("datasets.id", ondelete="RESTRICT"), nullable=False)
+    licensee_name = Column(String(200), nullable=False)
+    licensee_email = Column(String(254), nullable=False)
+    organization = Column(String(200), nullable=False)
+    license_tier = Column(String(50), nullable=False)  # 'academic', 'commercial', 'institutional'
+    amount_paid = Column(Numeric(12, 2), nullable=False)
+    currency = Column(String(10), default="USD", nullable=False)
+    payment_gateway = Column(String(50), nullable=False)  # 'telebirr', 'cbe', 'stripe', 'bank_transfer'
+    transaction_reference = Column(String(150), unique=True, nullable=False)
+    payment_status = Column(String(30), default="completed", nullable=False)
+    license_key = Column(String(128), unique=True, nullable=False)
+    download_count = Column(Integer, default=0, nullable=False)
+    max_downloads = Column(Integer, default=10, nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+
+    dataset = relationship("Dataset", backref="licenses")
 
 
 class Publication(Base):

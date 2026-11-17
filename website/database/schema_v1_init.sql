@@ -257,6 +257,34 @@ CREATE TABLE dataset_access_requests (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- 14b. DATASET LICENSES & PAID ACCESS CONTROL
+-- In accordance with TMA-DHI data monetization: raw datasets cannot be downloaded unless paid.
+CREATE TABLE dataset_licenses (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    dataset_id UUID NOT NULL
+        REFERENCES datasets(id) ON DELETE RESTRICT,
+    licensee_name VARCHAR(200) NOT NULL,
+    licensee_email VARCHAR(254) NOT NULL,
+    organization VARCHAR(200) NOT NULL,
+    license_tier VARCHAR(50) NOT NULL
+        CHECK (license_tier IN ('academic', 'commercial', 'institutional')),
+    amount_paid NUMERIC(12, 2) NOT NULL,
+    currency VARCHAR(10) NOT NULL DEFAULT 'USD',
+    payment_gateway VARCHAR(50) NOT NULL
+        CHECK (payment_gateway IN ('telebirr', 'cbe', 'stripe', 'bank_transfer')),
+    transaction_reference VARCHAR(150) NOT NULL UNIQUE,
+    payment_status VARCHAR(30) NOT NULL DEFAULT 'completed'
+        CHECK (payment_status IN ('pending', 'completed', 'failed', 'refunded')),
+    license_key VARCHAR(128) NOT NULL UNIQUE,
+    download_count INTEGER NOT NULL DEFAULT 0,
+    max_downloads INTEGER NOT NULL DEFAULT 10,
+    expires_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_dataset_licenses_key ON dataset_licenses(license_key);
+CREATE INDEX idx_dataset_licenses_tx ON dataset_licenses(transaction_reference);
+
 -- 15. PUBLICATIONS
 CREATE TABLE publications (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

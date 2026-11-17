@@ -73,12 +73,15 @@ def require_permission(permission_name: str):
 * `POST /api/v1/products`: Register a new digital health solution.
 * `PUT  /api/v1/products/{id}/status`: Update deployment status (`idea` ➔ `prototype` ➔ `testing` ➔ `deployed`).
 
-### Domain E: Clinical Datasets & Governance (`/api/v1/datasets`)
-* `GET  /api/v1/datasets`: Discover cataloged datasets (open metadata, restricted files).
+### Domain E: Clinical Datasets & Paid Governance (`/api/v1/datasets`)
+* `GET  /api/v1/datasets`: Discover cataloged datasets (open metadata, public 3-row showcase preview).
 * `POST /api/v1/datasets`: Submit a new dataset with ethical clearance documentation.
 * `POST /api/v1/datasets/{id}/versions`: Upload new version checksum and S3 storage keys.
-* `POST /api/v1/datasets/{id}/access-request`: Request access to restricted health data with scientific justification.
-* `POST /api/v1/datasets/access-requests/{id}/review`: Curator approval/rejection of access request.
+* `POST /api/v1/datasets/{id}/checkout`: Purchase commercial or academic dataset license via Telebirr, CBE Birr, or Stripe; issues verified `license_key`.
+* `POST /api/v1/datasets/{id}/verify-license`: Validate a license key and check remaining download quota.
+* `GET  /api/v1/datasets/{id}/download`: Download full raw CSV/audio package. **Requires valid `license_key` query parameter. Returns `HTTP 402 Payment Required` if missing or unverified.**
+* `POST /api/v1/datasets/{id}/access-request`: Request access waiver for regional healthcare institutions (Ayder Hospital / Regional Health Bureau).
+* `POST /api/v1/datasets/access-requests/{id}/review`: Leadership curator approval/rejection of access request.
 
 ### Domain F: Research & Publications (`/api/v1/publications`)
 * `GET  /api/v1/publications`: Search clinical and AI health research publications by author, DOI, or date.
