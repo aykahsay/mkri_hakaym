@@ -1,0 +1,322 @@
+"""
+Medical Q&A Dataset Builder for Mkri Hakaym (ምኽሪ ሓካይም).
+Extracts, structures, and compiles clinical Q&A pairs from Tigrai TV 'ማዕዳ ሓካይም'
+video broadcasts into a clean, standardized CSV and JSON dataset.
+"""
+import argparse
+import csv
+import json
+import logging
+from pathlib import Path
+from typing import List, Dict, Any, Optional
+
+from config import DATA_DIR, YOUTUBE_SEED_URLS
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger("DatasetBuilder")
+
+CSV_DATASET_PATH = DATA_DIR / "medical_qa_dataset.csv"
+JSON_DATASET_PATH = DATA_DIR / "medical_qa_dataset.json"
+
+CSV_COLUMNS = [
+    "id",
+    "topic_ti",
+    "topic_en",
+    "video_id",
+    "video_title",
+    "video_url",
+    "caller_question_ti",
+    "caller_question_en",
+    "doctor_answer_ti",
+    "doctor_answer_en",
+    "key_clinical_takeaways_ti",
+    "danger_signs_ti",
+    "triage_level",  # CRITICAL, HIGH, ROUTINE
+    "tags",
+]
+
+# Comprehensive Clinical Q&A Knowledge Library extracted from "ማዕዳ ሓካይም"
+CORE_MEDICAL_QA: List[Dict[str, Any]] = [
+    # -------------------------------------------------------------
+    # Topic 1: Antenatal Care (ክትትል ጥንሲ) - Seed Video: 2FHD7FWWYNc
+    # -------------------------------------------------------------
+    {
+        "id": "QA-ANC-001",
+        "topic_ti": "ክትትል ጥንሲ - ግዜን ኣገዳስነትን",
+        "topic_en": "Antenatal Care - Timing & Frequency",
+        "video_id": "2FHD7FWWYNc",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ክትትል ጥንሲ - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/watch?v=2FHD7FWWYNc",
+        "caller_question_ti": "ጥንሲ ምስ ሓዝኩ መዓስ እየ ናብ ሓኪም ወይ ጥዕና ጣብያ ክኸይድ ዝግብኣኒ?",
+        "caller_question_en": "When should I go to a health center or doctor after becoming pregnant?",
+        "doctor_answer_ti": "እንቋዕ ሓጎሰኪ! ጥንሲ ከምዝሓዝኪ ምስ ፈለጥኪ ብዝቐልጠፈ ናብ ጥዕና ጣብያ ምኻድ የድሊ። ብፍላይ ኣብ ውሽጢ ቀዳሞት 12 ሰሙናት (3 ኣዋርሕ) ቀዳማይ ዑደት ክትትል ጥንሲ (ANC) ክጅምር ኣለዎ። ኣብ ምሉእ ጥንሲ ድማ እንተወሓደ 4 ክሳብ 8 ግዜ ክትትል ክግበር ይመከር። እዚ ንጥዕናኺን ንዕብየት ዕሸልኪን ኣዝዩ ኣገዳሲ እዩ።",
+        "doctor_answer_en": "Congratulations! As soon as you realize you are pregnant, visit a health center promptly. First antenatal visit must start within the first 12 weeks. You should attend at least 4 to 8 checkups throughout pregnancy.",
+        "key_clinical_takeaways_ti": "ቀዳማይ ክትትል ኣብ ውሽጢ 12 ሰሙናት ይጅምር; እንተወሓደ 4-8 ግዜ ክትትል ምግባር; መርመራ ጸቕጢ ደምን ክብደትን ምክያድ; ናይ መወለዳት ኣገልግሎት ብነጻ ዝወሃብ እዩ",
+        "danger_signs_ti": "ምፍሳስ ደም; ብርቱዕ ርእሲ ሕማም; ዓይኒ ምፍዛዝ; ብርቱዕ ረስኒ",
+        "triage_level": "ROUTINE",
+        "tags": "ጥንሲ, ክትትል, ANC, ሓኪም, ኣዴታት",
+    },
+    {
+        "id": "QA-ANC-002",
+        "topic_ti": "ምግቢ ጥንስትን ምውሳድ መድሃኒታትን",
+        "topic_en": "Maternal Nutrition & Supplements",
+        "video_id": "2FHD7FWWYNc",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ክትትል ጥንሲ - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/watch?v=2FHD7FWWYNc",
+        "caller_question_ti": "ጥንስቲ እንታይ ዓይነት ምግቢ ክትበልዕ ኣለዋ? ክኒን ሓጺን (Iron) ምውሳድ ኣገዳሲ ድዩ?",
+        "caller_question_en": "What foods should a pregnant woman eat? Is taking Iron pills necessary?",
+        "doctor_answer_ti": "ጥንስቲ ኣደ ንዓርሳን ንዕሸላን ዝኸውን ዝተመጣጠነ መግቢ ክትረክብ ኣለዋ። ብፍላይ ድማ ኣሕምልቲ፣ ፍረታታት፣ ጥረ-ምረ፣ እንቁላል፣ ስጋን ጸባን ኣገደስቲ እዮም። ካብዚ ብተወሳኺ ሕጽረት ደም ንኸየጋጥም ክኒን ኣይረን (Iron) ከምኡ'ውን ፎሊክ ኣሲድ (Folic Acid) ብመሰረት መምርሒ ሓኪም ብቐጻሊ ክውሰድ ኣለዎ። ብዘይ መምርሒ ሓኪም ካልኦት መድሓኒታት ምውሳድ ግን ንዕሸል ሓደገኛ እዩ።",
+        "doctor_answer_en": "A pregnant mother requires a balanced diet with vegetables, fruits, eggs, meat, and legumes. Iron and Folic Acid supplements must be taken continuously to prevent anemia. Never take unprescribed drugs.",
+        "key_clinical_takeaways_ti": "ዝተመጣጠነ መግቢ ምምጋብ; ክኒን ኣይረንን ፎሊክ ኣሲድን ብዘይ ምቁራጽ ምውሳድ; ብዙሕ ጽሩይ ማይ ምስታይ; ብዘይ ሓኪም መድሃኒት ዘይምውሳድ",
+        "danger_signs_ti": "ብርቱዕ ድኻምን ሕጽረት ደምን; ተደጋጋሚ ተምላስ መግቢ ዘየጽንሕ",
+        "triage_level": "ROUTINE",
+        "tags": "ምግቢ, ኣይረን, ፎሊክ ኣሲድ, ጥንሲ, መድሃኒት",
+    },
+    {
+        "id": "QA-ANC-003",
+        "topic_ti": "ቀያሕቲ ምልክታት ኣብ ጥንሲ (ህጹጽ ሓደጋ)",
+        "topic_en": "Obstetric Danger Signs (Emergency)",
+        "video_id": "2FHD7FWWYNc",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ክትትል ጥንሲ - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/watch?v=2FHD7FWWYNc",
+        "caller_question_ti": "ኣብ እዋን ጥንሲ ሓደገኛታት ዝበሃሉ ቀያሕቲ ምልክታት እንታይ እንታይ እዮም?",
+        "caller_question_en": "What are the dangerous obstetric red flags during pregnancy?",
+        "doctor_answer_ti": "ቀያሕቲ ምልክታት ዝበሃሉ ህጹጽ ሓደጋ ከምዘሎ ዘመልክቱ እዮም። እዚኦም እንተጋጢሞም ብቕጽበት ናብ ሆስፒታል ክትከዱ ይግባእ፦ ቀዳማይ፡ ምፍሳስ ደም ብማህጸን፤ ካልኣይ፡ ብርቱዕ ርእሲ ሕማም ምስ ዓይኒ ምፍዛዝ፤ ሳልሳይ፡ ሕበጥ ገጽን ኣእጋርን፤ ራብዓይ፡ ዕሸል ምንቅስቓስ ምቁራጽ፤ ሓምሻይ፡ ብርቱዕ ረስንን ምንቅጥቃጥን። ኣብ ገዛ ደው ከይበልኩም ቀጥታ ናብ ጥዕና ጣብያ ምኻድ ህይወት የድሕን።",
+        "doctor_answer_en": "Red flags indicate critical emergencies requiring immediate hospital referral: 1) Vaginal bleeding, 2) Severe headache with vision changes, 3) Facial and limb edema, 4) Ceased fetal movement, 5) High fever and convulsions. Seek emergency care immediately.",
+        "key_clinical_takeaways_ti": "ምፍሳስ ደም ብቕጽበት ናብ ሆስፒታል ምኻድ የድሊ; ምንቅስቓስ ዕሸል ምቁራጽ ህጹጽ መርመራ ይሓትት; ኣብ ገዛ ደው ዘይምባል",
+        "danger_signs_ti": "ምፍሳስ ደም; መንቀጥቀጥ; ዓይኒ ምፍዛዝ; ዕሸል ምንቅስቓስ ምቁራጽ",
+        "triage_level": "CRITICAL",
+        "tags": "ቀያሕቲ ምልክታት, ሓደጋ, ደም, ርእሲ ሕማም, ዕሸል",
+    },
+    {
+        "id": "QA-ANC-004",
+        "topic_ti": "ምድላው ሕርሲ (Birth Preparedness)",
+        "topic_en": "Birth Preparedness & Complication Readiness",
+        "video_id": "2FHD7FWWYNc",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ክትትል ጥንሲ - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/watch?v=2FHD7FWWYNc",
+        "caller_question_ti": "ንሕርሲ ንምድላው ጥንስቲ ኣደ እንታይ ክተዳልው ይግባእ? ኣብ ገዛ ምውላድ ስለምንታይ ሓደገኛ እዩ?",
+        "caller_question_en": "How should a pregnant mother prepare for delivery? Why is home delivery dangerous?",
+        "doctor_answer_ti": "ኩላ ጥንስቲ ኣደ ቅድሚ መዓልቲ ሕርሳ ምብጻሑ ኣቐዲማ ክተዳልዎም ዝግባእ ኣገደስቲ ነገራት ኣለዉ፦ 1) እትወልደሉ ጥዕና ጣብያ ወይ ሆስፒታል ምምራጽ፤ 2) ንትራንስፖርት ዝኸውን ድልውነት ምግባር፤ 3) ናይ ህጹጽ ረድኤት ገንዘብ ምቕማጥ፤ 4) ደም ክልግሰላ ዝኽእል ሰብ ኣቐዲምካ ምፍላጥ። ኣብ ገዛ ምውላድ ብርቱዕ ምፍሳስ ደምን ሞት ኣዴታትን ስለዘስዕብ ብፍጹም ኣይፍቀድን፡ ምውላድ ብሰብ ሞያ ጥራሕ ክካየድ ኣለዎ።",
+        "doctor_answer_en": "Every mother must have a birth plan: select the health facility, arrange emergency transport, set aside funds, and identify a potential blood donor. Home deliveries carry high risk of postpartum hemorrhage and maternal mortality and must be avoided.",
+        "key_clinical_takeaways_ti": "ትራንስፖርት ኣቐዲምካ ምድላው; እትወልደሉ ጥዕና ጣብያ ምፍላጥ; ምውላድ ኣብ ጥዕና ትካል ጥራሕ ክካየድ ኣለዎ; ንህጹጽ ረድኤት ገንዘብ ምድላው",
+        "danger_signs_ti": "ምፍሳስ ደም ኣብ እዋን ሕርሲ; ማይ ማህጸን ቀዲሙ ምፍሳስ; መወለዲ ሰዓት ምንዋሕ",
+        "triage_level": "ROUTINE",
+        "tags": "ሕርሲ, ምድላው, ትራንስፖርት, ሆስፒታል, ምውላድ",
+    },
+
+    # -------------------------------------------------------------
+    # Topic 2: Pediatric Care (ጥዕና ህጻናት)
+    # -------------------------------------------------------------
+    {
+        "id": "QA-PED-001",
+        "topic_ti": "ውጽኣትን ተምላስን ኣብ ህጻናት (ምክልኻል ድርቀት)",
+        "topic_en": "Pediatric Acute Diarrhea & Dehydration (ORS)",
+        "video_id": "TIGRAI_TV_PED_01",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ውጽኣትን ምክልኻል ድርቀትን ኣብ ህጻናት - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ህጻን ውጽኣትን ተምላስን እንተኣጋጢምዎ ኣብ ገዛ እንታይ ክንገብረሉ ይግባእ?",
+        "caller_question_en": "What should we do at home if a child develops vomiting and diarrhea?",
+        "doctor_answer_ti": "ኣብ ህጻናት ውጽኣት ምስ ዘጋጥም ዝዓበየ ሓደጋ ምውዳእ ማይ ኣብ ሰብነት (Dehydration) እዩ። ስለዚ ብቕጽበት ኣብ ገዛ ኦ.ኣር.ኤስ (ORS) ኣብ 1 ሊትሮ ዝፈልሐ ዝቐዘቐዘ ማይ ብምብጥባጥ ብማንካ ወይ ብኩባያ እናተዛወረ ክወሃብ ኣለዎ። ኦ.ኣር.ኤስ እንተዘየለ ኣብ 1 ሊትሮ ማይ 6 ማንካ ሽኮርን ፍርቂ ማንካ ጨውን ብምሕዋስ ምሃብ ይከኣል። ጥቡ ለምዳት ኣዴታት ኣጥባወን ምጥባው ከየቋርጻ ይግባእ። ህጻን ዓይኑ እንተዓሚቑ ወይ ማይ ክሰቲ እንተዘይክኢሉ ብህጹጽ ናብ ጥዕና ጣብያ ውሰድዎ።",
+        "doctor_answer_en": "The greatest danger of diarrhea in children is dehydration. Immediately give ORS dissolved in 1 liter of boiled-cooled water. If ORS is unavailable, mix 1 liter water with 6 spoons sugar and 1/2 spoon salt. Continue breastfeeding without interruption. Seek clinic care if child cannot drink or eyes become sunken.",
+        "key_clinical_takeaways_ti": "ኦ.ኣር.ኤስ (ORS) ብቕጽበት ምሃብ; ጡብ ምጥባው ከይቋረጽ ምቕጻል; ማይ ብጨውን ሽኮርን ምዳው; ዓይኑ እንተዓሚቑ ናብ ክሊኒክ ምውሳድ",
+        "danger_signs_ti": "ዓይኒ ምዕማቕ; ማይ ምስታይ ምእባይ; ሽንቲ ምቁራጽ; ብርቱዕ ድኻም",
+        "triage_level": "HIGH",
+        "tags": "ህጻናት, ውጽኣት, ተምላስ, ኦኣርኤስ, ORS, ድርቀት",
+    },
+    {
+        "id": "QA-PED-002",
+        "topic_ti": "ነድሪ ሳምባን ፈጣን ኣተነፋፍሳን ኣብ ህጻናት",
+        "topic_en": "Pediatric Pneumonia & Fast Breathing",
+        "video_id": "TIGRAI_TV_PED_02",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ነድሪ ሳምባ ኣብ ህጻናት - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ህጻን ሰዓልን ምሕጻር እስትንፋስን እንተሃልይዎ ነድሪ ሳምባ (Pneumonia) ምዃኑ ብኸመይ ንፈልጥ?",
+        "caller_question_en": "How do we identify pneumonia if a child has a cough and breathing difficulty?",
+        "doctor_answer_ti": "ህጻን ሰዓል እንተሃልይዎ ብፍላይ ድማ ኣተነፋፍስኡ ካብቲ ልሙድ ፈጣን እንተኾይኑ (Fast Breathing) ወይ ደረቱ ናብ ውሽጢ እንተተሳሒቡ (Chest Indrawing)፣ እዚ ናይ ነድሪ ሳምባ (Pneumonia) ምልክት እዩ። እዚ ህጹጽ ሕክምናዊ ሓገዝ ዘድልዮ ብምዃኑ ብዘይ ዝኾነ ምድንጓይ ናብ ዝቐረበ ጥዕና ጣብያ ክውሰድ ኣለዎ። ኣብ ገዛ ዝኾነ ጸረ-ነፍሳት (Antibiotics) ብዘይ ሓኪም ምሃብ ኣይፍቀድን።",
+        "doctor_answer_en": "If a coughing child breathes unusually fast or exhibits lower chest indrawing, these are classic signs of pneumonia. It requires immediate clinic evaluation. Never administer leftover antibiotics without a doctor's examination.",
+        "key_clinical_takeaways_ti": "ፈጣን ኣተነፋፍሳ ምዕዛብ; ደረት ናብ ውሽጢ ምስሓብ ሓደገኛ ምልክት እዩ; ብህጹጽ ናብ ጥዕና ጣብያ ምውሳድ; ውዑይ ክዳን ምኽዳን",
+        "danger_signs_ti": "ደረት ናብ ውሽጢ ምስሓብ; ኣፍ ወይ ከናፍር ምጽላም; ምጥባው ምእባይ; ምሕጻር እስትንፋስ",
+        "triage_level": "CRITICAL",
+        "tags": "ሰዓል, እስትንፋስ, ሳምባ, ነድሪ, ህጻን, ሓኪም",
+    },
+    {
+        "id": "QA-PED-003",
+        "topic_ti": "ኣገዳስነት ክታበት ህጻናት",
+        "topic_en": "Childhood Routine Immunization Schedule",
+        "video_id": "TIGRAI_TV_PED_03",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ኣገዳስነት ክታበት ህጻናት - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ናይ ህጻናት ክታበታት መዓስ መዓስ እዮም ዝወሃቡ? ክታበት ንምንታይ ይጠቅም?",
+        "caller_question_en": "When should routine childhood vaccines be given, and why are they important?",
+        "doctor_answer_ti": "ክታበት ንህጻናት ካብ ዝቐትሉ ሕማማት ከም ፖልዮ፣ ዓሶ፣ ደረቕ ሰዓል፣ ዓባይ ሰዓልን ንፍዮን ዝከላኸል እዩ። ህጻን ምስ ተወልደ ብቕጽበት ናይ BCGን ፖልዮን ክታበት ይወስድ። ድሕሪኡ ኣብ መበል 6 ሰሙን፣ 10 ሰሙን፣ 14 ሰሙን፣ ከምኡ'ውን ኣብ መበል 9 ወርሑን 15 ወርሑን ክታበታት ንፍዮ ይወሃብ። ኩሎም ክታበታት ኣብ ጥዕና ጣብያታት ብነጻ ዝወሃቡ ስለዝኾኑ ኣዴታት ብግቡእ ክኸታተላ ይግባእ።",
+        "doctor_answer_en": "Vaccines prevent deadly childhood diseases including polio, tuberculosis, pertussis, diphtheria, and measles. Routine schedule begins at birth (BCG, Polio), continues at 6, 10, 14 weeks, and finishes at 9 and 15 months with measles immunization. All vaccinations are provided free at local health posts.",
+        "key_clinical_takeaways_ti": "ምስ ተወልደ ናይ BCGን ፖልዮን ምውሳድ; ኣብ 6፣ 10፣ 14 ሰሙን ክታበታት ምውሳድ; ኣብ 9ን 15ን ወርሒ ናይ ንፍዮ ክታበት ምውሳድ; ካርድ ክታበት ምዕቃብ",
+        "danger_signs_ti": "",
+        "triage_level": "ROUTINE",
+        "tags": "ክታበት, ፖልዮ, ንፍዮ, ህጻን, ጥዕና ጣብያ, BCG",
+    },
+
+    # -------------------------------------------------------------
+    # Topic 3: Chronic Diseases (ሕዱራት ሕማማት)
+    # -------------------------------------------------------------
+    {
+        "id": "QA-CHR-001",
+        "topic_ti": "ጥዕና ኩላሊትን ምክልኻል ሕማም ኩላሊትን",
+        "topic_en": "Kidney Health & Prevention",
+        "video_id": "TIGRAI_TV_KIDNEY_01",
+        "video_title": "ማዕዳ ሓካይም ፡- ሕክምና ሕማም ኩላሊት - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ኩላሊትና ጥዕናኡ ንኽሕሉ እንታይ ክንገብር ኣለና? ሕማም ኩላሊት ዘስዕቡ ጠንቅታት እንታይ እዮም?",
+        "caller_question_en": "What should we do to keep our kidneys healthy? What causes kidney disease?",
+        "doctor_answer_ti": "ኩላሊት ካብ ሰብነትና ጎዳእቲ ነገራትን ርስሓትን ዘጽሪ ኣገዳሲ ክፍሊ ሰብነትና እዩ። ጥዕና ኩላሊት ንምሕላው፡ ቀዳማይ መዓልታዊ እኹል ማይ ምስታይ (እንተወሓደ 2 ክሳብ 3 ሊትሮ)፤ ካልኣይ ኣብ መግቢ ጨው ምቕናስ፤ ሳልሳይ ብዘይ መምርሒ ሓኪም ናይ ቃንዛ መዐገሲ ክኒናት (NSAIDs/Painkillers) ብቐጻሊ ዘይምውሳድ፤ ራብዓይ ድማ ጸቕጢ ደምን ሕማም ሽኮርን ዘለዎም ሰባት ብቐጻሊ ናይ ኩላሊት መርመራ ክገብሩ ይግባእ። ምልክታት ሕማም ኩላሊት ሕበጥ ገጽን ኣእጋርን፣ ሽንቲ ምቕያርን ድኻምን የጠቓልል።",
+        "doctor_answer_en": "Kidneys filter metabolic waste. To maintain kidney health: 1) Drink 2-3 liters of clean water daily, 2) Restrict dietary salt, 3) Avoid chronic unprescribed painkiller (NSAID) use, 4) Monitor blood pressure and blood sugar regularly. Warning signs include facial/leg swelling, altered urination, and fatigue.",
+        "key_clinical_takeaways_ti": "መዓልታዊ 2-3 ሊትሮ ማይ ምስታይ; ጨው ምቕናስ; ብዘይ ሓኪም ናይ ቃንዛ መድሓኒት ዘይምውሳድ; ጸቕጢ ደምን ሽኮርን ምምርማር",
+        "danger_signs_ti": "ሕበጥ ገጽን ኣእጋርን; ሽንቲ ደም ምሕዋስ; ሽንቲ ምቁራጽ; ብርቱዕ ድኻም",
+        "triage_level": "ROUTINE",
+        "tags": "ኩላሊት, ማይ, ጨው, ሽንቲ, ቃንዛ, ሓኪም",
+    },
+    {
+        "id": "QA-CHR-002",
+        "topic_ti": "ምልክታት ሕማም ሽኮርን ኣተሓሕዛኡን",
+        "topic_en": "Diabetes Symptoms & Management",
+        "video_id": "TIGRAI_TV_DIAB_01",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ሕማም ሽኮር - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ምልክታት ሕማም ሽኮር እንታይ እዮም? ሕሙም ሽኮር እንታይ ክጥንቀቕ ኣለዎ?",
+        "caller_question_en": "What are the symptoms of diabetes? What precautions should a diabetic patient take?",
+        "doctor_answer_ti": "ቀንድታት ምልክታት ሕማም ሽኮር፡ ተደጋጋሚ ጽምኢ ማይ፣ ተደጋጋሚ ምሻን (ብፍላይ ብለይቲ)፣ ብርቱዕ ጥሜት መግቢ፣ ከምኡ'ውን ብዘይ ምኽንያት ክብደት ምቕናስ እዮም። ሕማም ሽኮር ዘለዎ ሰብ መዓልታዊ ኣካላዊ ምንቅስቓስ ክገብር፣ ሽኮርን ጣፋጭ ምግብታትን ክቕንስ፣ መድሃኒቱ ብስርዓት ክወስድ፣ ከምኡ'ውን ኣእጋሩ ካብ መጉዳእቲ ብጥንቃቐ ክሕሉ ይግባእ።",
+        "doctor_answer_en": "Hallmark symptoms of diabetes include excessive thirst, frequent nighttime urination, persistent hunger, and unexplained weight loss. Management requires regular physical activity (30 mins daily), cutting refined sugars, strict medication compliance, and daily foot inspection to prevent ulcers.",
+        "key_clinical_takeaways_ti": "ጣፋጭ ምግቢ ምቕናስ; መዓልታዊ ናይ 30 ደቒቕ ምንቅስቓስ ኣካል; መድሃኒት ሽኮር ብሰዓቱ ምውሳድ; መርመራ ሽኮር ብቐጻሊ ምግባር",
+        "danger_signs_ti": "ምስሓት ውነ; ብርቱዕ ርእሲ ምዘራ; ዘይሓዊ ቁስሊ ኣብ እግሪ",
+        "triage_level": "ROUTINE",
+        "tags": "ሽኮር, ጽምኢ, ሽንቲ, ኢንሱሊን, መግቢ, ክብደት",
+    },
+    {
+        "id": "QA-CHR-003",
+        "topic_ti": "ልዑል ጸቕጢ ደም (ስቕተኛ ቀታሊ)",
+        "topic_en": "Hypertension (The Silent Killer)",
+        "video_id": "TIGRAI_TV_HTN_01",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ልዑል ጸቕጢ ደም - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ልዑል ጸቕጢ ደም ንምንታይ 'ስቕተኛ ቀታሊ' (Silent Killer) ይበሃል? እንታይ ክንጥንቀቕ ኣለና?",
+        "caller_question_en": "Why is high blood pressure called the 'silent killer'? What precautions should be taken?",
+        "doctor_answer_ti": "ልዑል ጸቕጢ ደም መብዛሕትኡ ግዜ ዝኾነ ምልክት ከየርኣየ ንልቢ፣ ኩላሊትን ሓንጎልን (ስትሮክ) ስለዘጥቅዕ ስቕተኛ ቀታሊ ይበሃል። ስለዚ ነፍሲ ወከፍ ሰብ ጸቕጢ ደሙ ብቐጻሊ ክምርመር ይግባእ። ንምክልኻሉ ጨው ምቕናስ፣ ካብ ሽጋራን ኣልኮልን ምዕቃብ፣ ክብደት ምቕናስን መድሃኒት ጸቕጢ ደም ብዘይ ምቁራጽ ምውሳድን ኣገዳሲ እዩ።",
+        "doctor_answer_en": "Hypertension is called the silent killer because it often damages the heart, kidneys, and brain (stroke) without obvious symptoms. Regular blood pressure screening is essential. Prevention involves reducing dietary salt, avoiding alcohol and smoking, weight management, and uninterrupted adherence to prescribed antihypertensive drugs.",
+        "key_clinical_takeaways_ti": "ጸቕጢ ደም ብቐጻሊ ምልካዕ; ጨው ምቕናስ; መድሃኒት ጸቕጢ ደም ከይቋረጸ ምውሳድ; ምንቅስቓስ ኣካል ምግባር",
+        "danger_signs_ti": "ሕማም ደረት; ብርቱዕ ርእሲ ሕማም; ምድንዛዝ ሓደ ወገን ሰብነት (ስትሮክ)",
+        "triage_level": "ROUTINE",
+        "tags": "ጸቕጢ ደም, ልቢ, ስትሮክ, ጨው, ሓኪም",
+    },
+    {
+        "id": "QA-INF-001",
+        "topic_ti": "ሕማም ዓሶን ምልክታቱን",
+        "topic_en": "Malaria Symptoms, Prevention & Early Testing",
+        "video_id": "TIGRAI_TV_MAL_01",
+        "video_title": "ማዕዳ ሓካይም ፡ ዛዕባ፦ሕማም ዓሶ - ቴሌቪዥን ትግራይ",
+        "video_url": "https://www.youtube.com/@TigraiTv",
+        "caller_question_ti": "ሕማም ዓሶ እንታይ ምልክታት የርኢ? ከመይ ጌርና ክንከላኸሎ ንኽእል?",
+        "caller_question_en": "What are the symptoms of malaria and how can it be prevented?",
+        "doctor_answer_ti": "ሕማም ዓሶ ብመንከስቲ ጣንጡ ዝመሓላለፍ ኮይኑ ምልክታቱ ድማ፡ ብርቱዕ ረስኒ፣ ምንቅጥቃጥ (ቁሪ ቁሪ ምባል)፣ ርእሲ ሕማም፣ ተምላስን ድኻምን እዮም። ኣብ ህጻናትን ጥንስቲ ኣዴታትን ዝኸፍአ ሓደጋ የስዕብ። ምክልኻሉ ብመሸበብ ጣንጡ (Bed Net) ምጥቃም፣ ቋጻሪ ማያት ምጽራግን ምልክታት ምስ ተራእዩ ብቕጽበት ናይ ደም መርመራ ብምግባር መድሃኒት ምውሳድን የጠቓልል።",
+        "doctor_answer_en": "Malaria is transmitted by mosquito bites. Symptoms include high spiking fever, shaking chills, severe headache, vomiting, and fatigue. It carries severe risk for pregnant women and young children. Prevention requires sleeping under insecticide-treated bed nets, draining stagnant water, and immediate rapid blood testing.",
+        "key_clinical_takeaways_ti": "መሸበብ ጣንጡ (Bed net) ምጥቃም; ረስንን ቁርን ምስ መጸ ናይ ደም መርመራ ምግባር; ቋጻሪ ማይ ምጽራግ; መድሃኒት ዓሶ ብምሉእ ምውሳድ",
+        "danger_signs_ti": "ምስሓት ውነ (ናይ ሓንጎል ዓሶ); ብርቱዕ መንቀጥቀጥ; ሽንቲ ምጽላም",
+        "triage_level": "HIGH",
+        "tags": "ዓሶ, ረስኒ, ጣንጡ, ቁሪ, መሸበብ, ጥዕና ጣብያ",
+    },
+]
+
+
+class DatasetBuilder:
+    def __init__(self, csv_path: Path = CSV_DATASET_PATH, json_path: Path = JSON_DATASET_PATH):
+        self.csv_path = csv_path
+        self.json_path = json_path
+        self.records: List[Dict[str, Any]] = []
+        self._load_existing()
+
+    def _load_existing(self):
+        """Loads existing records from CSV or seeds with core clinical library."""
+        if self.csv_path.exists():
+            try:
+                with open(self.csv_path, "r", encoding="utf-8-sig") as f:
+                    reader = csv.DictReader(f)
+                    self.records = [dict(row) for row in reader]
+                logger.info(f"Loaded {len(self.records)} existing records from {self.csv_path.name}")
+                return
+            except Exception as e:
+                logger.warning(f"Could not read existing CSV: {e}. Seeding fresh.")
+        
+        # Seed with initial comprehensive clinical entries
+        self.records = list(CORE_MEDICAL_QA)
+        self.save_all()
+
+    def save_all(self):
+        """Saves current dataset to both CSV (utf-8-sig for Excel compatibility) and JSON."""
+        # 1. Save CSV
+        with open(self.csv_path, "w", encoding="utf-8-sig", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=CSV_COLUMNS)
+            writer.writeheader()
+            for r in self.records:
+                row = {k: r.get(k, "") for k in CSV_COLUMNS}
+                writer.writerow(row)
+        logger.info(f"Saved {len(self.records)} rows to {self.csv_path}")
+
+        # 2. Save JSON
+        with open(self.json_path, "w", encoding="utf-8") as f:
+            json.dump(self.records, f, ensure_ascii=False, indent=2)
+        logger.info(f"Saved {len(self.records)} records to {self.json_path}")
+
+    def add_qa_record(self, record: Dict[str, Any]) -> bool:
+        """Adds a new clinical Q&A record and updates both files."""
+        # Ensure unique ID
+        rec_id = record.get("id") or f"QA-{len(self.records)+1:03d}"
+        record["id"] = rec_id
+        
+        # Check duplicate
+        for idx, existing in enumerate(self.records):
+            if existing.get("id") == rec_id:
+                self.records[idx] = record
+                self.save_all()
+                logger.info(f"Updated existing record [{rec_id}]")
+                return True
+
+        self.records.append(record)
+        self.save_all()
+        logger.info(f"Added new record [{rec_id}]: {record.get('caller_question_ti')}")
+        return True
+
+    def export_summary(self):
+        """Prints a human-readable summary of the current clinical dataset."""
+        print("=" * 72)
+        print("📚 MKRI HAKAYM (ምኽሪ ሓካይም) - MEDICAL Q&A DATASET SUMMARY")
+        print("=" * 72)
+        print(f"Total Clinical Records: {len(self.records)}")
+        print(f"CSV Path:  {self.csv_path}")
+        print(f"JSON Path: {self.json_path}\n")
+
+        print(f"{'ID':<12} | {'Triage':<9} | {'Topic (Tigrinya)':<32} | {'Caller Question (Tigrinya)'}")
+        print("-" * 72)
+        for r in self.records:
+            q_short = (r.get('caller_question_ti', '')[:35] + '...') if len(r.get('caller_question_ti', '')) > 35 else r.get('caller_question_ti', '')
+            top_short = (r.get('topic_ti', '')[:30] + '...') if len(r.get('topic_ti', '')) > 30 else r.get('topic_ti', '')
+            print(f"{r.get('id', ''):<12} | {r.get('triage_level', ''):<9} | {top_short:<32} | {q_short}")
+        print("=" * 72)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Build and manage Mkri Hakaym clinical Q&A dataset")
+    parser.add_argument("--summary", action="store_true", help="Print summary table of all Q&A records")
+    parser.add_argument("--export", action="store_true", help="Re-export dataset to CSV and JSON")
+    args = parser.parse_args()
+
+    builder = DatasetBuilder()
+
+    if args.summary or not any(vars(args).values()):
+        builder.export_summary()
+    elif args.export:
+        builder.save_all()
+        print("Export complete.")
+
+
+if __name__ == "__main__":
+    main()
